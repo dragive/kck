@@ -3,13 +3,10 @@ package Back.Models;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
-public class Cinema {
-
+@Setter
+public class City {
     private Integer id;
-    private Integer cityId;
     private String name;
-    private String description;
 
 }
