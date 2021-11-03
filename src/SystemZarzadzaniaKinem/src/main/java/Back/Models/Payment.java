@@ -1,22 +1,21 @@
 package Back.Models;
 
 import lombok.Getter;
-import lombok.Setter;
 
+@Getter
 public enum Payment {
+    CASH("Płatność Gotówką"),
+    INTERNET("Płatność internetowa"),
+    CARD("Płatność kartą");
 
-    CASH(){
-
-    },
-    INTERNET(){
-
-    },
-    CARD(){
-
-    };
-
-    @Getter
-    @Setter
     private Double amount;
+    private String name;
 
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    Payment(String name){
+        this.name = name;
+    }
 }
