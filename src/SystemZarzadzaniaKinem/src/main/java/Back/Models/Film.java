@@ -1,23 +1,22 @@
 package Back.Models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
-@Getter
-@Setter
+@Data
 public class Film {
-    @JsonProperty("id")
+//    @JsonProperty("id")
     private Integer id;
-    @JsonProperty("releaseDate")
+//    @JsonProperty("releaseDate")
     private Date releaseDate;
-    @JsonProperty("description")
+//    @JsonProperty("description")
     private String description;
-    @JsonProperty("title")
+//    @JsonProperty("title")
     private String title;
-    @JsonProperty("filmCategoryId")
+//    @JsonProperty("filmCategoryId")
     private Integer filmCategoryId;
+
+
 }

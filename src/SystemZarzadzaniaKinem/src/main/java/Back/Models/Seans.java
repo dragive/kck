@@ -1,12 +1,12 @@
 package Back.Models;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
 
-@Setter
-@Getter
+@Data
 public class Seans {
     private Integer id;
     private Integer filmId;

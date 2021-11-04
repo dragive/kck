@@ -1,11 +1,11 @@
 package Back.Models;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-@Setter
-@Getter
+@Data
 public class Reservation {
     private Integer id;
     private Integer userId;

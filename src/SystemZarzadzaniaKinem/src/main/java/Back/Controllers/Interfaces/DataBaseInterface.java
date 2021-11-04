@@ -17,18 +17,20 @@ public interface DataBaseInterface {
     public List<Seat> getAllSeat();
     public List<Ticket> getAllTicket();
     public List<User> getAllUser();
+    public List<City> getAllCity();
 
-    public void saveAllFilm();
-    public void saveAllCinema();
-    public void saveAllFilmCategory();
-    public void saveAllGiftCard();
-    public void saveAllItems();
-    public void saveAllPayment();
-    public void saveAllReservation();
-    public void saveAllRoom();
-    public void saveAllSeans();
-    public void saveAllSeat();
-    public void saveAllTicket();
-    public void saveAllUser();
+    public void saveAllFilm(List<Film> list);
+    public void saveAllCinema(List<Cinema> list);
+    public void saveAllFilmCategory(List<FilmCategory> list);
+    public void saveAllGiftCard(List<GiftCard> list);
+    public void saveAllItems(List<Items> list);
+    public void saveAllPayment(List<Payment> list);
+    public void saveAllReservation(List<Reservation> list);
+    public void saveAllRoom(List<Room> list);
+    public void saveAllSeans(List<Seans> list);
+    public void saveAllSeat(List<Seat> list);
+    public void saveAllTicket(List<Ticket> list);
+    public void saveAllUser(List<User> list);
+    public void saveAllCity(List<City> list);
 
 }
