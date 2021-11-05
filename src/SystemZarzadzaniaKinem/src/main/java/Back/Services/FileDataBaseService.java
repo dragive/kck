@@ -14,10 +14,6 @@ public class FileDataBaseService extends DataBaseService {
 
     private static FileDataBaseService instance;
     private static String DIRECTORY = "Data/";
-
-    static public FileDataBaseService getInstance() {if(instance == null){instance = new FileDataBaseService();} return instance;}
-    private FileDataBaseService(){};
-
     private static String FILM_FILE = "film.json";
     private static String CINEMA_FILE = "cinema.json";
     private static String CITY_FILE = "city.json";

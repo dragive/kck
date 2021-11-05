@@ -13,7 +13,7 @@ public class FileDataBaseServiceTest {
 
     @Test
     public void Class_name_convert_to_file_name_convention(){
-        FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
+        DataBaseService fileDataBaseService = DataBaseService.getInstance();
         FilmCategory filmCategory = new FilmCategory();
         String className = fileDataBaseService.ConvertToFileConvention(filmCategory);
         System.out.println(className);
