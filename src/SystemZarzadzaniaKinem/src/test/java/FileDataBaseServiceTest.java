@@ -173,6 +173,33 @@ public class FileDataBaseServiceTest {
 
     }
 
+    @Test
+    public void TicketType(){
+        DataBaseService fileDataBaseService = DataBaseService.getInstance();
+
+        List<TicketType> list = new ArrayList<>();
+        list.add(new TicketType());
+        fileDataBaseService.saveAllTicketType(list);
+
+
+        List<TicketType> out = fileDataBaseService.getAllTicketType();
+        Assert.assertTrue(out.equals(list));
+
+    }
+
+    @Test
+    public void Payment(){
+        DataBaseService fileDataBaseService = DataBaseService.getInstance();
+
+        List<Payment> list = new ArrayList<>();
+        list.add(new Payment());
+        fileDataBaseService.saveAllPayment(list);
+
+
+        List<Payment> out = fileDataBaseService.getAllPayment();
+        Assert.assertTrue(out.equals(list));
+
+    }
 
     @Test
     public void User(){

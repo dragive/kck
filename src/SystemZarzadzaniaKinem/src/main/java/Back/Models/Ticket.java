@@ -12,6 +12,7 @@ public class Ticket {
     private Integer roomId;
     private Integer seansId;
     private TicketType ticketType;
+    private String name;
 
 
 }

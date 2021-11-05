@@ -14,7 +14,7 @@ public class Film {
 //    @JsonProperty("description")
     private String description;
 //    @JsonProperty("title")
-    private String title;
+    private String name;
 //    @JsonProperty("filmCategoryId")
     private Integer filmCategoryId;
 
