@@ -1,6 +1,6 @@
-import Back.Controllers.PaymentController;
+import Back.Services.DataBaseService;
 import Back.Models.*;
-import Back.Services.FileDataBaseService;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -21,8 +21,8 @@ public class FileDataBaseServiceTest {
     }
     
     @Test
-    public void Cinema_serialization(){
-        FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
+    public void Cinema(){
+        DataBaseService fileDataBaseService = DataBaseService.getInstance();
 
         List<Cinema> list = new ArrayList<>();
         list.add(new Cinema());
@@ -35,8 +35,8 @@ public class FileDataBaseServiceTest {
     }
     
     @Test
-    public void City_serialization(){
-        FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
+    public void City(){
+        DataBaseService fileDataBaseService = DataBaseService.getInstance();
 
         List<City> list = new ArrayList<>();
         list.add(new City());
@@ -50,8 +50,8 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void Film_serialization(){
-        FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
+    public void Film(){
+        DataBaseService fileDataBaseService = DataBaseService.getInstance();
 
         List<Film> list = new ArrayList<>();
         list.add(new Film());
@@ -65,8 +65,8 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void Gift_serialization(){
-        FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
+    public void Gift(){
+        DataBaseService fileDataBaseService = DataBaseService.getInstance();
 
         List<GiftCard> list = new ArrayList<>();
         list.add(new GiftCard());
@@ -80,8 +80,8 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void Items_serialization(){
-        FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
+    public void Items(){
+        DataBaseService fileDataBaseService = DataBaseService.getInstance();
 
         List<Items> list = new ArrayList<>();
         list.add(new Items());
@@ -95,8 +95,8 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void Reservation_serialization(){
-        FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
+    public void Reservation(){
+        DataBaseService fileDataBaseService = DataBaseService.getInstance();
 
         List<Reservation> list = new ArrayList<>();
         list.add(new Reservation());
@@ -110,8 +110,8 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void Room_serialization(){
-        FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
+    public void Room(){
+        DataBaseService fileDataBaseService = DataBaseService.getInstance();
 
         List<Room> list = new ArrayList<>();
         list.add(new Room());
@@ -125,8 +125,8 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void Seans_serialization(){
-        FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
+    public void Seans(){
+        DataBaseService fileDataBaseService = DataBaseService.getInstance();
 
         List<Seans> list = new ArrayList<>();
         list.add(new Seans());
@@ -140,8 +140,8 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void Seat_serialization(){
-        FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
+    public void Seat(){
+        DataBaseService fileDataBaseService = DataBaseService.getInstance();
 
         List<Seat> list = new ArrayList<>();
         list.add(new Seat());
@@ -155,8 +155,8 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void Staff_serialization(){
-        FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
+    public void Staff(){
+        DataBaseService fileDataBaseService = DataBaseService.getInstance();
 
         List<Staff> list = new ArrayList<>();
         list.add(new Staff());
@@ -171,8 +171,8 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void Ticket_serialization(){
-        FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
+    public void Ticket(){
+        DataBaseService fileDataBaseService = DataBaseService.getInstance();
 
         List<Ticket> list = new ArrayList<>();
         list.add(new Ticket());
@@ -186,8 +186,22 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void User_serialization(){
-        FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
+    public void User(){
+        DataBaseService fileDataBaseService = DataBaseService.getInstance();
+
+        List<User> list = new ArrayList<>();
+        list.add(new User());
+        fileDataBaseService.saveAllUser(list);
+
+
+        List<User> out = fileDataBaseService.getAllUser();
+        Assert.assertTrue(out.equals(list));
+
+    }
+
+    @Test
+    public void Permission(){
+        DataBaseService fileDataBaseService = DataBaseService.getInstance();
 
         List<User> list = new ArrayList<>();
         list.add(new User());
