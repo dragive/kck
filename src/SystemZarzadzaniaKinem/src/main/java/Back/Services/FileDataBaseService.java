@@ -8,14 +8,13 @@ import lombok.SneakyThrows;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FileDataBaseService implements DataBaseInterface {
 
     private static FileDataBaseService instance;
-    public static FileDataBaseService getInstance() {if(instance == null){instance = new FileDataBaseService();} return instance;}
-    private FileDataBaseService(){};
-
+    private static String DIRECTORY = "Data/";
     private static String FILM_FILE = "film.json";
     private static String CINEMA_FILE = "cinema.json";
     private static String CITY_FILE = "city.json";
@@ -33,6 +32,25 @@ public class FileDataBaseService implements DataBaseInterface {
     private static String TICKET_TYPE_FILE = "ticket_type.json";
     private static String USER_FILE = "user.json";
 
+    private FileDataBaseService() {};
+
+    public static FileDataBaseService getInstance() {
+        if(instance == null){
+            instance = new FileDataBaseService();
+        } return instance;
+    }
+
+    public <T> String ConvertToFileConvention(T object){
+        String className = object.getClass().getSimpleName();
+        String[] splittedClassName = className.split("(?=\\p{Upper})");
+        splittedClassName = Arrays.stream(splittedClassName).map(name -> name.toUpperCase()).toArray(size -> new String[size]);
+        StringBuilder result = (DIRECTORY==null)?new StringBuilder():new StringBuilder(DIRECTORY);
+        for(String name : splittedClassName) {
+            result.append(name+"_");
+        }
+        result.append("FILE");
+        return result.toString();
+    }
 
     @SneakyThrows
     public List<FilmCategory> getAllFilmCategory() {

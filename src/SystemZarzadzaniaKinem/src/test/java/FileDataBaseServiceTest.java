@@ -5,12 +5,23 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class FileDataBaseServiceTest {
+
+    @Test
+    public void Class_name_convert_to_file_name_convention(){
+        FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
+        FilmCategory filmCategory = new FilmCategory();
+        String className = fileDataBaseService.ConvertToFileConvention(filmCategory);
+        System.out.println(className);
+        Assert.assertEquals("Data/FILM_CATEGORY_FILE",className);
+    }
     
     @Test
-    public void Cinema(){
+    public void Cinema_serialization(){
         FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
 
         List<Cinema> list = new ArrayList<>();
@@ -24,7 +35,7 @@ public class FileDataBaseServiceTest {
     }
     
     @Test
-    public void City(){
+    public void City_serialization(){
         FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
 
         List<City> list = new ArrayList<>();
@@ -39,7 +50,7 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void Film(){
+    public void Film_serialization(){
         FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
 
         List<Film> list = new ArrayList<>();
@@ -54,7 +65,7 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void Gift(){
+    public void Gift_serialization(){
         FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
 
         List<GiftCard> list = new ArrayList<>();
@@ -69,7 +80,7 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void Items(){
+    public void Items_serialization(){
         FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
 
         List<Items> list = new ArrayList<>();
@@ -84,7 +95,7 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void Reservation(){
+    public void Reservation_serialization(){
         FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
 
         List<Reservation> list = new ArrayList<>();
@@ -99,7 +110,7 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void Room(){
+    public void Room_serialization(){
         FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
 
         List<Room> list = new ArrayList<>();
@@ -114,7 +125,7 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void Seans(){
+    public void Seans_serialization(){
         FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
 
         List<Seans> list = new ArrayList<>();
@@ -129,7 +140,7 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void Seat(){
+    public void Seat_serialization(){
         FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
 
         List<Seat> list = new ArrayList<>();
@@ -144,7 +155,7 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void Staff(){
+    public void Staff_serialization(){
         FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
 
         List<Staff> list = new ArrayList<>();
@@ -160,7 +171,7 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void Ticket(){
+    public void Ticket_serialization(){
         FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
 
         List<Ticket> list = new ArrayList<>();
@@ -175,7 +186,7 @@ public class FileDataBaseServiceTest {
 
 
     @Test
-    public void User(){
+    public void User_serialization(){
         FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
 
         List<User> list = new ArrayList<>();
