@@ -1,14 +1,11 @@
 package Back.Models;
 
-import java.util.SplittableRandom;
+import lombok.Data;
 
-public enum TicketType {
-    NORMAL(0,"Normalny"),REDUCED(1,"Ulgowy");
+@Data
+public class TicketType {
+
     private String name;
     private Integer id;
 
-    TicketType(Integer id,String name){
-        this.id = id;
-        this.name = name;
-    }
 }

@@ -1,19 +1,18 @@
 package Back.Services;
 
-import Back.Controllers.FilmController;
-import Back.Controllers.Interfaces.DataBaseInterface;
+
 import Back.Models.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
-public class FileDataBaseService implements DataBaseInterface {
+public class FileDataBaseService extends DataBaseService {
 
     private static FileDataBaseService instance;
-    public static FileDataBaseService getInstance() {if(instance == null){instance = new FileDataBaseService();} return instance;}
+
+    static public FileDataBaseService getInstance() {if(instance == null){instance = new FileDataBaseService();} return instance;}
     private FileDataBaseService(){};
 
     private static String FILM_FILE = "film.json";
@@ -32,6 +31,8 @@ public class FileDataBaseService implements DataBaseInterface {
     private static String TICKET_FILE = "ticket.json";
     private static String TICKET_TYPE_FILE = "ticket_type.json";
     private static String USER_FILE = "user.json";
+
+
 
 
     @SneakyThrows
