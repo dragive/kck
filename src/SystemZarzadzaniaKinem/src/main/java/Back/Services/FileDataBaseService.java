@@ -56,30 +56,33 @@ public class FileDataBaseService extends DataBaseService {
     @SneakyThrows
     public List<FilmCategory> getAllFilmCategory() {
         List<FilmCategory> ret ;
-
         ObjectMapper objectMapper = new ObjectMapper();
-
-        ret = objectMapper.readerForListOf(FilmCategory.class).readValue(new File(FILM_CATEGORY_FILE));
+        File file = new File(FILM_CATEGORY_FILE);
+        if(!file.exists()) {
+            ret = new ArrayList<>();
+        }
+        else ret = objectMapper.readerForListOf(FilmCategory.class).readValue(file);
 
         return ret;
     }
 
     @SneakyThrows
     public void saveAllFilmCategory(List<FilmCategory> list) {
-
+        File file = new File(FILM_CATEGORY_FILE);
+        if(!file.exists()) file.createNewFile();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        objectMapper.writeValue(new File(FILM_CATEGORY_FILE),list);
+        objectMapper.writeValue(file,list);
 
     }
     @SneakyThrows
     public List<Cinema> getAllCinema() {
-        List<Cinema> ret ;
+        List<Cinema> ret;
 
         ObjectMapper objectMapper = new ObjectMapper();
-
-        ret = objectMapper.readerForListOf(Cinema.class).readValue(new File(CINEMA_FILE));
-
+        File file = new File(CINEMA_FILE);
+        if(file.exists()) ret = objectMapper.readerForListOf(Cinema.class).readValue(file);
+        else ret = new ArrayList<>();
         return ret;
     }
 
@@ -87,119 +90,138 @@ public class FileDataBaseService extends DataBaseService {
     public void saveAllCinema(List<Cinema> list) {
 
         ObjectMapper objectMapper = new ObjectMapper();
-
-        objectMapper.writeValue(new File(CINEMA_FILE),list);
+        File file = new File(CINEMA_FILE);
+        if(!file.exists()) file.createNewFile();
+        objectMapper.writeValue(file,list);
 
     }
     @SneakyThrows
     public List<City> getAllCity() {
         List<City> ret ;
-
+        File file = new File(CITY_FILE);
         ObjectMapper objectMapper = new ObjectMapper();
-
-        ret = objectMapper.readerForListOf(City.class).readValue(new File(CITY_FILE));
+        if(!file.exists()) {
+            ret = new ArrayList<>();
+        }
+        else ret = objectMapper.readerForListOf(City.class).readValue(file);
 
         return ret;
     }
 
     @SneakyThrows
     public void saveAllCity(List<City> list) {
-
+        File file = new File(CITY_FILE);
+        if(!file.exists()) file.createNewFile();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        objectMapper.writeValue(new File(CITY_FILE),list);
+        objectMapper.writeValue(file,list);
 
     }
     @SneakyThrows
     public List<Film> getAllFilm() {
         List<Film> ret ;
-
+        File file = new File(FILM_FILE);
         ObjectMapper objectMapper = new ObjectMapper();
-
-        ret = objectMapper.readerForListOf(Film.class).readValue(new File(FILM_FILE));
+        if(!file.exists()) {
+            ret = new ArrayList<>();
+        }
+        else ret = objectMapper.readerForListOf(Film.class).readValue(file);
 
         return ret;
     }
 
     @SneakyThrows
     public void saveAllFilm(List<Film> list) {
-
+        File file = new File(FILM_FILE);
+        if(!file.exists()) file.createNewFile();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        objectMapper.writeValue(new File(FILM_FILE),list);
+        objectMapper.writeValue(file,list);
 
     }
     @SneakyThrows
     public List<GiftCard> getAllGiftCard() {
         List<GiftCard> ret ;
-
+        File file = new File(GIFT_CARD_FILE);
         ObjectMapper objectMapper = new ObjectMapper();
-
-        ret = objectMapper.readerForListOf(GiftCard.class).readValue(new File(GIFT_CARD_FILE));
+        if(!file.exists()) {
+            ret = new ArrayList<>();
+        }
+        else ret = objectMapper.readerForListOf(GiftCard.class).readValue(file);
 
         return ret;
     }
 
     @SneakyThrows
     public void saveAllGiftCard(List<GiftCard> list) {
-
+        File file = new File(GIFT_CARD_FILE);
+        if(!file.exists()) file.createNewFile();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        objectMapper.writeValue(new File(GIFT_CARD_FILE),list);
+        objectMapper.writeValue(file,list);
 
     }
     @SneakyThrows
     public List<Items> getAllItems() {
         List<Items> ret ;
-
+        File file = new File(ITEMS_FILE);
         ObjectMapper objectMapper = new ObjectMapper();
-
-        ret = objectMapper.readerForListOf(Items.class).readValue(new File(ITEMS_FILE));
+        if(!file.exists()) {
+            ret = new ArrayList<>();
+        }
+        else ret = objectMapper.readerForListOf(Items.class).readValue(file);
 
         return ret;
     }
 
     @SneakyThrows
     public void saveAllItems(List<Items> list) {
-
+        File file = new File(ITEMS_FILE);
+        if(!file.exists()) file.createNewFile();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        objectMapper.writeValue(new File(ITEMS_FILE),list);
+        objectMapper.writeValue(file,list);
 
     }
     @SneakyThrows
     public List<Payment> getAllPayment() {
         List<Payment> ret ;
-
+        File file = new File(PAYMENT_FILE);
         ObjectMapper objectMapper = new ObjectMapper();
-
-        ret = objectMapper.readerForListOf(Payment.class).readValue(new File(PAYMENT_FILE));
+        if(!file.exists()) {
+            ret = new ArrayList<>();
+        }
+        else ret = objectMapper.readerForListOf(Payment.class).readValue(file);
 
         return ret;
     }
 
     @SneakyThrows
     public void saveAllPayment(List<Payment> list) {
-
+        File file = new File(PAYMENT_FILE);
+        if(!file.exists()) file.createNewFile();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        objectMapper.writeValue(new File(PAYMENT_FILE),list);
+        objectMapper.writeValue(file,list);
 
     }
     @SneakyThrows
     public List<Permission> getAllPermission() {
         List<Permission> ret ;
-
+        File file = new File(PERMISSION_FILE);
         ObjectMapper objectMapper = new ObjectMapper();
-
-        ret = objectMapper.readerForListOf(Permission.class).readValue(new File(PERMISSION_FILE));
+        if(!file.exists()) {
+            ret = new ArrayList<>();
+        }
+        else ret = objectMapper.readerForListOf(Permission.class).readValue(file);
 
         return ret;
     }
 
     @SneakyThrows
     public void saveAllPermission(List<Permission> list) {
-
+        File file = new File(PERMISSION_FILE);
+        if(!file.exists()) file.createNewFile();
         ObjectMapper objectMapper = new ObjectMapper();
 
         objectMapper.writeValue(new File(PERMISSION_FILE),list);
@@ -208,153 +230,177 @@ public class FileDataBaseService extends DataBaseService {
     @SneakyThrows
     public List<Reservation> getAllReservation() {
         List<Reservation> ret ;
-
+        File file = new File(RESERVATION_FILE);
         ObjectMapper objectMapper = new ObjectMapper();
-
-        ret = objectMapper.readerForListOf(Reservation.class).readValue(new File(RESERVATION_FILE));
+        if(!file.exists()) {
+            ret = new ArrayList<>();
+        }
+        else ret = objectMapper.readerForListOf(Reservation.class).readValue(file);
 
         return ret;
     }
 
     @SneakyThrows
     public void saveAllReservation(List<Reservation> list) {
-
+        File file = new File(RESERVATION_FILE);
+        if(!file.exists()) file.createNewFile();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        objectMapper.writeValue(new File(RESERVATION_FILE),list);
+        objectMapper.writeValue(file,list);
 
     }
     @SneakyThrows
     public List<Room> getAllRoom() {
         List<Room> ret ;
-
+        File file = new File(ROOM_FILE);
         ObjectMapper objectMapper = new ObjectMapper();
-
-        ret = objectMapper.readerForListOf(Room.class).readValue(new File(ROOM_FILE));
+        if(!file.exists()) {
+            ret = new ArrayList<>();
+        }
+        else ret = objectMapper.readerForListOf(Room.class).readValue(file);
 
         return ret;
     }
 
     @SneakyThrows
     public void saveAllRoom(List<Room> list) {
-
+        File file = new File(ROOM_FILE);
+        if(!file.exists()) file.createNewFile();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        objectMapper.writeValue(new File(ROOM_FILE),list);
+        objectMapper.writeValue(file,list);
 
     }
     @SneakyThrows
     public List<Seans> getAllSeans() {
         List<Seans> ret ;
-
+        File file = new File(SEANS_FILE);
         ObjectMapper objectMapper = new ObjectMapper();
-
-        ret = objectMapper.readerForListOf(Seans.class).readValue(new File(SEANS_FILE));
+        if(!file.exists()) {
+            ret = new ArrayList<>();
+        }
+        else ret = objectMapper.readerForListOf(Seans.class).readValue(file);
 
         return ret;
     }
 
     @SneakyThrows
     public void saveAllSeans(List<Seans> list) {
-
+        File file = new File(SEANS_FILE);
+        if(!file.exists()) file.createNewFile();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        objectMapper.writeValue(new File(SEANS_FILE),list);
+        objectMapper.writeValue(file,list);
 
     }
     @SneakyThrows
     public List<Seat> getAllSeat() {
         List<Seat> ret ;
-
+        File file = new File(SEAT_FILE);
         ObjectMapper objectMapper = new ObjectMapper();
-
-        ret = objectMapper.readerForListOf(Seat.class).readValue(new File(SEAT_FILE));
+        if(!file.exists()) {
+            ret = new ArrayList<>();
+        }
+        else ret = objectMapper.readerForListOf(Seat.class).readValue(file);
 
         return ret;
     }
 
     @SneakyThrows
     public void saveAllSeat(List<Seat> list) {
-
+        File file = new File(SEAT_FILE);
+        if(!file.exists()) file.createNewFile();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        objectMapper.writeValue(new File(SEAT_FILE),list);
+        objectMapper.writeValue(file,list);
 
     }
     @SneakyThrows
     public List<Staff> getAllStaff() {
         List<Staff> ret ;
-
+        File file = new File(STAFF_FILE);
         ObjectMapper objectMapper = new ObjectMapper();
-
-        ret = objectMapper.readerForListOf(Staff.class).readValue(new File(STAFF_FILE));
+        if(!file.exists()) {
+            ret = new ArrayList<>();
+        }
+        else ret = objectMapper.readerForListOf(Staff.class).readValue(file);
 
         return ret;
     }
 
     @SneakyThrows
     public void saveAllStaff(List<Staff> list) {
-
+        File file = new File(STAFF_FILE);
+        if(!file.exists()) file.createNewFile();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        objectMapper.writeValue(new File(STAFF_FILE),list);
+        objectMapper.writeValue(file,list);
 
     }
     @SneakyThrows
     public List<TicketType> getAllTicketType() {
         List<TicketType> ret ;
-
+        File file = new File(TICKET_TYPE_FILE);
         ObjectMapper objectMapper = new ObjectMapper();
-
-        ret = objectMapper.readerForListOf(TicketType.class).readValue(new File(TICKET_TYPE_FILE));
+        if(!file.exists()) {
+            ret = new ArrayList<>();
+        }
+        else ret = objectMapper.readerForListOf(TicketType.class).readValue(file);
 
         return ret;
     }
 
     @SneakyThrows
     public void saveAllTicketType(List<TicketType> list) {
-
+        File file = new File(TICKET_TYPE_FILE);
+        if(!file.exists()) file.createNewFile();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        objectMapper.writeValue(new File(TICKET_TYPE_FILE),list);
+        objectMapper.writeValue(file,list);
 
     }
     @SneakyThrows
     public List<Ticket> getAllTicket() {
         List<Ticket> ret ;
-
+        File file = new File(TICKET_FILE);
         ObjectMapper objectMapper = new ObjectMapper();
-
-        ret = objectMapper.readerForListOf(Ticket.class).readValue(new File(TICKET_FILE));
+        if(!file.exists()) {
+            ret = new ArrayList<>();
+        }
+        else ret = objectMapper.readerForListOf(Ticket.class).readValue(file);
 
         return ret;
     }
 
     @SneakyThrows
     public void saveAllTicket(List<Ticket> list) {
-
+        File file = new File(TICKET_FILE);
+        if(!file.exists()) file.createNewFile();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        objectMapper.writeValue(new File(TICKET_FILE),list);
+        objectMapper.writeValue(file,list);
 
     }
     @SneakyThrows
     public List<User> getAllUser() {
         List<User> ret ;
-
+        File file = new File(USER_FILE);
         ObjectMapper objectMapper = new ObjectMapper();
-
-        ret = objectMapper.readerForListOf(User.class).readValue(new File(USER_FILE));
+        if(!file.exists()) {
+            ret = new ArrayList<>();
+        }
+        else ret = objectMapper.readerForListOf(User.class).readValue(file);
 
         return ret;
     }
 
     @SneakyThrows
     public void saveAllUser(List<User> list) {
-
+        File file = new File(USER_FILE);
+        if(!file.exists()) file.createNewFile();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        objectMapper.writeValue(new File(USER_FILE),list);
+        objectMapper.writeValue(file,list);
 
     }
 

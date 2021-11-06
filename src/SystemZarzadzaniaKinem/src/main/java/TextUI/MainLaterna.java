@@ -15,8 +15,6 @@ import java.util.Arrays;
 
 public class MainLaterna {
     public static void main(String[] args) throws IOException {
-
-        boolean run = true;
         Terminal terminal = new DefaultTerminalFactory().createTerminal();
         MainScreen mainScreen = MainScreen.getInstance();
         mainScreen.init(terminal);
@@ -24,21 +22,5 @@ public class MainLaterna {
 
         mainScreen.modify();
         ((AsynchronousTextGUIThread)gui.getGUIThread()).start();
-
-        /*while (run) {
-            KeyStroke key = terminal.pollInput();
-            if(key!=null) {
-                switch (key.getKeyType()) {
-                    case Escape:
-                        if(mainScreen.isInternalWindowShown()) mainScreen.closeResponseWindow();
-                        else run = false;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }*/
-
-
     }
 }
