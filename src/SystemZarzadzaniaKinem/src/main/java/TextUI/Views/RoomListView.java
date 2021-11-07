@@ -1,23 +1,28 @@
 package TextUI.Views;
 
-import Back.Controllers.CinemaController;
+import Back.Controllers.RoomsController;
+import Back.Controllers.UsersController;
 import Back.Models.Cinema;
+import Back.Models.Room;
+import Back.Models.User;
 import TextUI.MultiWindowTextExtendedGUI;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.input.KeyStroke;
+import lombok.SneakyThrows;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class CinemaView {
-    private static CinemaView instance = null;
+public class RoomListView {
+    private static RoomListView instance = null;
     private Cinema cinema;
-    private CinemaView(){}
+    private RoomListView(){}
 
-    public static CinemaView getInstance() {
-        if(instance==null) instance = new CinemaView();
+    public static RoomListView getInstance() {
+        if(instance==null) instance = new RoomListView();
         return instance;
     }
 
@@ -33,13 +38,14 @@ public class CinemaView {
 
         }
 
+        @SneakyThrows
         @Override
         public void onInput(Window window, KeyStroke keyStroke, AtomicBoolean atomicBoolean) {
-            switch (keyStroke.getKeyType()) {
+            switch (keyStroke.getKeyType()){
                 case Escape:
                     window.close();
-                    CinemaListView cinemaListView = CinemaListView.getInstance();
-                    cinemaListView.init();
+                    CinemaView cinemaView = CinemaView.getInstance();
+                    cinemaView.init(cinema);
                     break;
                 default:
                     break;
@@ -52,7 +58,7 @@ public class CinemaView {
         }
     }
 
-    public void init(Cinema cinema) {
+    public void init(Cinema cinema){
         this.cinema = cinema;
         MultiWindowTextExtendedGUI gui = MultiWindowTextExtendedGUI.getInstance();
         BasicWindow window = new BasicWindow();
@@ -60,40 +66,30 @@ public class CinemaView {
         window.addWindowListener(keyStrokeListener);
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
-        Button room = new Button("Sale kinowe", new Runnable() {
-            @Override
-            public void run() {
-                window.close();
-                RoomListView roomListView = RoomListView.getInstance();
-                roomListView.init(cinema);
-            }
-        });
-        Button delete = new Button("Usun kino", new Runnable() {
-            @Override
-            public void run() {
-                CinemaController cinemaController = new CinemaController();
-                cinemaController.delete(cinema);
-                window.close();
-                CinemaListView cinemaListView = CinemaListView.getInstance();
-                cinemaListView.init();
-            }
-        });
-        Button reservation = new Button("Zarezerwuj", new Runnable() {
-            @Override
-            public void run() {
-                window.close();
-                ReservationSeansListView reservationSeansListView = ReservationSeansListView.getInstance();
-                reservationSeansListView.init(cinema,instance);
-            }
-        });
-
-        window.setTitle(cinema.getName());
         panel.setLayoutManager(new GridLayout(1));
-        panel.addComponent(room);
-        panel.addComponent(reservation);
-        panel.addComponent(delete);
 
-        window.setTitle(cinema.getName());
+        RoomsController roomsController = new RoomsController();
+        List<Room> roomList = roomsController.getByCinemaId(cinema.getId());
+        for(Room room : roomList) {
+            panel.addComponent(new Button(room.getName(), new Runnable() {
+                @Override
+                public void run() {
+                    window.close();
+                    RoomView roomView = RoomView.getInstance();
+                    roomView.init(room);
+                }
+            }));
+        }
+        panel.addComponent(new Button("Dodaj salę kinową", new Runnable() {
+            @Override
+            public void run() {
+                window.close();
+                AddRoomView addRoomView = AddRoomView.getInstance();
+                addRoomView.init(cinema);
+            }
+        }));
+
+        window.setTitle("Sale kinowe");
         window.setComponent(panel);
         gui.addWindow(window);
     }

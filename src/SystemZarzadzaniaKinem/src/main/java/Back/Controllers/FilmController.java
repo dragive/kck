@@ -13,7 +13,7 @@ public class FilmController {
         return DataBaseService.getInstance().getAllFilm();
     }
 
-    public void createNew(Film object){List list = this.getAll();list.add(object);this.saveAll(list);}
+    public void createNew(Film object){List list = this.getAll();if(list.size()==0) object.setId(1);else {Film last = (Film)list.get(list.size()-1);object.setId(last.getId()+1);}list.add(object);this.saveAll(list);}
     public void update(Film object){this.saveAll(this.getAll().stream().map((o)->{if(o.getId() == object.getId())return object; else return o;}).collect(Collectors.toList()));}
     public void delete(Film object){this.saveAll(this.getAll().stream().filter((o)->{return !o.equals(object);}).collect(Collectors.toList()));}
 }

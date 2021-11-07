@@ -1,6 +1,7 @@
 package TextUI.Views;
 
 import Back.Controllers.FilmCategoryController;
+import Back.Controllers.FilmController;
 import Back.Models.Film;
 import Back.Models.FilmCategory;
 import TextUI.MultiWindowTextExtendedGUI;
@@ -77,6 +78,8 @@ public class FilmView {
                 filmList.remove(film);
                 filmCategory.setFilmList(filmList);
                 filmCategoryController.update(filmCategory);
+                FilmController filmController = new FilmController();
+                filmController.delete(film);
                 FilmCategoryView filmCategoryView = FilmCategoryView.getInstance();
                 filmCategoryView.init(filmCategory);
             }

@@ -1,5 +1,6 @@
 package TextUI.Views;
 
+import Back.Controllers.UsersController;
 import Back.Models.User;
 import TextUI.MultiWindowTextExtendedGUI;
 import com.googlecode.lanterna.TerminalPosition;
@@ -67,10 +68,6 @@ public class LoginView {
         login.setSize(new TerminalSize(20,1));
         password.setSize(new TerminalSize(20,1));
 
-        user = new User();
-        user.setName("Krzysiek");
-        user.setPasswordHash("123");
-
         panel = new Panel();
         panel.setLayoutManager(new GridLayout(2));
 
@@ -87,11 +84,20 @@ public class LoginView {
         panel.addComponent(new Button("Zaloguj się", new Runnable() {
             @Override
             public void run() {
+                UsersController usersController = new UsersController();
+                user = usersController.getByName(login.getText());
                 System.out.println(login.getText()+" "+password.getText());
-                if(user.getName().equals(login.getText()) && user.getPasswordHash().equals(password.getText())) {
-                    window.close();
-                    MenuView menuView = MenuView.getInstance();
-                    menuView.init(user);
+                if(user!=null)
+                {
+                    if(user.getName().equals(login.getText()) && user.getPasswordHash().equals(password.getText())) {
+                        window.close();
+                        MenuView menuView = MenuView.getInstance();
+                        menuView.init(user);
+                    }
+                    else {
+                        ErrorWindow internalWindow = new ErrorWindow();
+                        internalWindow.ShowErrorMessage("Zly login lub haslo");
+                    }
                 }
                 else {
                     ErrorWindow internalWindow = new ErrorWindow();

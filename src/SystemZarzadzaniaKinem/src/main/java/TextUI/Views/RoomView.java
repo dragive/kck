@@ -1,23 +1,28 @@
 package TextUI.Views;
 
 import Back.Controllers.CinemaController;
+import Back.Controllers.RoomsController;
 import Back.Models.Cinema;
+import Back.Models.Room;
+import Back.Models.Seat;
 import TextUI.MultiWindowTextExtendedGUI;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.input.KeyStroke;
+import lombok.SneakyThrows;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class CinemaView {
-    private static CinemaView instance = null;
-    private Cinema cinema;
-    private CinemaView(){}
+public class RoomView {
+    private static RoomView instance = null;
+    private Room room;
+    private RoomView(){}
 
-    public static CinemaView getInstance() {
-        if(instance==null) instance = new CinemaView();
+    public static RoomView getInstance() {
+        if(instance==null) instance = new RoomView();
         return instance;
     }
 
@@ -33,13 +38,15 @@ public class CinemaView {
 
         }
 
+        @SneakyThrows
         @Override
         public void onInput(Window window, KeyStroke keyStroke, AtomicBoolean atomicBoolean) {
-            switch (keyStroke.getKeyType()) {
+            switch (keyStroke.getKeyType()){
                 case Escape:
                     window.close();
-                    CinemaListView cinemaListView = CinemaListView.getInstance();
-                    cinemaListView.init();
+                    CinemaController cinemaController = new CinemaController();
+                    RoomListView roomListView = RoomListView.getInstance();
+                    roomListView.init(cinemaController.getById(room.getCinemaId()));
                     break;
                 default:
                     break;
@@ -52,48 +59,46 @@ public class CinemaView {
         }
     }
 
-    public void init(Cinema cinema) {
-        this.cinema = cinema;
+    public void init(Room room){
+        this.room=room;
         MultiWindowTextExtendedGUI gui = MultiWindowTextExtendedGUI.getInstance();
         BasicWindow window = new BasicWindow();
         KeyStrokeListener keyStrokeListener = new KeyStrokeListener();
         window.addWindowListener(keyStrokeListener);
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
-        Button room = new Button("Sale kinowe", new Runnable() {
+        List<Seat> seatList = room.getSeatList();
+        Label name = new Label(room.getName());
+        Label rows = new Label(String.valueOf(seatList.get(seatList.size()-1).getRow()));
+        Label howManySeats = new Label(String.valueOf(seatList.size()));
+        Button seats = new Button("Siedzenia", new Runnable() {
             @Override
             public void run() {
-                window.close();
-                RoomListView roomListView = RoomListView.getInstance();
-                roomListView.init(cinema);
+
             }
         });
-        Button delete = new Button("Usun kino", new Runnable() {
-            @Override
-            public void run() {
-                CinemaController cinemaController = new CinemaController();
-                cinemaController.delete(cinema);
-                window.close();
-                CinemaListView cinemaListView = CinemaListView.getInstance();
-                cinemaListView.init();
-            }
-        });
-        Button reservation = new Button("Zarezerwuj", new Runnable() {
+        Button seanses = new Button("Seanse", new Runnable() {
             @Override
             public void run() {
                 window.close();
-                ReservationSeansListView reservationSeansListView = ReservationSeansListView.getInstance();
-                reservationSeansListView.init(cinema,instance);
+                SeansListView seansListView = SeansListView.getInstance();
+                seansListView.init(room);
             }
         });
 
-        window.setTitle(cinema.getName());
-        panel.setLayoutManager(new GridLayout(1));
-        panel.addComponent(room);
-        panel.addComponent(reservation);
-        panel.addComponent(delete);
+        panel.addComponent(new Label("Nazwa"));
+        panel.addComponent(name);
 
-        window.setTitle(cinema.getName());
+        panel.addComponent(new Label("Liczba rzędów"));
+        panel.addComponent(rows);
+
+        panel.addComponent(new Label("Liczba siedzen"));
+        panel.addComponent(howManySeats);
+
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(seanses);
+
+        window.setTitle(room.getName());
         window.setComponent(panel);
         gui.addWindow(window);
     }

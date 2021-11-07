@@ -11,6 +11,6 @@ public class Seans {
     private Integer id;
     private Integer filmId;
     private Date date;
-    private Integer cinemaId;
+    private Integer roomId;
 
 }

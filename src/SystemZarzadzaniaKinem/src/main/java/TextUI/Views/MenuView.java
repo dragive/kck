@@ -6,14 +6,19 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.input.KeyStroke;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.SneakyThrows;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+@Setter
+@Getter
 public class MenuView {
     private static MenuView instance = null;
-
+    private User user;
+    private BasicWindow window;
     private MenuView(){}
 
     public static MenuView getInstance() {
@@ -56,6 +61,7 @@ public class MenuView {
 
     @SneakyThrows
     public void init(User user) {
+        this.user = user;
         MultiWindowTextExtendedGUI gui = MultiWindowTextExtendedGUI.getInstance();
 
         Label userWelcomeMessage = new Label("Witaj " + user.getName());
@@ -66,11 +72,32 @@ public class MenuView {
                 filmCategoryListView.init();
             }
         });
+        Button cities = new Button("Miasta", new Runnable() {
+            @Override
+            public void run() {
+                CityListView cityListView = CityListView.getInstance();
+                cityListView.init();;
+            }
+        });
         Button cinemas = new Button("Kina", new Runnable() {
             @Override
             public void run() {
                 CinemaListView cinemaListView = CinemaListView.getInstance();
                 cinemaListView.init();
+            }
+        });
+        Button userButton = new Button("Użytkownik", new Runnable() {
+            @Override
+            public void run() {
+                UserView userView = UserView.getInstance();
+                userView.init(user,instance);
+            }
+        });
+        Button users = new Button("Użytkownikcy", new Runnable() {
+            @Override
+            public void run() {
+                UserListView userListView = UserListView.getInstance();
+                userListView.init();
             }
         });
         Button credits = new Button("Twórcy", new Runnable() {
@@ -80,6 +107,13 @@ public class MenuView {
                 creditsWindow.init();
             }
         });
+        Button reservation = new Button("Zarezerwuj", new Runnable() {
+            @Override
+            public void run() {
+                ReservationCinemaListView reservationCinemaListView = ReservationCinemaListView.getInstance();
+                reservationCinemaListView.init();
+            }
+        });
 
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(1));
@@ -87,11 +121,14 @@ public class MenuView {
         panel.addComponent(new EmptySpace(new TerminalSize(0,1)));
         panel.addComponent(cinemas);
         panel.addComponent(films);
+        panel.addComponent(reservation);
+        panel.addComponent(userButton);
+        panel.addComponent(users);
         panel.addComponent(credits);
 
 
 
-        BasicWindow window = new BasicWindow();
+        window = new BasicWindow();
         KeyStrokeListener keyStrokeListener = new KeyStrokeListener();
         window.addWindowListener(keyStrokeListener);
         window.setFixedSize(new TerminalSize(20,10));
