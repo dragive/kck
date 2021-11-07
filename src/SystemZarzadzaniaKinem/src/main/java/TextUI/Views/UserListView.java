@@ -69,6 +69,8 @@ public class UserListView {
             }
         });
         panel.setLayoutManager(new GridLayout(1));
+        panel.addComponent(new Label("Użytkownicy systemu: "));
+        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
         UsersController usersController = new UsersController();
         List<User> userList = usersController.getAll();
         for(User user : userList) {
@@ -81,6 +83,7 @@ public class UserListView {
                 }
             }));
         }
+        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
         panel.addComponent(new Button("Dodaj użytkownika", new Runnable() {
             @Override
             public void run() {
@@ -89,6 +92,7 @@ public class UserListView {
                 addUserView.init();
             }
         }));
+        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
         panel.addComponent(exit);
 
         window.setTitle("Użytkownicy");

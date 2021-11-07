@@ -57,22 +57,25 @@ public class CreditsWindow {
         window.setTitle("Twórcy");
         KeyStrokeListener keyStrokeListener = new KeyStrokeListener();
         window.addWindowListener(keyStrokeListener);
-        window.setFixedSize(new TerminalSize(20,4));
-        window.setHints(Arrays.asList(Window.Hint.CENTERED));
+        window.setFixedSize(new TerminalSize(40,7));
+        window.setHints(Arrays.asList(Window.Hint.CENTERED, Window.Hint.FIXED_SIZE));
         Panel internalPanel = new Panel();
         Button exit = new Button("Wstecz", new Runnable() {
             @SneakyThrows
             @Override
             public void run() {
                 window.close();
-               
+
             }
         });
         internalPanel.setLayoutManager(new LinearLayout());
-        internalPanel.addComponent(new Label("Kozackie chlopaki"));
+        internalPanel.addComponent(new Label("Autorzy Projektu:"));
+        internalPanel.addComponent(new EmptySpace(new TerminalSize(1,1)));
+//        internalPanel.addComponent(new Label("Kozackie chlopaki"));
         internalPanel.addComponent(new Label("Maciek Fender"));
         internalPanel.addComponent(new Label("Kacper Chrost"));
         internalPanel.addComponent(new Label("Krzysztof Funkowski"));
+        internalPanel.addComponent(new EmptySpace(new TerminalSize(1,1)));
         internalPanel.addComponent(exit);
         window.setComponent(internalPanel);
         gui.addWindow(window);

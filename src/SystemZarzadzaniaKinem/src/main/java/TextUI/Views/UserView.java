@@ -79,6 +79,8 @@ public class UserView {
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(2));
+        panel.addComponent(new Label("Dane użytkownika:"));
+        panel.addComponent(new EmptySpace(new TerminalSize(2,1)));
         Label name = new Label(user.getName());
         Label email = new Label(user.getEmail());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
