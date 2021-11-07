@@ -69,6 +69,8 @@ public class MenuFilmView {
             }
         });
         panel.setLayoutManager(new GridLayout(1));
+        panel.addComponent(new Label("Wybierz film z listy:"));
+        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
         FilmController filmController = new FilmController();
         List<Film> filmList = filmController.getAll();
         for(Film film:filmList)
@@ -82,6 +84,7 @@ public class MenuFilmView {
                 }
             }));
         }
+        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
         panel.addComponent(exit);
 
         window.setTitle("Filmy");

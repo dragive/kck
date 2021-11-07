@@ -769,33 +769,33 @@ public class ControllersTest {
         Assert.assertTrue(lista.equals(listb));
     }
 
-    @Test
-    public void SeatBasicOperationsWriteUpdateReadTest(){
-        List<Seat> lista = new ArrayList<>();
-
-        for(int i =0; i<NO_OF_OBJECTS;i++){
-            Seat object = new Seat();
-            object.setId(i+1);
-            lista.add(object);
-        }
-        SeatController controller = new SeatController();
-        Seat updated = new Seat();
-        updated.setId(1);
-        updated.setName("TESTTESTTEST");
-        controller.saveAll(lista);
-        controller.update(updated);
-
-        List<Seat> listb = controller.getAll();
-
-        Assert.assertFalse(lista.equals(listb));
-        Assert.assertTrue(lista.size()==listb.size());
-        int countUpdated =0;
-        for (Seat object: listb) {
-            if(object.equals(updated))
-                countUpdated++;
-        }
-        Assert.assertTrue(countUpdated==1);
-    }
+//    @Test
+//    public void SeatBasicOperationsWriteUpdateReadTest(){
+//        List<Seat> lista = new ArrayList<>();
+//
+//        for(int i =0; i<NO_OF_OBJECTS;i++){
+//            Seat object = new Seat();
+//            object.setId(i+1);
+//            lista.add(object);
+//        }
+//        SeatController controller = new SeatController();
+//        Seat updated = new Seat();
+//        updated.setId(1);
+//        updated.setName("TESTTESTTEST");
+//        controller.saveAll(lista);
+//        controller.update(updated);
+//
+//        List<Seat> listb = controller.getAll();
+//
+//        Assert.assertFalse(lista.equals(listb));
+//        Assert.assertTrue(lista.size()==listb.size());
+//        int countUpdated =0;
+//        for (Seat object: listb) {
+//            if(object.equals(updated))
+//                countUpdated++;
+//        }
+//        Assert.assertTrue(countUpdated==1);
+//    }
 
     @Test
     public void SeatBasicOperationsWriteDeleteReadTest(){

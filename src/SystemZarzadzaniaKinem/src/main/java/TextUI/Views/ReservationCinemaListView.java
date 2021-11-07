@@ -62,6 +62,8 @@ public class ReservationCinemaListView {
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(1));
+        panel.addComponent(new Label("Wybierz kino by móc umieścić rezerwację\nw jednym z jego seansów:"));
+        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
         Button exit = new Button("Wstecz", new Runnable() {
             @SneakyThrows
             @Override
@@ -69,6 +71,7 @@ public class ReservationCinemaListView {
                 window.close();
             }
         });
+
         CinemaController cinemaController = new CinemaController();
         List<Cinema> cinemas = cinemaController.getAll();
 
@@ -83,6 +86,8 @@ public class ReservationCinemaListView {
             }));
         }
 
+        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
+        panel.addComponent(exit);
         window.setTitle("Wybierz kino");
         window.setComponent(panel);
         gui.addWindow(window);

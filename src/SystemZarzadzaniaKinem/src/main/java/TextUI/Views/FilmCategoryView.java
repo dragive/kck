@@ -73,6 +73,8 @@ public class FilmCategoryView {
             }
         });
         panel.setLayoutManager(new GridLayout(1));
+        panel.addComponent(new Label("wybierz kategorię filmu:"));
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         FilmCategoryController filmCategoryController = new FilmCategoryController();
         List<Film> filmList = filmCategoryController.getCategoryFilms(filmCategory.getId());
         for(Film film:filmList)
@@ -86,6 +88,7 @@ public class FilmCategoryView {
                 }
             }));
         }
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(new Button("Dodaj film", new Runnable() {
             @Override
             public void run() {

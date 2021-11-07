@@ -28,12 +28,12 @@ public class UserListView {
 
         @Override
         public void onResized(Window window, TerminalSize terminalSize, TerminalSize terminalSize1) {
-
+            System.out.println("onResized");
         }
 
         @Override
         public void onMoved(Window window, TerminalPosition terminalPosition, TerminalPosition terminalPosition1) {
-
+            System.out.println("onMoved");
         }
 
         @SneakyThrows

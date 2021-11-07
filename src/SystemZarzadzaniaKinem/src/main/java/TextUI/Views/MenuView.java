@@ -64,7 +64,7 @@ public class MenuView {
         this.user = user;
         MultiWindowTextExtendedGUI gui = MultiWindowTextExtendedGUI.getInstance();
 
-        Label userWelcomeMessage = new Label("Witaj " + user.getName());
+        Label userWelcomeMessage = new Label("Witaj " + user.getName()+"!");
         Button filmcategories = new Button("Kategorie filmów", new Runnable() {
             @Override
             public void run() {
@@ -125,23 +125,37 @@ public class MenuView {
         });
 
         Panel panel = new Panel();
-        panel.setLayoutManager(new GridLayout(1));
+        panel.setLayoutManager(new GridLayout(2));
         panel.addComponent(userWelcomeMessage);
-        panel.addComponent(new EmptySpace(new TerminalSize(0,1)));
-        panel.addComponent(cinemas);
-        panel.addComponent(filmcategories);
-        panel.addComponent(films);
-        panel.addComponent(reservation);
-        panel.addComponent(userButton);
-        panel.addComponent(users);
-        panel.addComponent(credits);
+        panel.addComponent(new EmptySpace(new TerminalSize(2,2)));
+//        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+
+        panel.addComponent(new Label("Panel główny programu zarządzania kinem."));
+                panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(new Label("Wybierz jedną z poniższych opcji."));
+//        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(new EmptySpace(new TerminalSize(0,2)));
+
+        panel.addComponent(cinemas); panel.addComponent(new Label("Zarządzanie kinami"));
+        panel.addComponent(filmcategories); panel.addComponent(new Label("Zarządzanie kategoriami filmów"));
+        panel.addComponent(films);panel.addComponent(new Label("Zarządzanie filmami"));
+        panel.addComponent(reservation); panel.addComponent(new Label("Zarządzanie Rezerwacjami"));
+        panel.addComponent(userButton); panel.addComponent(new Label("Informacje o aktualnym użytkowniku"));
+        panel.addComponent(users); panel.addComponent(new Label("Panel administracyjny użytkowników"));
+        panel.addComponent(credits); panel.addComponent(new Label("Informacje o twórcach systemu"));
+//        panel.addComponent(new EmptySpace(new TerminalSize(4,4)));
+//        panel.addComponent(new EmptySpace(new TerminalSize(0,4)));
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+//        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(new EmptySpace(new TerminalSize(2,2)));
+//        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(exit);
 
 
         window = new BasicWindow();
         KeyStrokeListener keyStrokeListener = new KeyStrokeListener();
         window.addWindowListener(keyStrokeListener);
-        window.setFixedSize(new TerminalSize(20,10));
+        window.setFixedSize(new TerminalSize(80,16));
         window.setHints(Arrays.asList(Window.Hint.CENTERED,Window.Hint.FIXED_SIZE));
         window.setComponent(panel);
         window.setTitle("Menu");

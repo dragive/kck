@@ -78,7 +78,14 @@ public class CinemaListView {
         CinemaController cinemaController = new CinemaController();
         List<Cinema> cinemas = cinemaController.getAll();
 
+
+
         panel.setLayoutManager(new GridLayout(1));
+
+        if (MenuView.getInstance().getUser().isPermission())panel.addComponent(new Label("Wybierz kino lub utwórz nowe:"));
+        else panel.addComponent(new Label("Wybierz kino:"));
+        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
+
         for(Cinema cinema: cinemas) {
             panel.addComponent(new Button(cinema.getName(), new Runnable() {
                 @Override
@@ -89,6 +96,7 @@ public class CinemaListView {
                 }
             }));
         }
+        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
         panel.addComponent(addCinema);
         panel.addComponent(exit);
 

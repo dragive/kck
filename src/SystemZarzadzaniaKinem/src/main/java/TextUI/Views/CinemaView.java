@@ -99,12 +99,15 @@ public class CinemaView {
 
         window.setTitle(cinema.getName());
         panel.setLayoutManager(new GridLayout(1));
+        panel.addComponent(new Label("Wybierz salę lub rezerwazję w tym kinie:"));
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(room);
         panel.addComponent(reservation);
         if (MenuView.getInstance().getUser().isPermission())
         {
             panel.addComponent(delete);
         }
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(exit);
 
         window.setTitle(cinema.getName());
