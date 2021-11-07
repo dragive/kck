@@ -2,6 +2,7 @@ package TextUI.Views;
 
 import Back.Controllers.FilmController;
 import Back.Controllers.RoomsController;
+import Back.Controllers.SeansController;
 import Back.Models.Room;
 import Back.Models.Seans;
 import TextUI.MultiWindowTextExtendedGUI;
@@ -76,6 +77,15 @@ public class SeansView {
                 seansListView.init(roomsController.getById(seans.getRoomId()));
             }
         });
+        Button remove = new Button("Usuń", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                SeansController seansController = new SeansController();
+                seansController.delete(seans);
+            }
+        });
         panel.setLayoutManager(new GridLayout(2));
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
         Label date = new Label(simpleDateFormat.format(seans.getDate()));
@@ -87,6 +97,12 @@ public class SeansView {
 
         panel.addComponent(new Label("Tytuł filmu"));
         panel.addComponent(film);
+
+        if (MenuView.getInstance().getUser().isPermission())
+        {
+            panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+            panel.addComponent(remove);
+        }
 
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(exit);
