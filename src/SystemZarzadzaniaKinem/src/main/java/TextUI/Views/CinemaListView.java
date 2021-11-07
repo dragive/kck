@@ -97,7 +97,10 @@ public class CinemaListView {
             }));
         }
         panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
-        panel.addComponent(addCinema);
+        if(MenuView.getInstance().getUser().isPermission())
+        {
+            panel.addComponent(addCinema);
+        }
         panel.addComponent(exit);
 
         KeyStrokeListener keyStrokeListener = new KeyStrokeListener();

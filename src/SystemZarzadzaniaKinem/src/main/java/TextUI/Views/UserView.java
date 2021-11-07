@@ -54,6 +54,9 @@ public class UserView {
                     else if(previousWindow instanceof EditUserView) {
                         window.close();
                     }
+                    else if(previousWindow instanceof UserReservationsView) {
+                        window.close();
+                    }
                     break;
                 default:
                     break;
@@ -100,6 +103,15 @@ public class UserView {
                 window.close();
             }
         });
+        Button reservations = new Button("Rezerwacje", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                UserReservationsView reservationsView = UserReservationsView.getInstance();
+                reservationsView.init(user);
+            }
+        });
 
         panel.addComponent(new Label("Nazwa użytkownika"));
         panel.addComponent(name);
@@ -110,6 +122,10 @@ public class UserView {
         panel.addComponent(new Label("Data założenia"));
         panel.addComponent(date);
 
+        panel.addComponent(new Label("Rezerwacje"));
+        panel.addComponent(reservations);
+
+
         if(user.isPermission())
         {
             panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
@@ -117,7 +133,7 @@ public class UserView {
         }
 
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
-        panel.addComponent(edit);
+        panel.addComponent(exit);
 
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(edit);

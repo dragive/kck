@@ -84,6 +84,9 @@ public class SeansView {
                 window.close();
                 SeansController seansController = new SeansController();
                 seansController.delete(seans);
+                RoomsController roomsController = new RoomsController();
+                SeansListView seansListView = SeansListView.getInstance();
+                seansListView.init(roomsController.getById(seans.getRoomId()));
             }
         });
         panel.setLayoutManager(new GridLayout(2));

@@ -1,7 +1,11 @@
 package TextUI.Views;
 
-import Back.Controllers.FilmCategoryController;
-import Back.Models.FilmCategory;
+import Back.Controllers.FilmController;
+import Back.Controllers.ReservationController;
+import Back.Controllers.SeansController;
+import Back.Models.Reservation;
+import Back.Models.Seans;
+import Back.Models.User;
 import TextUI.MultiWindowTextExtendedGUI;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
@@ -9,17 +13,19 @@ import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.input.KeyStroke;
 import lombok.SneakyThrows;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class FilmCategoryListView {
-    private static FilmCategoryListView instance=null;
+public class UserReservationsView {
 
-    private FilmCategoryListView() {}
+    private static UserReservationsView instance = null;
+    private User user;
+    private UserReservationsView(){}
 
-    public static FilmCategoryListView getInstance() {
-        if(instance==null) instance = new FilmCategoryListView();
+    public static UserReservationsView getInstance() {
+        if(instance==null) instance = new UserReservationsView();
         return instance;
     }
 
@@ -41,6 +47,8 @@ public class FilmCategoryListView {
             switch (keyStroke.getKeyType()){
                 case Escape:
                     window.close();
+                    UserView userView = UserView.getInstance();
+                    userView.init(user, instance);
                     break;
                 default:
                     break;
@@ -53,7 +61,8 @@ public class FilmCategoryListView {
         }
     }
 
-    public void init() {
+    public void init(User user){
+        this.user = user;
         MultiWindowTextExtendedGUI gui = MultiWindowTextExtendedGUI.getInstance();
         BasicWindow window = new BasicWindow();
         KeyStrokeListener keyStrokeListener = new KeyStrokeListener();
@@ -65,41 +74,32 @@ public class FilmCategoryListView {
             @Override
             public void run() {
                 window.close();
+                UserView userView = UserView.getInstance();
+                userView.init(user, instance);
             }
         });
-        FilmCategoryController filmCategoryController = new FilmCategoryController();
-        List<FilmCategory> filmCategories = filmCategoryController.getAll();
         panel.setLayoutManager(new GridLayout(1));
-        panel.addComponent(new Label("Wybierz kategorię filmu:"));
-
-        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
-        for(FilmCategory item: filmCategories)
+        ReservationController reservationController = new ReservationController();
+        List<Reservation> reservationList = reservationController.getReservationByUserId(MenuView.getInstance().getUser().getId());
+        for(Reservation reservation:reservationList)
         {
-            panel.addComponent(new Button(item.getName(), new Runnable() {
+            SeansController seansController = new SeansController();
+            Seans seans = seansController.getById(reservation.getSeansId());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
+            FilmController filmController = new FilmController();
+            panel.addComponent(new Button(filmController.getById(seans.getFilmId()).getTitle() + " " + simpleDateFormat.format(seans.getDate()), new Runnable() {
                 @Override
                 public void run() {
                     window.close();
-                    FilmCategoryView filmCategoryView = FilmCategoryView.getInstance();
-                    filmCategoryView.init(item);
+                    ReservationView reservationView = ReservationView.getInstance();
+                    reservationView.init(user,reservation);
                 }
             }));
         }
-        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
-        if(MenuView.getInstance().getUser().isPermission())
-        {
-            panel.addComponent(new Button("Dodaj kategorię", new Runnable() {
-                @Override
-                public void run() {
-                    window.close();
-                    AddFilmCategoryView addFilmCategoryView = AddFilmCategoryView.getInstance();
-                    addFilmCategoryView.init();
-                }
-            }));
-        }
-
         panel.addComponent(exit);
-        window.setTitle("Kategorie Filmów");
+        window.setTitle("Lista rezerwacji");
         window.setComponent(panel);
         gui.addWindow(window);
     }
+
 }

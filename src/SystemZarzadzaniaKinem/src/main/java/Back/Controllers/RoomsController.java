@@ -35,6 +35,7 @@ public class RoomsController {
             for(int j=0;j<cols;j++)
             {
                 seat = new Seat();
+                seat.setId(counter);
                 seat.setNumber(counter++);
                 seat.setRow(i+1);
                 seat.setRoomId(roomId);

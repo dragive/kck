@@ -451,33 +451,6 @@ public class ControllersTest {
         Assert.assertTrue(lista.equals(listb));
     }
 
-    @Test
-    public void ReservationBasicOperationsWriteUpdateReadTest(){
-        List<Reservation> lista = new ArrayList<>();
-
-        for(int i =0; i<NO_OF_OBJECTS;i++){
-            Reservation object = new Reservation();
-            object.setId(i+1);
-            lista.add(object);
-        }
-        ReservationController controller = new ReservationController();
-        Reservation updated = new Reservation();
-        updated.setId(1);
-        updated.setName("TESTTESTTEST");
-        controller.saveAll(lista);
-        controller.update(updated);
-
-        List<Reservation> listb = controller.getAll();
-
-        Assert.assertFalse(lista.equals(listb));
-        Assert.assertTrue(lista.size()==listb.size());
-        int countUpdated =0;
-        for (Reservation object: listb) {
-            if(object.equals(updated))
-                countUpdated++;
-        }
-        Assert.assertTrue(countUpdated==1);
-    }
 
     @Test
     public void ReservationBasicOperationsWriteDeleteReadTest(){
@@ -661,34 +634,6 @@ public class ControllersTest {
         List listb = controller.getAll();
 
         Assert.assertTrue(lista.equals(listb));
-    }
-
-    @Test
-    public void SeansBasicOperationsWriteUpdateReadTest(){
-        List<Seans> lista = new ArrayList<>();
-
-        for(int i =0; i<NO_OF_OBJECTS;i++){
-            Seans object = new Seans();
-            object.setId(i+1);
-            lista.add(object);
-        }
-        SeansController controller = new SeansController();
-        Seans updated = new Seans();
-        updated.setId(1);
-        updated.setName("TESTTESTTEST");
-        controller.saveAll(lista);
-        controller.update(updated);
-
-        List<Seans> listb = controller.getAll();
-
-        Assert.assertFalse(lista.equals(listb));
-        Assert.assertTrue(lista.size()==listb.size());
-        int countUpdated =0;
-        for (Seans object: listb) {
-            if(object.equals(updated))
-                countUpdated++;
-        }
-        Assert.assertTrue(countUpdated==1);
     }
 
     @Test

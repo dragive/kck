@@ -89,14 +89,17 @@ public class RoomListView {
                 }
             }));
         }
-        panel.addComponent(new Button("Dodaj salę kinową", new Runnable() {
-            @Override
-            public void run() {
-                window.close();
-                AddRoomView addRoomView = AddRoomView.getInstance();
-                addRoomView.init(cinema);
-            }
-        }));
+        if(MenuView.getInstance().getUser().isPermission())
+        {
+            panel.addComponent(new Button("Dodaj salę kinową", new Runnable() {
+                @Override
+                public void run() {
+                    window.close();
+                    AddRoomView addRoomView = AddRoomView.getInstance();
+                    addRoomView.init(cinema);
+                }
+            }));
+        }
         panel.addComponent(exit);
 
         window.setTitle("Sale kinowe");

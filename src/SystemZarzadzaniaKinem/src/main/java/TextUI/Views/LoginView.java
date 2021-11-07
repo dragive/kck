@@ -81,9 +81,6 @@ public class LoginView {
         panel.addComponent(new Label("Hasło"));
         panel.addComponent(password.setMask('*'));
 
-
-
-//        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(new Button("Zaloguj się", new Runnable() {
             @Override
             public void run() {

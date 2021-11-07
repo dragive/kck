@@ -12,6 +12,6 @@ public class Reservation {
     private Date dateOfReservation;
     private Date dateOfCreation;
     private Integer seansId;
-    private String name;
-
+    private Integer seatId;
+    private boolean paid;
 }

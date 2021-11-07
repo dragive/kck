@@ -10,5 +10,5 @@ public class Seat {
     private Integer roomId;
     private Integer number;
     private Integer row;
-    private String name;
+    private boolean reserved;
 }

@@ -76,6 +76,7 @@ public class AddSeansView {
             @Override
             public void run() {
                 window.close();
+                seans.setSeatList(room.getSeatList());
                 seans.setRoomId(room.getId());
                 seans.setDate(simpleDateFormat.parse(date.getText()));
                 SeansAddFilmView seansAddFilmView = SeansAddFilmView.getInstance();
@@ -133,6 +134,7 @@ public class AddSeansView {
                 room = roomsController.getById(seans.getRoomId());
                 seans.setDate(simpleDateFormat.parse(date.getText()));
                 seans.setFilmId(film.getId());
+                seans.setCinemaId(room.getCinemaId());
                 seansController.createNew(seans);
                 window.close();
                 RoomView roomView = RoomView.getInstance();

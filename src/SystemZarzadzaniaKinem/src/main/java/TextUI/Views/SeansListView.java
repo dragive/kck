@@ -94,14 +94,18 @@ public class SeansListView {
                 }
             }));
         }
-        panel.addComponent(new Button("Dodaj seans", new Runnable() {
-            @Override
-            public void run() {
-                window.close();
-                AddSeansView addSeansView = AddSeansView.getInstance();
-                addSeansView.init(room);
-            }
-        }));
+        if(MenuView.getInstance().getUser().isPermission())
+        {
+            panel.addComponent(new Button("Dodaj seans", new Runnable() {
+                @Override
+                public void run() {
+                    window.close();
+                    AddSeansView addSeansView = AddSeansView.getInstance();
+                    addSeansView.init(room);
+                }
+            }));
+        }
+
         panel.addComponent(exit);
         window.setTitle(room.getName() + " - Lista seansów");
         window.setComponent(panel);
