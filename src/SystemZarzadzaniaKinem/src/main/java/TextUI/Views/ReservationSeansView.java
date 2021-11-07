@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ReservationSeansView {
     private static ReservationSeansView instance = null;
+    private Object previous;
     private Seans seans;
     private ReservationSeansView(){}
 
@@ -41,11 +42,9 @@ public class ReservationSeansView {
         public void onInput(Window window, KeyStroke keyStroke, AtomicBoolean atomicBoolean) {
             switch (keyStroke.getKeyType()){
                 case Escape:
-                    window.close();
                     CinemaController cinemaController = new CinemaController();
-                    RoomsController roomsController = new RoomsController();
-                    Room room = roomsController.getById(seans.getRoomId());
-                    Cinema cinema = cinemaController.getById(room.getCinemaId());
+                    Cinema cinema = cinemaController.getById(seans.getCinemaId());
+                    window.close();
                     ReservationSeansListView reservationSeansListView = ReservationSeansListView.getInstance();
                     reservationSeansListView.init(cinema,instance);
                     break;
@@ -60,7 +59,8 @@ public class ReservationSeansView {
         }
     }
 
-    public void init(Seans seans){
+    public void init(Seans seans, Object previous){
+        this.previous = previous;
         this.seans = seans;
         MultiWindowTextExtendedGUI gui = MultiWindowTextExtendedGUI.getInstance();
         BasicWindow window = new BasicWindow();
@@ -84,7 +84,7 @@ public class ReservationSeansView {
                 Room room = roomsController.getById(seans.getRoomId());
                 Cinema cinema = cinemaController.getById(room.getCinemaId());
                 ReservationSeansListView reservationSeansListView = ReservationSeansListView.getInstance();
-                reservationSeansListView.init(cinema,instance);
+                reservationSeansListView.init(cinema,previous);
             }
         });
         for(Seat seat: seatList)
@@ -101,7 +101,11 @@ public class ReservationSeansView {
                             seansController.update(seans);
                             ReservationController reservationController = new ReservationController();
                             reservationController.delete(reservation);
+                            CinemaController cinemaController = new CinemaController();
+                            Cinema cinema = cinemaController.getById(seans.getCinemaId());
                             window.close();
+                            ReservationSeansListView reservationSeansListView = ReservationSeansListView.getInstance();
+                            reservationSeansListView.init(cinema,instance);
                         }
                     }));
                 }
@@ -125,7 +129,11 @@ public class ReservationSeansView {
                         seansController.update(seans);
                         ReservationController reservationController = new ReservationController();
                         reservationController.createNew(reservation);
+                        CinemaController cinemaController = new CinemaController();
+                        Cinema cinema = cinemaController.getById(seans.getCinemaId());
                         window.close();
+                        ReservationSeansListView reservationSeansListView = ReservationSeansListView.getInstance();
+                        reservationSeansListView.init(cinema,instance);
                     }
                 }));
             }

@@ -109,7 +109,7 @@ public class EditUserView {
                     UserListView userListView = UserListView.getInstance();
                     userListView.init();
                 }
-                else if(previousWindow instanceof EditUserView) {
+                else if(previousWindow instanceof UserView) {
                     UserView userView = UserView.getInstance();
                     userView.init(user,instance);
                 }
@@ -139,6 +139,7 @@ public class EditUserView {
 
         panel.addComponent(accept);
         panel.addComponent(delete);
+        panel.addComponent(exit);
 
         window.setTitle(user.getName());
         window.setComponent(panel);

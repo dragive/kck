@@ -122,10 +122,6 @@ public class UserView {
         panel.addComponent(new Label("Data założenia"));
         panel.addComponent(date);
 
-        panel.addComponent(new Label("Rezerwacje"));
-        panel.addComponent(reservations);
-
-
         if(user.isPermission())
         {
             panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
@@ -133,10 +129,13 @@ public class UserView {
         }
 
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
-        panel.addComponent(exit);
+        panel.addComponent(reservations);
 
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(edit);
+
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(exit);
 
         window.setTitle(user.getName());
         window.setComponent(panel);

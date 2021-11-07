@@ -89,14 +89,18 @@ public class FilmCategoryView {
             }));
         }
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
-        panel.addComponent(new Button("Dodaj film", new Runnable() {
-            @Override
-            public void run() {
-                window.close();
-                AddFilmView addFilmView = AddFilmView.getInstance();
-                addFilmView.init(filmCategory);
-            }
-        }));
+        if(MenuView.getInstance().getUser().isPermission())
+        {
+            panel.addComponent(new Button("Dodaj film", new Runnable() {
+                @Override
+                public void run() {
+                    window.close();
+                    AddFilmView addFilmView = AddFilmView.getInstance();
+                    addFilmView.init(filmCategory);
+                }
+            }));
+        }
+
         panel.addComponent(exit);
 
 

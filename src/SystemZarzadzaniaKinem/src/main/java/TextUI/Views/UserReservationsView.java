@@ -63,6 +63,7 @@ public class UserReservationsView {
 
     public void init(User user){
         this.user = user;
+        System.out.println(user.getName());
         MultiWindowTextExtendedGUI gui = MultiWindowTextExtendedGUI.getInstance();
         BasicWindow window = new BasicWindow();
         KeyStrokeListener keyStrokeListener = new KeyStrokeListener();
@@ -80,21 +81,55 @@ public class UserReservationsView {
         });
         panel.setLayoutManager(new GridLayout(1));
         ReservationController reservationController = new ReservationController();
-        List<Reservation> reservationList = reservationController.getReservationByUserId(MenuView.getInstance().getUser().getId());
+        List<Reservation> reservationList = reservationController.getReservationByUserId(user.getId());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
+        FilmController filmController = new FilmController();
         for(Reservation reservation:reservationList)
         {
-            SeansController seansController = new SeansController();
-            Seans seans = seansController.getById(reservation.getSeansId());
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
-            FilmController filmController = new FilmController();
-            panel.addComponent(new Button(filmController.getById(seans.getFilmId()).getTitle() + " " + simpleDateFormat.format(seans.getDate()), new Runnable() {
-                @Override
-                public void run() {
-                    window.close();
-                    ReservationView reservationView = ReservationView.getInstance();
-                    reservationView.init(user,reservation);
+            if(MenuView.getInstance().getUser().isPermission()) {
+                if(user.equals(MenuView.getInstance().getUser())) {
+                    if(reservation.getUserId().equals(user.getId())) {
+                        SeansController seansController = new SeansController();
+                        Seans seans = seansController.getById(reservation.getSeansId());
+                        panel.addComponent(new Button(filmController.getById(seans.getFilmId()).getTitle() + " " + simpleDateFormat.format(seans.getDate()), new Runnable() {
+                            @Override
+                            public void run() {
+                                window.close();
+                                ReservationView reservationView = ReservationView.getInstance();
+                                reservationView.init(user,reservation);
+                            }
+                        }));
+                    }
                 }
-            }));
+                else {
+                    if(reservation.getUserId().equals(user.getId())) {
+                        SeansController seansController = new SeansController();
+                        Seans seans = seansController.getById(reservation.getSeansId());
+                        panel.addComponent(new Button(filmController.getById(seans.getFilmId()).getTitle() + " " + simpleDateFormat.format(seans.getDate()), new Runnable() {
+                            @Override
+                            public void run() {
+                                window.close();
+                                ReservationView reservationView = ReservationView.getInstance();
+                                reservationView.init(user,reservation);
+                            }
+                        }));
+                    }
+                }
+            }
+            else {
+                if(reservation.getUserId().equals(user.getId())) {
+                    SeansController seansController = new SeansController();
+                    Seans seans = seansController.getById(reservation.getSeansId());
+                    panel.addComponent(new Button(filmController.getById(seans.getFilmId()).getTitle() + " " + simpleDateFormat.format(seans.getDate()), new Runnable() {
+                        @Override
+                        public void run() {
+                            window.close();
+                            ReservationView reservationView = ReservationView.getInstance();
+                            reservationView.init(user,reservation);
+                        }
+                    }));
+                }
+            }
         }
         panel.addComponent(exit);
         window.setTitle("Lista rezerwacji");

@@ -128,12 +128,10 @@ public class MenuView {
         panel.setLayoutManager(new GridLayout(2));
         panel.addComponent(userWelcomeMessage);
         panel.addComponent(new EmptySpace(new TerminalSize(2,2)));
-//        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
 
         panel.addComponent(new Label("Panel główny programu zarządzania kinem."));
-                panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(new Label("Wybierz jedną z poniższych opcji."));
-//        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(new EmptySpace(new TerminalSize(0,2)));
 
         panel.addComponent(cinemas); panel.addComponent(new Label("Zarządzanie kinami"));
@@ -141,14 +139,10 @@ public class MenuView {
         panel.addComponent(films);panel.addComponent(new Label("Zarządzanie filmami"));
         panel.addComponent(reservation); panel.addComponent(new Label("Zarządzanie Rezerwacjami"));
         panel.addComponent(userButton); panel.addComponent(new Label("Informacje o aktualnym użytkowniku"));
-        panel.addComponent(users); panel.addComponent(new Label("Panel administracyjny użytkowników"));
+        if(user.isPermission()) {panel.addComponent(users); panel.addComponent(new Label("Panel administracyjny użytkowników"));}
         panel.addComponent(credits); panel.addComponent(new Label("Informacje o twórcach systemu"));
-//        panel.addComponent(new EmptySpace(new TerminalSize(4,4)));
-//        panel.addComponent(new EmptySpace(new TerminalSize(0,4)));
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
-//        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(new EmptySpace(new TerminalSize(2,2)));
-//        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(exit);
 
 

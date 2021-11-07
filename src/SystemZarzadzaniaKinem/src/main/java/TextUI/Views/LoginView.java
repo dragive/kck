@@ -63,8 +63,8 @@ public class LoginView {
     {
         MultiWindowTextExtendedGUI gui = MultiWindowTextExtendedGUI.getInstance();
         BasicWindow window = new BasicWindow();
-        login = new TextBox().setPreferredSize(new TerminalSize(15,1));
-        password = new TextBox().setPreferredSize(new TerminalSize(15,1));
+        login = new TextBox().setPreferredSize(new TerminalSize(22,1));
+        password = new TextBox().setPreferredSize(new TerminalSize(22,1));
         login.setSize(new TerminalSize(20,1));
         password.setSize(new TerminalSize(20,1));
 
