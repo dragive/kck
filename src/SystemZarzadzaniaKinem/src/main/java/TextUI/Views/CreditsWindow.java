@@ -65,8 +65,7 @@ public class CreditsWindow {
             @Override
             public void run() {
                 window.close();
-                OptionView optionView = OptionView.getInstance();
-                optionView.init();
+               
             }
         });
         internalPanel.setLayoutManager(new LinearLayout());
