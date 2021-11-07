@@ -62,6 +62,15 @@ public class AddCinemaView {
         KeyStrokeListener keyStrokeListener = new KeyStrokeListener();
         TextBox name = new TextBox();
         TextBox desc = new TextBox();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                CinemaListView cinemaListView = CinemaListView.getInstance();
+                cinemaListView.init();
+            }
+        });
         Button accept = new Button("Zaakceptuj", new Runnable() {
             @Override
             public void run() {
@@ -92,6 +101,9 @@ public class AddCinemaView {
 
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(accept);
+
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(exit);
 
         window.setComponent(panel);
         gui.addWindow(window);

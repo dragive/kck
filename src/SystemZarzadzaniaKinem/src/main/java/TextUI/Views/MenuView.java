@@ -65,18 +65,11 @@ public class MenuView {
         MultiWindowTextExtendedGUI gui = MultiWindowTextExtendedGUI.getInstance();
 
         Label userWelcomeMessage = new Label("Witaj " + user.getName());
-        Button films = new Button("Filmy", new Runnable() {
+        Button filmcategories = new Button("Kategorie filmów", new Runnable() {
             @Override
             public void run() {
                 FilmCategoryListView filmCategoryListView = FilmCategoryListView.getInstance();
                 filmCategoryListView.init();
-            }
-        });
-        Button cities = new Button("Miasta", new Runnable() {
-            @Override
-            public void run() {
-                CityListView cityListView = CityListView.getInstance();
-                cityListView.init();;
             }
         });
         Button cinemas = new Button("Kina", new Runnable() {
@@ -84,6 +77,13 @@ public class MenuView {
             public void run() {
                 CinemaListView cinemaListView = CinemaListView.getInstance();
                 cinemaListView.init();
+            }
+        });
+        Button films = new Button("Filmy", new Runnable() {
+            @Override
+            public void run() {
+                MenuFilmView menuFilmView = MenuFilmView.getInstance();
+                menuFilmView.init();
             }
         });
         Button userButton = new Button("Użytkownik", new Runnable() {
@@ -114,25 +114,35 @@ public class MenuView {
                 reservationCinemaListView.init();
             }
         });
+        Button exit = new Button("Wyloguj", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                LoginView loginView = LoginView.getInstance();
+                loginView.init();
+            }
+        });
 
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(1));
         panel.addComponent(userWelcomeMessage);
         panel.addComponent(new EmptySpace(new TerminalSize(0,1)));
         panel.addComponent(cinemas);
+        panel.addComponent(filmcategories);
         panel.addComponent(films);
         panel.addComponent(reservation);
         panel.addComponent(userButton);
         panel.addComponent(users);
         panel.addComponent(credits);
-
+        panel.addComponent(exit);
 
 
         window = new BasicWindow();
         KeyStrokeListener keyStrokeListener = new KeyStrokeListener();
         window.addWindowListener(keyStrokeListener);
         window.setFixedSize(new TerminalSize(20,10));
-        window.setHints(Arrays.asList(Window.Hint.CENTERED));
+        window.setHints(Arrays.asList(Window.Hint.CENTERED,Window.Hint.FIXED_SIZE));
         window.setComponent(panel);
         window.setTitle("Menu");
         gui.addWindow(window);

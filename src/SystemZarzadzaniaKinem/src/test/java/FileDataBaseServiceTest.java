@@ -33,20 +33,6 @@ public class FileDataBaseServiceTest {
         Assert.assertTrue(out.equals(list));
 
     }
-    
-    @Test
-    public void City(){
-        DataBaseService fileDataBaseService = DataBaseService.getInstance();
-
-        List<City> list = new ArrayList<>();
-        list.add(new City());
-        fileDataBaseService.saveAllCity(list);
-
-
-        List<City> out = fileDataBaseService.getAllCity();
-        Assert.assertTrue(out.equals(list));
-
-    }
 
 
     @Test
@@ -62,37 +48,6 @@ public class FileDataBaseServiceTest {
         Assert.assertTrue(out.equals(list));
 
     }
-
-
-    @Test
-    public void Gift(){
-        DataBaseService fileDataBaseService = DataBaseService.getInstance();
-
-        List<GiftCard> list = new ArrayList<>();
-        list.add(new GiftCard());
-        fileDataBaseService.saveAllGiftCard(list);
-
-
-        List<GiftCard> out = fileDataBaseService.getAllGiftCard();
-        Assert.assertTrue(out.equals(list));
-
-    }
-
-
-    @Test
-    public void Items(){
-        DataBaseService fileDataBaseService = DataBaseService.getInstance();
-
-        List<Items> list = new ArrayList<>();
-        list.add(new Items());
-        fileDataBaseService.saveAllItems(list);
-
-
-        List<Items> out = fileDataBaseService.getAllItems();
-        Assert.assertTrue(out.equals(list));
-
-    }
-
 
     @Test
     public void Reservation(){
@@ -149,51 +104,6 @@ public class FileDataBaseServiceTest {
 
 
         List<Seat> out = fileDataBaseService.getAllSeat();
-        Assert.assertTrue(out.equals(list));
-
-    }
-
-
-    @Test
-    public void Staff(){
-        DataBaseService fileDataBaseService = DataBaseService.getInstance();
-
-        List<Staff> list = new ArrayList<>();
-        list.add(new Staff());
-        fileDataBaseService.saveAllStaff(list);
-
-
-        List<Staff> out = fileDataBaseService.getAllStaff();
-        Assert.assertTrue(out.equals(list));
-
-    }
-
-
-
-    @Test
-    public void Ticket(){
-        DataBaseService fileDataBaseService = DataBaseService.getInstance();
-
-        List<Ticket> list = new ArrayList<>();
-        list.add(new Ticket());
-        fileDataBaseService.saveAllTicket(list);
-
-
-        List<Ticket> out = fileDataBaseService.getAllTicket();
-        Assert.assertTrue(out.equals(list));
-
-    }
-
-    @Test
-    public void TicketType(){
-        DataBaseService fileDataBaseService = DataBaseService.getInstance();
-
-        List<TicketType> list = new ArrayList<>();
-        list.add(new TicketType());
-        fileDataBaseService.saveAllTicketType(list);
-
-
-        List<TicketType> out = fileDataBaseService.getAllTicketType();
         Assert.assertTrue(out.equals(list));
 
     }

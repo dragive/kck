@@ -67,6 +67,16 @@ public class FilmView {
         KeyStrokeListener keyStrokeListener = new KeyStrokeListener();
         window.addWindowListener(keyStrokeListener);
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                FilmCategoryController filmCategoryController = new FilmCategoryController();
+                FilmCategoryView filmCategoryView = FilmCategoryView.getInstance();
+                filmCategoryView.init(filmCategoryController.getById(film.getFilmCategoryId()));
+            }
+        });
         Panel panel = new Panel();
         Button delete = new Button("Usuń", new Runnable() {
             @Override
@@ -96,8 +106,13 @@ public class FilmView {
         panel.addComponent(new Label("Data (DD-MM-RRRR)"));
         panel.addComponent(new Label(simpleDateFormat.format(film.getReleaseDate())));
 
+        if(MenuView.getInstance().getUser().isPermission()){
+            panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+            panel.addComponent(delete);
+        }
+
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
-        panel.addComponent(delete);
+        panel.addComponent(exit);
 
         window.setTitle(film.getTitle());
         window.setComponent(panel);

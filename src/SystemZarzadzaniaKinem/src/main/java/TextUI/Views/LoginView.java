@@ -63,8 +63,8 @@ public class LoginView {
     {
         MultiWindowTextExtendedGUI gui = MultiWindowTextExtendedGUI.getInstance();
         BasicWindow window = new BasicWindow();
-        login = new TextBox();
-        password = new TextBox();
+        login = new TextBox().setPreferredSize(new TerminalSize(15,1));
+        password = new TextBox().setPreferredSize(new TerminalSize(15,1));
         login.setSize(new TerminalSize(20,1));
         password.setSize(new TerminalSize(20,1));
 
@@ -80,7 +80,15 @@ public class LoginView {
         panel.addComponent(new Label("Hasło"));
         panel.addComponent(password.setMask('*'));
 
-        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+
+        panel.addComponent(new Button("Zarejestruj się", new Runnable() {
+            @Override
+            public void run() {
+                window.close();
+                RegisterView registerView = RegisterView.getInstance();
+                registerView.init();
+            }
+        }));
         panel.addComponent(new Button("Zaloguj się", new Runnable() {
             @Override
             public void run() {
@@ -103,6 +111,15 @@ public class LoginView {
                     ErrorWindow internalWindow = new ErrorWindow();
                     internalWindow.ShowErrorMessage("Zly login lub haslo");
                 }
+            }
+        }));
+        panel.addComponent(new Button("Wyjdź", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                MultiWindowTextExtendedGUI gui = MultiWindowTextExtendedGUI.getInstance();
+                gui.getScreen().stopScreen();
             }
         }));
 

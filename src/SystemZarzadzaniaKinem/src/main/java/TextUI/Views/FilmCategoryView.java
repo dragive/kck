@@ -63,6 +63,15 @@ public class FilmCategoryView {
         window.addWindowListener(keyStrokeListener);
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                FilmCategoryListView filmCategoryListView = FilmCategoryListView.getInstance();
+                filmCategoryListView.init();
+            }
+        });
         panel.setLayoutManager(new GridLayout(1));
         FilmCategoryController filmCategoryController = new FilmCategoryController();
         List<Film> filmList = filmCategoryController.getCategoryFilms(filmCategory.getId());
@@ -85,6 +94,7 @@ public class FilmCategoryView {
                 addFilmView.init(filmCategory);
             }
         }));
+        panel.addComponent(exit);
 
 
         window.setTitle(filmCategory.getName());

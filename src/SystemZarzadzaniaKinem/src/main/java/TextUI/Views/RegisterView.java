@@ -1,6 +1,5 @@
 package TextUI.Views;
 
-import Back.Controllers.CinemaController;
 import Back.Controllers.UsersController;
 import Back.Models.User;
 import TextUI.MultiWindowTextExtendedGUI;
@@ -9,20 +8,19 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.input.KeyStroke;
 import lombok.SneakyThrows;
+import lombok.extern.java.Log;
 
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+public class RegisterView {
+    private static RegisterView instance = null;
 
-public class UserView {
-    private static UserView instance = null;
-    private Object previousWindow;
-    private User user;
-    private UserView(){}
+    private RegisterView(){}
 
-    public static UserView getInstance() {
-        if(instance==null) instance = new UserView();
+    public static RegisterView getInstance() {
+        if(instance==null) instance = new RegisterView();
         return instance;
     }
 
@@ -43,17 +41,9 @@ public class UserView {
         public void onInput(Window window, KeyStroke keyStroke, AtomicBoolean atomicBoolean) {
             switch (keyStroke.getKeyType()){
                 case Escape:
-                    if(previousWindow instanceof MenuView) {
-                        window.close();
-                    }
-                    else if(previousWindow instanceof UserListView) {
-                        window.close();
-                        UserListView userListView = UserListView.getInstance();
-                        userListView.init();
-                    }
-                    else if(previousWindow instanceof EditUserView) {
-                        window.close();
-                    }
+                    window.close();
+                    LoginView loginView = LoginView.getInstance();
+                    loginView.init();
                     break;
                 default:
                     break;
@@ -66,12 +56,7 @@ public class UserView {
         }
     }
 
-    public void init(User user, Object previousWindow){
-        this.previousWindow = previousWindow;
-        this.user = user;
-        Object previous;
-        if(previousWindow instanceof UserListView) previous = previousWindow;
-        else previous = instance;
+    public void init(){
         MultiWindowTextExtendedGUI gui = MultiWindowTextExtendedGUI.getInstance();
         BasicWindow window = new BasicWindow();
         KeyStrokeListener keyStrokeListener = new KeyStrokeListener();
@@ -79,38 +64,38 @@ public class UserView {
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(2));
-        Label name = new Label(user.getName());
-        Label email = new Label(user.getEmail());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        Label date = new Label(simpleDateFormat.format(user.getRegistrationDate()));
-        Button edit = new Button("Edytuj dane", new Runnable() {
+        TextBox name = new TextBox();
+        TextBox password = new TextBox();
+        TextBox email = new TextBox();
+        Button accept = new Button("Akceptuj", new Runnable() {
             @Override
             public void run() {
                 window.close();
-                EditUserView editUserView = EditUserView.getInstance();
-                editUserView.init(user,previous);
+                UsersController usersController = new UsersController();
+                User newUser = new User();
+                newUser.setName(name.getText());
+                newUser.setEmail(email.getText());
+                newUser.setPasswordHash(password.getText());
+                newUser.setRegistrationDate(new Date());
+                newUser.setPermission(false);
+                usersController.createNew(newUser);
+                MenuView menuView = MenuView.getInstance();
+                menuView.init(newUser);
             }
         });
 
         panel.addComponent(new Label("Nazwa użytkownika"));
         panel.addComponent(name);
 
-        panel.addComponent(new Label("Adres e-mail"));
+        panel.addComponent(new Label("E-mail"));
         panel.addComponent(email);
 
-        panel.addComponent(new Label("Data założenia"));
-        panel.addComponent(date);
-
-        if(user.isPermission())
-        {
-            panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
-            panel.addComponent(new Label("Pracownik"));
-        }
+        panel.addComponent(new Label("Hasło"));
+        panel.addComponent(password);
 
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
-        panel.addComponent(edit);
-
-        window.setTitle(user.getName());
+        panel.addComponent(accept);
+        window.setTitle("Rejestracja");
         window.setComponent(panel);
         gui.addWindow(window);
     }

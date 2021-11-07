@@ -5,6 +5,7 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.input.KeyStroke;
+import lombok.SneakyThrows;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -59,11 +60,21 @@ public class CreditsWindow {
         window.setFixedSize(new TerminalSize(20,4));
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel internalPanel = new Panel();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                OptionView optionView = OptionView.getInstance();
+                optionView.init();
+            }
+        });
         internalPanel.setLayoutManager(new LinearLayout());
         internalPanel.addComponent(new Label("Kozackie chlopaki"));
-        internalPanel.addComponent(new Label("Maciu tu byl"));
-        internalPanel.addComponent(new Label("Kacpi tu byl"));
-        internalPanel.addComponent(new Label("Krzysiu tu byl"));
+        internalPanel.addComponent(new Label("Maciek Fender"));
+        internalPanel.addComponent(new Label("Kacper Chrost"));
+        internalPanel.addComponent(new Label("Krzysztof Funkowski"));
+        internalPanel.addComponent(exit);
         window.setComponent(internalPanel);
         gui.addWindow(window);
     }

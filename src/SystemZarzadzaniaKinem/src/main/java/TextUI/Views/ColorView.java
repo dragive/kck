@@ -1,23 +1,23 @@
 package TextUI.Views;
-
 import TextUI.MultiWindowTextExtendedGUI;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.input.KeyStroke;
 import lombok.SneakyThrows;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class CityListView {
+public class ColorView {
+    private static ColorView instance = null;
 
-    private static CityListView instance = null;
+    private ColorView(){}
 
-    private CityListView(){}
-
-    public static CityListView getInstance() {
-        if(instance==null) instance = new CityListView();
+    public static ColorView getInstance() {
+        if(instance==null) instance = new ColorView();
         return instance;
     }
 
@@ -39,6 +39,8 @@ public class CityListView {
             switch (keyStroke.getKeyType()){
                 case Escape:
                     window.close();
+                    OptionView optionView = OptionView.getInstance();
+                    optionView.init();
                     break;
                 default:
                     break;
@@ -59,8 +61,35 @@ public class CityListView {
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(1));
+        TextColor.ANSI[] colors = TextColor.ANSI.values();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                OptionView optionView = OptionView.getInstance();
+                optionView.init();
+            }
+        });
+        for (TextColor.ANSI color: colors)
+        {
+            panel.addComponent(new Button(color.name(), new Runnable() {
+                @Override
+                public void run() {
+                }
+            }));
+        }
+        panel.addComponent(new Button("Wyjdź", new Runnable() {
+            @Override
+            public void run() {
+                window.close();
+                OptionView optionView = OptionView.getInstance();
+                optionView.init();
+            }
+        }));
+        panel.addComponent(exit);
 
-        window.setTitle("Miasta");
+        window.setTitle("Wybierz kolor");
         window.setComponent(panel);
         gui.addWindow(window);
     }

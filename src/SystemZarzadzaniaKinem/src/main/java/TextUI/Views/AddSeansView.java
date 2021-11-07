@@ -82,12 +82,24 @@ public class AddSeansView {
                 seansAddFilmView.init(seans);
             }
         });
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                RoomView roomView = RoomView.getInstance();
+                roomView.init(room);
+            }
+        });
 
         panel.addComponent(new Label("Data seansu (dd-mm-rrrr hh:mm)"));
         panel.addComponent(date);
 
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(button);
+
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(exit);
 
         window.setTitle("Dodaj seans");
         window.setComponent(panel);
