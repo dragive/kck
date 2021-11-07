@@ -91,6 +91,13 @@ public class UserView {
                 editUserView.init(user,previous);
             }
         });
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+            }
+        });
 
         panel.addComponent(new Label("Nazwa użytkownika"));
         panel.addComponent(name);
@@ -106,6 +113,9 @@ public class UserView {
             panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
             panel.addComponent(new Label("Pracownik"));
         }
+
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(edit);
 
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(edit);

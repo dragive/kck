@@ -67,6 +67,15 @@ public class RegisterView {
         TextBox name = new TextBox();
         TextBox password = new TextBox();
         TextBox email = new TextBox();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                LoginView loginView = LoginView.getInstance();
+                loginView.init();
+            }
+        });
         Button accept = new Button("Akceptuj", new Runnable() {
             @Override
             public void run() {
@@ -95,6 +104,10 @@ public class RegisterView {
 
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(accept);
+
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(exit);
+
         window.setTitle("Rejestracja");
         window.setComponent(panel);
         gui.addWindow(window);

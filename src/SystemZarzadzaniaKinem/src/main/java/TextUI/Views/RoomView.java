@@ -71,18 +71,22 @@ public class RoomView {
         Label name = new Label(room.getName());
         Label rows = new Label(String.valueOf(seatList.get(seatList.size()-1).getRow()));
         Label howManySeats = new Label(String.valueOf(seatList.size()));
-        Button seats = new Button("Siedzenia", new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        });
         Button seanses = new Button("Seanse", new Runnable() {
             @Override
             public void run() {
                 window.close();
                 SeansListView seansListView = SeansListView.getInstance();
                 seansListView.init(room);
+            }
+        });
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                CinemaController cinemaController = new CinemaController();
+                RoomListView roomListView = RoomListView.getInstance();
+                roomListView.init(cinemaController.getById(room.getCinemaId()));
             }
         });
 
@@ -97,6 +101,9 @@ public class RoomView {
 
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(seanses);
+
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(exit);
 
         window.setTitle(room.getName());
         window.setComponent(panel);

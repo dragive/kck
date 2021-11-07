@@ -66,6 +66,16 @@ public class SeansView {
         window.addWindowListener(keyStrokeListener);
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                RoomsController roomsController = new RoomsController();
+                SeansListView seansListView = SeansListView.getInstance();
+                seansListView.init(roomsController.getById(seans.getRoomId()));
+            }
+        });
         panel.setLayoutManager(new GridLayout(2));
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
         Label date = new Label(simpleDateFormat.format(seans.getDate()));
@@ -77,6 +87,9 @@ public class SeansView {
 
         panel.addComponent(new Label("Tytuł filmu"));
         panel.addComponent(film);
+
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(exit);
 
         window.setTitle("Seans");
         window.setComponent(panel);

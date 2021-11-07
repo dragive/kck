@@ -82,7 +82,7 @@ public class FilmCategoryView {
                 public void run() {
                     window.close();
                     FilmView filmView = FilmView.getInstance();
-                    filmView.init(film);
+                    filmView.init(film, instance);
                 }
             }));
         }

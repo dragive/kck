@@ -62,7 +62,13 @@ public class ReservationCinemaListView {
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(1));
-
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+            }
+        });
         CinemaController cinemaController = new CinemaController();
         List<Cinema> cinemas = cinemaController.getAll();
 

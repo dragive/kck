@@ -1,5 +1,6 @@
 package TextUI.Views;
 
+import Back.Controllers.CinemaController;
 import Back.Controllers.RoomsController;
 import Back.Controllers.UsersController;
 import Back.Models.Cinema;
@@ -67,7 +68,15 @@ public class RoomListView {
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(1));
-
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                CinemaView cinemaView = CinemaView.getInstance();
+                cinemaView.init(cinema);
+            }
+        });
         RoomsController roomsController = new RoomsController();
         List<Room> roomList = roomsController.getByCinemaId(cinema.getId());
         for(Room room : roomList) {
@@ -88,6 +97,7 @@ public class RoomListView {
                 addRoomView.init(cinema);
             }
         }));
+        panel.addComponent(exit);
 
         window.setTitle("Sale kinowe");
         window.setComponent(panel);

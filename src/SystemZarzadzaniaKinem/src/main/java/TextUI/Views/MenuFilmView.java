@@ -61,6 +61,13 @@ public class MenuFilmView {
         window.addWindowListener(keyStrokeListener);
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+            }
+        });
         panel.setLayoutManager(new GridLayout(1));
         FilmController filmController = new FilmController();
         List<Film> filmList = filmController.getAll();
@@ -71,10 +78,11 @@ public class MenuFilmView {
                 public void run() {
                     window.close();
                     FilmView filmView = FilmView.getInstance();
-                    filmView.init(film);
+                    filmView.init(film, instance);
                 }
             }));
         }
+        panel.addComponent(exit);
 
         window.setTitle("Filmy");
         window.setComponent(panel);

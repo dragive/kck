@@ -41,7 +41,6 @@ public class ReservationSeansView {
             switch (keyStroke.getKeyType()){
                 case Escape:
                     window.close();
-
                     CinemaController cinemaController = new CinemaController();
                     RoomsController roomsController = new RoomsController();
                     Room room = roomsController.getById(seans.getRoomId());
@@ -75,10 +74,22 @@ public class ReservationSeansView {
         Integer cols = seatList.size()/rows;
         Reservation reservation = new Reservation();
         panel.setLayoutManager(new GridLayout(cols));
-
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                CinemaController cinemaController = new CinemaController();
+                RoomsController roomsController = new RoomsController();
+                Room room = roomsController.getById(seans.getRoomId());
+                Cinema cinema = cinemaController.getById(room.getCinemaId());
+                ReservationSeansListView reservationSeansListView = ReservationSeansListView.getInstance();
+                reservationSeansListView.init(cinema,instance);
+            }
+        });
         for(int i=0;i<rows;i++) {
             for(int j=0;j<cols;j++) {
-                panel.addComponent(new Button("[*]", new Runnable() {
+                panel.addComponent(new Button("[ ]", new Runnable() {
                     @Override
                     public void run() {
                         reservation.setSeansId(seans.getId());
@@ -92,6 +103,7 @@ public class ReservationSeansView {
                 }));
             }
         }
+        panel.addComponent(exit);
 
         window.setTitle("Rezerwacja");
         window.setComponent(panel);

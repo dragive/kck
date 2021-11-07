@@ -1,5 +1,6 @@
 package TextUI.Views;
 
+import Back.Controllers.CinemaController;
 import Back.Controllers.FilmController;
 import Back.Controllers.RoomsController;
 import Back.Models.Film;
@@ -67,6 +68,16 @@ public class SeansAddFilmView {
         window.addWindowListener(keyStrokeListener);
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                RoomsController roomsController = new RoomsController();
+                AddSeansView addSeansView = AddSeansView.getInstance();
+                addSeansView.init(roomsController.getById(seans.getRoomId()));
+            }
+        });
         panel.setLayoutManager(new GridLayout(1));
         FilmController filmController = new FilmController();
         List<Film> filmList = filmController.getAll();
@@ -80,6 +91,7 @@ public class SeansAddFilmView {
                 }
             }));
         }
+        panel.addComponent(exit);
 
         window.setTitle("Filmy");
         window.setComponent(panel);

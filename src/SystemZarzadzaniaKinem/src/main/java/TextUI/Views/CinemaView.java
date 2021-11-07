@@ -101,7 +101,10 @@ public class CinemaView {
         panel.setLayoutManager(new GridLayout(1));
         panel.addComponent(room);
         panel.addComponent(reservation);
-        panel.addComponent(delete);
+        if (MenuView.getInstance().getUser().isPermission())
+        {
+            panel.addComponent(delete);
+        }
         panel.addComponent(exit);
 
         window.setTitle(cinema.getName());

@@ -79,6 +79,23 @@ public class ReservationSeansListView {
         window.addWindowListener(keyStrokeListener);
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                if(previous instanceof ReservationCinemaListView)
+                {
+                    ReservationCinemaListView reservationCinemaListView = ReservationCinemaListView.getInstance();
+                    reservationCinemaListView.init();
+                }
+                else if(previous instanceof CinemaView)
+                {
+                    CinemaView cinemaView = CinemaView.getInstance();
+                    cinemaView.init(cinema);
+                }
+            }
+        });
         panel.setLayoutManager(new GridLayout(1));
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
@@ -95,6 +112,7 @@ public class ReservationSeansListView {
                 }
             }));
         }
+        panel.addComponent(exit);
 
         window.setTitle("Wybierz seans");
         window.setComponent(panel);

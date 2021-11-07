@@ -1,5 +1,6 @@
 package TextUI.Views;
 
+import Back.Controllers.RoomsController;
 import Back.Controllers.UsersController;
 import Back.Models.User;
 import TextUI.MultiWindowTextExtendedGUI;
@@ -60,6 +61,13 @@ public class UserListView {
         window.addWindowListener(keyStrokeListener);
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+            }
+        });
         panel.setLayoutManager(new GridLayout(1));
         UsersController usersController = new UsersController();
         List<User> userList = usersController.getAll();
@@ -81,6 +89,7 @@ public class UserListView {
                 addUserView.init();
             }
         }));
+        panel.addComponent(exit);
 
         window.setTitle("Użytkownicy");
         window.setComponent(panel);

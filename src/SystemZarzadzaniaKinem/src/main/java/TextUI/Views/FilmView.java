@@ -18,6 +18,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FilmView {
     private static FilmView instance = null;
+    private Object previous;
     private Film film;
 
     private FilmView(){}
@@ -45,9 +46,16 @@ public class FilmView {
             switch (keyStroke.getKeyType()){
                 case Escape:
                     window.close();
-                    FilmCategoryController filmCategoryController = new FilmCategoryController();
-                    FilmCategoryView filmCategoryView = FilmCategoryView.getInstance();
-                    filmCategoryView.init(filmCategoryController.getById(film.getFilmCategoryId()));
+                    if(previous instanceof FilmCategoryView)
+                    {
+                        FilmCategoryController filmCategoryController = new FilmCategoryController();
+                        FilmCategoryView filmCategoryView = FilmCategoryView.getInstance();
+                        filmCategoryView.init(filmCategoryController.getById(film.getFilmCategoryId()));
+                    }
+                    else if(previous instanceof MenuFilmView){
+                        MenuFilmView menuFilmView =MenuFilmView.getInstance();
+                        menuFilmView.init();
+                    }
                     break;
                 default:
                     break;
@@ -60,7 +68,8 @@ public class FilmView {
         }
     }
 
-    public void init(Film film){
+    public void init(Film film,Object previous){
+        this.previous = previous;
         this.film = film;
         MultiWindowTextExtendedGUI gui = MultiWindowTextExtendedGUI.getInstance();
         BasicWindow window = new BasicWindow();
@@ -72,9 +81,16 @@ public class FilmView {
             @Override
             public void run() {
                 window.close();
-                FilmCategoryController filmCategoryController = new FilmCategoryController();
-                FilmCategoryView filmCategoryView = FilmCategoryView.getInstance();
-                filmCategoryView.init(filmCategoryController.getById(film.getFilmCategoryId()));
+                if(previous instanceof FilmCategoryView)
+                {
+                    FilmCategoryController filmCategoryController = new FilmCategoryController();
+                    FilmCategoryView filmCategoryView = FilmCategoryView.getInstance();
+                    filmCategoryView.init(filmCategoryController.getById(film.getFilmCategoryId()));
+                }
+                else if(previous instanceof MenuFilmView){
+                    MenuFilmView menuFilmView =MenuFilmView.getInstance();
+                    menuFilmView.init();
+                }
             }
         });
         Panel panel = new Panel();

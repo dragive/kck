@@ -58,13 +58,21 @@ public class OptionView {
         window.addWindowListener(keyStrokeListener);
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+            }
+        });
         panel.setLayoutManager(new GridLayout(1));
         Button color = new Button("Wybierz kolor tła", new Runnable() {
             @Override
             public void run() {
-
             }
         });
+        panel.addComponent(color);
+        panel.addComponent(exit);
 
         window.setTitle("Opcje");
         window.setComponent(panel);

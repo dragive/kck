@@ -1,6 +1,7 @@
 package TextUI.Views;
 
 import Back.Controllers.FilmController;
+import Back.Controllers.RoomsController;
 import Back.Controllers.SeansController;
 import Back.Models.FilmCategory;
 import Back.Models.Room;
@@ -68,6 +69,15 @@ public class SeansListView {
         window.addWindowListener(keyStrokeListener);
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                RoomView roomView = RoomView.getInstance();
+                roomView.init(room);
+            }
+        });
         panel.setLayoutManager(new GridLayout(1));
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         SeansController seansController = new SeansController();
@@ -92,6 +102,7 @@ public class SeansListView {
                 addSeansView.init(room);
             }
         }));
+        panel.addComponent(exit);
         window.setTitle(room.getName() + " - Lista seansów");
         window.setComponent(panel);
         gui.addWindow(window);
