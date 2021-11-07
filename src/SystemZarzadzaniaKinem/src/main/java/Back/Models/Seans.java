@@ -12,5 +12,7 @@ public class Seans {
     private Integer filmId;
     private Date date;
     private Integer roomId;
+    private Integer cinemaId;
+    private String name;
 
 }

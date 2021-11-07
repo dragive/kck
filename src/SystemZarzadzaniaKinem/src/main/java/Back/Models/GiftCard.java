@@ -7,6 +7,6 @@ import lombok.Setter;
 @Data
 public class GiftCard {
     private Integer id;
-    private String code;
+    private String name;
     private Double amount;
 }
