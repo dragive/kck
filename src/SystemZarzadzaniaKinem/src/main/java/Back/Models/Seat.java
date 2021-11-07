@@ -6,6 +6,7 @@ import lombok.Setter;
 
 @Data
 public class Seat {
+    private Integer id;
     private Integer roomId;
     private Integer number;
     private Integer row;

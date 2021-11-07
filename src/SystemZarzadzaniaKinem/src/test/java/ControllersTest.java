@@ -356,7 +356,7 @@ public class ControllersTest {
         FilmController controller = new FilmController();
         Film updated = new Film();
         updated.setId(1);
-        updated.setName("TESTTESTTEST");
+        updated.setTitle("TESTTESTTEST");
         controller.saveAll(lista);
         controller.update(updated);
 
