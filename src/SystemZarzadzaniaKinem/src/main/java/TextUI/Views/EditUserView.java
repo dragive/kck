@@ -137,6 +137,7 @@ public class EditUserView {
             panel.addComponent(checkBox);
         }
 
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(accept);
         panel.addComponent(delete);
         panel.addComponent(exit);
