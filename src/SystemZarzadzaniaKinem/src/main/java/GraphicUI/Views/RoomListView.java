@@ -3,6 +3,8 @@ import Back.Controllers.RoomsController;
 import Back.Models.Cinema;
 import Back.Models.Room;
 import Back.Models.User;
+import GraphicUI.MenuPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -14,6 +16,7 @@ public class RoomListView extends JPanel implements KeyListener {
     Cinema cinema;
     public RoomListView(User user, Cinema cinema) {
         panel = this;
+        MenuPanel.bottomPanel = this;
         this.user = user;
         this.cinema = cinema;
         this.setMinimumSize(new Dimension(400,300));
@@ -38,7 +41,7 @@ public class RoomListView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 AddRoomView addRoomView = new AddRoomView(user,cinema);
-                frame.add(addRoomView, new GridBagConstraints());
+                frame.add(addRoomView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 addRoomView.requestFocus();
@@ -50,7 +53,7 @@ public class RoomListView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 CinemaView cinemaView = new CinemaView(user,cinema);
-                frame.add(cinemaView, new GridBagConstraints());
+                frame.add(cinemaView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 cinemaView.requestFocus();
@@ -67,7 +70,7 @@ public class RoomListView extends JPanel implements KeyListener {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                     frame.remove(panel);
                     RoomView roomView = new RoomView(user,room);
-                    frame.add(roomView, new GridBagConstraints());
+                    frame.add(roomView, BorderLayout.CENTER);
                     frame.revalidate();
                     frame.repaint();
                     roomView.requestFocus();
@@ -95,7 +98,7 @@ public class RoomListView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 CinemaView cinemaView = new CinemaView(user,cinema);
-                frame.add(cinemaView, new GridBagConstraints());
+                frame.add(cinemaView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 cinemaView.requestFocus();

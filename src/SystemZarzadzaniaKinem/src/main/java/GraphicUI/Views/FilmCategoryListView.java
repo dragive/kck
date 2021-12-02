@@ -2,6 +2,8 @@ package GraphicUI.Views;
 import Back.Controllers.FilmCategoryController;
 import Back.Models.FilmCategory;
 import Back.Models.User;
+import GraphicUI.MenuPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -12,6 +14,7 @@ public class FilmCategoryListView extends JPanel implements KeyListener {
     User user;
     public FilmCategoryListView(User user) {
         panel = this;
+        MenuPanel.bottomPanel = this;
         this.user = user;
 
         this.setMinimumSize(new Dimension(400,300));
@@ -30,7 +33,6 @@ public class FilmCategoryListView extends JPanel implements KeyListener {
         FilmCategoryController filmCategoryController = new FilmCategoryController();
         List<FilmCategory> filmCategories = filmCategoryController.getAll();
 
-        JButton exit = new JButton("Wstecz");
         JButton addCategory = new JButton("Dodaj kategorię");
 
         addCategory.addActionListener(new ActionListener() {
@@ -39,27 +41,14 @@ public class FilmCategoryListView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 AddFilmCategoryView addFilmCategoryView = new AddFilmCategoryView(user);
-                frame.add(addFilmCategoryView, new GridBagConstraints());
+                frame.add(addFilmCategoryView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 addFilmCategoryView.requestFocus();
             }
         });
-        exit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
-                frame.remove(panel);
-                MenuView menuView = new MenuView(user);
-                frame.add(menuView, new GridBagConstraints());
-                frame.revalidate();
-                frame.repaint();
-                menuView.requestFocus();
-            }
-        });
 
         this.add(new JLabel("Wybierz kategorię filmu:"));
-        this.add(new JLabel(""));
 
         for(FilmCategory item: filmCategories) {
             JButton temp = new JButton(item.getName());
@@ -69,7 +58,7 @@ public class FilmCategoryListView extends JPanel implements KeyListener {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                     frame.remove(panel);
                     FilmCategoryView filmCategoryView = new FilmCategoryView(user,item);
-                    frame.add(filmCategoryView, new GridBagConstraints());
+                    frame.add(filmCategoryView, BorderLayout.CENTER);
                     frame.revalidate();
                     frame.repaint();
                     filmCategoryView.requestFocus();
@@ -82,8 +71,6 @@ public class FilmCategoryListView extends JPanel implements KeyListener {
         if(user.isPermission()) {
             this.add(addCategory);
         }
-
-        this.add(exit);
     }
 
     @Override
@@ -94,15 +81,6 @@ public class FilmCategoryListView extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case 27:
-                JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
-                frame.remove(panel);
-                MenuView menuView = new MenuView(user);
-                frame.add(menuView, new GridBagConstraints());
-                frame.revalidate();
-                frame.repaint();
-                menuView.requestFocus();
-                break;
             default:
                 break;
         }

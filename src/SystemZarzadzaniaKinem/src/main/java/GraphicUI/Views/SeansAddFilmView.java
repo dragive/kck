@@ -4,6 +4,8 @@ import Back.Controllers.RoomsController;
 import Back.Models.Film;
 import Back.Models.Seans;
 import Back.Models.User;
+import GraphicUI.MenuPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -15,6 +17,7 @@ public class SeansAddFilmView extends JPanel implements KeyListener {
     Seans seans;
     public SeansAddFilmView(User user, Seans seans) {
         panel = this;
+        MenuPanel.bottomPanel = this;
         this.user = user;
         this.seans = seans;
         this.setMinimumSize(new Dimension(400,300));
@@ -41,7 +44,7 @@ public class SeansAddFilmView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 AddSeansView seansView = new AddSeansView(user,roomsController.getById(seans.getRoomId()));
-                frame.add(seansView, new GridBagConstraints());
+                frame.add(seansView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 seansView.requestFocus();
@@ -56,7 +59,7 @@ public class SeansAddFilmView extends JPanel implements KeyListener {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                     frame.remove(panel);
                     AddSeansView seansView = new AddSeansView(user,seans,film);
-                    frame.add(seansView, new GridBagConstraints());
+                    frame.add(seansView, BorderLayout.CENTER);
                     frame.revalidate();
                     frame.repaint();
                     seansView.requestFocus();
@@ -83,7 +86,7 @@ public class SeansAddFilmView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 AddSeansView seansView = new AddSeansView(user,roomsController.getById(seans.getRoomId()));
-                frame.add(seansView, new GridBagConstraints());
+                frame.add(seansView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 seansView.requestFocus();

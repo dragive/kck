@@ -3,6 +3,8 @@ package GraphicUI.Views;
 import Back.Controllers.FilmController;
 import Back.Models.Film;
 import Back.Models.User;
+import GraphicUI.MenuPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -13,6 +15,7 @@ public class MenuFilmView extends JPanel implements KeyListener {
     User user;
     public MenuFilmView(User user) {
         panel = this;
+        MenuPanel.bottomPanel = this;
         this.user = user;
 
         this.setMinimumSize(new Dimension(400,300));
@@ -28,21 +31,6 @@ public class MenuFilmView extends JPanel implements KeyListener {
             }
         });
 
-        JButton exit = new JButton("Wstecz");
-
-        exit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
-                frame.remove(panel);
-                MenuView menuView = new MenuView(user);
-                frame.add(menuView, new GridBagConstraints());
-                frame.revalidate();
-                frame.repaint();
-                menuView.requestFocus();
-            }
-        });
-
         this.add(new JLabel("Wybierz film z listy:"));
 
         FilmController filmController = new FilmController();
@@ -55,7 +43,7 @@ public class MenuFilmView extends JPanel implements KeyListener {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                     frame.remove(panel);
                     FilmView menuView = new FilmView(user,film,this);
-                    frame.add(menuView, new GridBagConstraints());
+                    frame.add(menuView, BorderLayout.CENTER);
                     frame.revalidate();
                     frame.repaint();
                     menuView.requestFocus();
@@ -63,9 +51,6 @@ public class MenuFilmView extends JPanel implements KeyListener {
             });
             this.add(temp);
         }
-
-        this.add(new JLabel(""));
-        this.add(exit);
     }
 
     @Override
@@ -76,12 +61,6 @@ public class MenuFilmView extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case 27:
-                JFrame frame = (JFrame) SwingUtilities.windowForComponent(this);
-                frame.remove(this);
-                frame.requestFocusInWindow();
-                frame.repaint();
-                break;
             default:
                 break;
         }

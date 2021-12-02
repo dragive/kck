@@ -1,5 +1,6 @@
 package GraphicUI.Views;
 import Back.Models.User;
+import GraphicUI.MenuPanel;
 
 
 import javax.swing.*;
@@ -17,14 +18,13 @@ public class UserView extends JPanel implements KeyListener {
         this.previousWindow = previousWindow;
         this.user = user;
         this.panelUser = panelUser;
+        MenuPanel.bottomPanel = this;
         Object previous;
         if(previousWindow.getClass().toString().contains("UserListView"))
         {
-            //System.out.println("brr");
             previous = previousWindow;
         }
         else {
-            //System.out.println(previousWindow.getClass().getName());
             previous = this;
         }
 
@@ -56,7 +56,7 @@ public class UserView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 EditUserView editUserView = new EditUserView(user,panelUser,previous);
-                frame.add(editUserView, new GridBagConstraints());
+                frame.add(editUserView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 editUserView.requestFocus();
@@ -69,7 +69,7 @@ public class UserView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 UserReservationsView userReservationsView = new UserReservationsView(user,panelUser);
-                frame.add(userReservationsView, new GridBagConstraints());
+                frame.add(userReservationsView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 userReservationsView.requestFocus();
@@ -83,19 +83,10 @@ public class UserView extends JPanel implements KeyListener {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                     frame.remove(panel);
                     UserListView userListView = new UserListView(user);
-                    frame.add(userListView, new GridBagConstraints());
+                    frame.add(userListView, BorderLayout.CENTER);
                     frame.revalidate();
                     frame.repaint();
                     userListView.requestFocus();
-                }
-                else {
-                    JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
-                    frame.remove(panel);
-                    MenuView menuView = new MenuView(user);
-                    frame.add(menuView, new GridBagConstraints());
-                    frame.revalidate();
-                    frame.repaint();
-                    menuView.requestFocus();
                 }
             }
         });
@@ -120,8 +111,10 @@ public class UserView extends JPanel implements KeyListener {
         this.add(new JLabel(""));
         this.add(edit);
 
-        this.add(new JLabel(""));
-        this.add(exit);
+        if(previousWindow.getClass().toString().contains("UserListView")) {
+            this.add(new JLabel(""));
+            this.add(exit);
+        }
     }
 
     @Override
@@ -141,15 +134,6 @@ public class UserView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     userListView.requestFocus();
-                }
-                else {
-                    JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
-                    frame.remove(panel);
-                    MenuView menuView = new MenuView(user);
-                    frame.add(menuView, new GridBagConstraints());
-                    frame.revalidate();
-                    frame.repaint();
-                    menuView.requestFocus();
                 }
                 break;
             default:

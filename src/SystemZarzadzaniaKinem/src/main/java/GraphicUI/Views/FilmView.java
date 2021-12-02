@@ -5,6 +5,8 @@ import Back.Controllers.FilmController;
 import Back.Models.Film;
 import Back.Models.FilmCategory;
 import Back.Models.User;
+import GraphicUI.MenuPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -18,6 +20,7 @@ public class FilmView extends JPanel implements KeyListener {
     Film film;
     public FilmView(User user, Film film, Object previousWindow) {
         panel = this;
+        MenuPanel.bottomPanel = this;
         this.user = user;
         this.film = film;
         this.previousWindow = previousWindow;
@@ -53,7 +56,7 @@ public class FilmView extends JPanel implements KeyListener {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                     frame.remove(panel);
                     FilmCategoryView filmCategoryView = new FilmCategoryView(user,filmCategoryController.getById(film.getFilmCategoryId()));
-                    frame.add(filmCategoryView, new GridBagConstraints());
+                    frame.add(filmCategoryView, BorderLayout.CENTER);
                     frame.revalidate();
                     frame.repaint();
                     filmCategoryView.requestFocus();
@@ -62,7 +65,7 @@ public class FilmView extends JPanel implements KeyListener {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                     frame.remove(panel);
                     MenuFilmView menuView = new MenuFilmView(user);
-                    frame.add(menuView, new GridBagConstraints());
+                    frame.add(menuView, BorderLayout.CENTER);
                     frame.revalidate();
                     frame.repaint();
                     menuView.requestFocus();
@@ -77,7 +80,7 @@ public class FilmView extends JPanel implements KeyListener {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                     frame.remove(panel);
                     FilmCategoryView filmCategoryView = new FilmCategoryView(user,filmCategoryController.getById(film.getFilmCategoryId()));
-                    frame.add(filmCategoryView, new GridBagConstraints());
+                    frame.add(filmCategoryView, BorderLayout.CENTER);
                     frame.revalidate();
                     frame.repaint();
                     filmCategoryView.requestFocus();
@@ -86,7 +89,7 @@ public class FilmView extends JPanel implements KeyListener {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                     frame.remove(panel);
                     MenuFilmView menuView = new MenuFilmView(user);
-                    frame.add(menuView, new GridBagConstraints());
+                    frame.add(menuView, BorderLayout.CENTER);
                     frame.revalidate();
                     frame.repaint();
                     menuView.requestFocus();
@@ -108,7 +111,6 @@ public class FilmView extends JPanel implements KeyListener {
             this.add(delete);
         }
 
-        this.add(new JLabel(""));
         this.add(exit);
     }
 
@@ -126,7 +128,7 @@ public class FilmView extends JPanel implements KeyListener {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                     frame.remove(panel);
                     FilmCategoryView filmCategoryView = new FilmCategoryView(user,filmCategoryController.getById(film.getFilmCategoryId()));
-                    frame.add(filmCategoryView, new GridBagConstraints());
+                    frame.add(filmCategoryView, BorderLayout.CENTER);
                     frame.revalidate();
                     frame.repaint();
                     filmCategoryView.requestFocus();
@@ -135,7 +137,7 @@ public class FilmView extends JPanel implements KeyListener {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                     frame.remove(panel);
                     MenuFilmView menuView = new MenuFilmView(user);
-                    frame.add(menuView, new GridBagConstraints());
+                    frame.add(menuView, BorderLayout.CENTER);
                     frame.revalidate();
                     frame.repaint();
                     menuView.requestFocus();

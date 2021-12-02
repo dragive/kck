@@ -5,6 +5,7 @@ import Back.Models.Film;
 import Back.Models.Room;
 import Back.Models.Seans;
 import Back.Models.User;
+import GraphicUI.MenuPanel;
 import lombok.SneakyThrows;
 
 import javax.swing.*;
@@ -18,6 +19,7 @@ public class AddSeansView extends JPanel implements KeyListener {
     Room room;
     public AddSeansView(User user, Room room) {
         panel = this;
+        MenuPanel.bottomPanel = this;
         this.user = user;
         this.room = room;
         Seans seans = new Seans();
@@ -49,7 +51,7 @@ public class AddSeansView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 SeansAddFilmView seansAddFilmView = new SeansAddFilmView(user,seans);
-                frame.add(seansAddFilmView, new GridBagConstraints());
+                frame.add(seansAddFilmView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 seansAddFilmView.requestFocus();
@@ -61,7 +63,7 @@ public class AddSeansView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 SeansListView seansListView = new SeansListView(user,room);
-                frame.add(seansListView, new GridBagConstraints());
+                frame.add(seansListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 seansListView.requestFocus();
@@ -117,7 +119,7 @@ public class AddSeansView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 RoomView roomView = new RoomView(user,room);
-                frame.add(roomView, new GridBagConstraints());
+                frame.add(roomView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 roomView.requestFocus();
@@ -133,7 +135,7 @@ public class AddSeansView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 SeansAddFilmView seansAddFilmView = new SeansAddFilmView(user,seans);
-                frame.add(seansAddFilmView, new GridBagConstraints());
+                frame.add(seansAddFilmView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 seansAddFilmView.requestFocus();
@@ -145,7 +147,7 @@ public class AddSeansView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 SeansListView seansListView = new SeansListView(user,room);
-                frame.add(seansListView, new GridBagConstraints());
+                frame.add(seansListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 seansListView.requestFocus();
@@ -174,7 +176,7 @@ public class AddSeansView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 SeansListView seansListView = new SeansListView(user,room);
-                frame.add(seansListView, new GridBagConstraints());
+                frame.add(seansListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 seansListView.requestFocus();

@@ -5,6 +5,8 @@ import Back.Controllers.SeansController;
 import Back.Models.Reservation;
 import Back.Models.Seans;
 import Back.Models.User;
+import GraphicUI.MenuPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -16,6 +18,7 @@ public class ReservationView extends JPanel implements KeyListener {
     User panelUser;
     public ReservationView(User user, User panelUser, Reservation reservation) {
         panel = this;
+        MenuPanel.bottomPanel = this;
         this.user = user;
 
         this.setMinimumSize(new Dimension(400,300));
@@ -52,7 +55,7 @@ public class ReservationView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 UserReservationsView reservationView = new UserReservationsView(user,panelUser);
-                frame.add(reservationView, new GridBagConstraints());
+                frame.add(reservationView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 reservationView.requestFocus();
@@ -88,7 +91,7 @@ public class ReservationView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 UserReservationsView reservationView = new UserReservationsView(user,panelUser);
-                frame.add(reservationView, new GridBagConstraints());
+                frame.add(reservationView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 reservationView.requestFocus();

@@ -2,6 +2,7 @@ package GraphicUI.Views;
 
 import Back.Controllers.UsersController;
 import Back.Models.User;
+import GraphicUI.MenuPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,11 +43,13 @@ public class LoginView extends JPanel implements KeyListener {
                     if(user.getName().equals(login.getText()) && user.getPasswordHash().equals(password.getText())) {
                         JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                         frame.remove(panel);
-                        MenuView menuView = new MenuView(user);
-                        frame.add(menuView, new GridBagConstraints());
+                        MenuPanel menuPanel = new MenuPanel(user);
+                        frame.add(menuPanel, BorderLayout.PAGE_START);
+                        CinemaListView cinemaListView = new CinemaListView(user);
+                        frame.add(cinemaListView, BorderLayout.CENTER);
                         frame.revalidate();
                         frame.repaint();
-                        menuView.requestFocus();
+                        cinemaListView.requestFocus();
                     }
                     else {
                         new ErrorFrame("Zly login lub haslo");
@@ -63,7 +66,7 @@ public class LoginView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 RegisterView registerView = new RegisterView();
-                frame.add(registerView, new GridBagConstraints());
+                frame.add(registerView, BorderLayout.PAGE_START);
                 frame.revalidate();
                 frame.repaint();
                 registerView.requestFocus();
@@ -110,11 +113,13 @@ public class LoginView extends JPanel implements KeyListener {
                     if(user.getName().equals(login.getText()) && user.getPasswordHash().equals(password.getText())) {
                         JFrame frame2 = (JFrame) SwingUtilities.windowForComponent(panel);
                         frame2.remove(panel);
-                        MenuView menuView = new MenuView(user);
-                        frame2.add(menuView, new GridBagConstraints());
+                        MenuPanel menuPanel = new MenuPanel(user);
+                        frame2.add(menuPanel, BorderLayout.PAGE_START);
+                        CinemaListView cinemaListView = new CinemaListView(user);
+                        frame2.add(cinemaListView, BorderLayout.CENTER);
                         frame2.revalidate();
                         frame2.repaint();
-                        menuView.requestFocus();
+                        cinemaListView.requestFocus();
                     }
                     else {
                         new ErrorFrame("Zly login lub haslo");

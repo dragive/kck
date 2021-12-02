@@ -1,6 +1,8 @@
 package GraphicUI.Views;
 import Back.Controllers.UsersController;
 import Back.Models.User;
+import GraphicUI.MenuPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -11,6 +13,7 @@ public class AddUserView extends JPanel implements KeyListener {
     User user;
     public AddUserView(User user) {
         panel = this;
+        MenuPanel.bottomPanel = this;
         this.user = user;
 
         this.setMinimumSize(new Dimension(400,300));
@@ -49,7 +52,7 @@ public class AddUserView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 UserListView userListView = new UserListView(user);
-                frame.add(userListView, new GridBagConstraints());
+                frame.add(userListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 userListView.requestFocus();
@@ -61,7 +64,7 @@ public class AddUserView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 UserListView userListView = new UserListView(user);
-                frame.add(userListView, new GridBagConstraints());
+                frame.add(userListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 userListView.requestFocus();
@@ -99,7 +102,7 @@ public class AddUserView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 UserListView userListView = new UserListView(user);
-                frame.add(userListView, new GridBagConstraints());
+                frame.add(userListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 userListView.requestFocus();

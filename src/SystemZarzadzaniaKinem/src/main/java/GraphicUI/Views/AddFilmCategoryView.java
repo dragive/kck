@@ -3,6 +3,8 @@ package GraphicUI.Views;
 import Back.Controllers.FilmCategoryController;
 import Back.Models.FilmCategory;
 import Back.Models.User;
+import GraphicUI.MenuPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -14,7 +16,7 @@ public class AddFilmCategoryView extends JPanel implements KeyListener {
     public AddFilmCategoryView(User user) {
         panel = this;
         this.user = user;
-
+        MenuPanel.bottomPanel = this;
         this.setMinimumSize(new Dimension(400,300));
         this.setLayout(new GridLayout(0,2));
         this.addKeyListener(this);
@@ -44,7 +46,7 @@ public class AddFilmCategoryView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 FilmCategoryListView filmCategoryListView = new FilmCategoryListView(user);
-                frame.add(filmCategoryListView, new GridBagConstraints());
+                frame.add(filmCategoryListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 filmCategoryListView.requestFocus();
@@ -57,7 +59,7 @@ public class AddFilmCategoryView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 FilmCategoryListView filmCategoryListView = new FilmCategoryListView(user);
-                frame.add(filmCategoryListView, new GridBagConstraints());
+                frame.add(filmCategoryListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 filmCategoryListView.requestFocus();
@@ -67,9 +69,7 @@ public class AddFilmCategoryView extends JPanel implements KeyListener {
         this.add(new JLabel("Nazwa kategorii"));
         this.add(name);
 
-        this.add(new JLabel(""));
         this.add(accept);
-
         this.add(exit);
     }
 
@@ -85,7 +85,7 @@ public class AddFilmCategoryView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 FilmCategoryListView filmCategoryListView = new FilmCategoryListView(user);
-                frame.add(filmCategoryListView, new GridBagConstraints());
+                frame.add(filmCategoryListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 filmCategoryListView.requestFocus();

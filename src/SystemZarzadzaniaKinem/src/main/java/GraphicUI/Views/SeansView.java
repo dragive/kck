@@ -4,6 +4,8 @@ import Back.Controllers.RoomsController;
 import Back.Controllers.SeansController;
 import Back.Models.Seans;
 import Back.Models.User;
+import GraphicUI.MenuPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -15,6 +17,7 @@ public class SeansView extends JPanel implements KeyListener {
     Seans seans;
     public SeansView(User user, Seans seans) {
         panel = this;
+        MenuPanel.bottomPanel = this;
         this.user = user;
         this.seans = seans;
         this.setMinimumSize(new Dimension(400,300));
@@ -46,7 +49,7 @@ public class SeansView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 SeansListView seansListView = new SeansListView(user,roomsController.getById(seans.getRoomId()));
-                frame.add(seansListView, new GridBagConstraints());
+                frame.add(seansListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 seansListView.requestFocus();
@@ -60,7 +63,7 @@ public class SeansView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 SeansListView seansListView = new SeansListView(user,roomsController.getById(seans.getRoomId()));
-                frame.add(seansListView, new GridBagConstraints());
+                frame.add(seansListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 seansListView.requestFocus();
@@ -95,7 +98,7 @@ public class SeansView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 SeansListView seansListView = new SeansListView(user,roomsController.getById(seans.getRoomId()));
-                frame.add(seansListView, new GridBagConstraints());
+                frame.add(seansListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 seansListView.requestFocus();

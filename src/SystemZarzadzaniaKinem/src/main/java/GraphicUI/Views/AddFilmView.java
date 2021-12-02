@@ -4,6 +4,7 @@ import Back.Controllers.FilmController;
 import Back.Models.Film;
 import Back.Models.FilmCategory;
 import Back.Models.User;
+import GraphicUI.MenuPanel;
 import lombok.SneakyThrows;
 
 import javax.swing.*;
@@ -18,6 +19,7 @@ public class AddFilmView extends JPanel implements KeyListener {
     FilmCategory filmCategory;
     public AddFilmView(User user, FilmCategory filmCategory) {
         panel = this;
+        MenuPanel.bottomPanel = this;
         this.user = user;
         this.filmCategory = filmCategory;
         this.setMinimumSize(new Dimension(400,300));
@@ -66,7 +68,7 @@ public class AddFilmView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 FilmCategoryView filmCategoryView = new FilmCategoryView(user,filmCategory);
-                frame.add(filmCategoryView, new GridBagConstraints());
+                frame.add(filmCategoryView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 filmCategoryView.requestFocus();
@@ -78,7 +80,7 @@ public class AddFilmView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 FilmCategoryView filmCategoryView = new FilmCategoryView(user,filmCategory);
-                frame.add(filmCategoryView, new GridBagConstraints());
+                frame.add(filmCategoryView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 filmCategoryView.requestFocus();
@@ -113,7 +115,7 @@ public class AddFilmView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 FilmCategoryView filmCategoryView = new FilmCategoryView(user,filmCategory);
-                frame.add(filmCategoryView, new GridBagConstraints());
+                frame.add(filmCategoryView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 filmCategoryView.requestFocus();

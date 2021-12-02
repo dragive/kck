@@ -4,6 +4,7 @@ import Back.Controllers.RoomsController;
 import Back.Models.Cinema;
 import Back.Models.Room;
 import Back.Models.User;
+import GraphicUI.MenuPanel;
 import com.googlecode.lanterna.gui2.TextBox;
 
 import javax.swing.*;
@@ -16,6 +17,7 @@ public class AddRoomView extends JPanel implements KeyListener {
     Cinema cinema;
     public AddRoomView(User user, Cinema cinema) {
         panel = this;
+        MenuPanel.bottomPanel = this;
         this.user = user;
         this.cinema = cinema;
         this.setMinimumSize(new Dimension(400,300));
@@ -47,7 +49,7 @@ public class AddRoomView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 CinemaView cinemaView = new CinemaView(user,cinema);
-                frame.add(cinemaView, new GridBagConstraints());
+                frame.add(cinemaView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 cinemaView.requestFocus();
@@ -59,7 +61,7 @@ public class AddRoomView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 RoomListView roomListView = new RoomListView(user,cinema);
-                frame.add(roomListView, new GridBagConstraints());
+                frame.add(roomListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 roomListView.requestFocus();
@@ -94,7 +96,7 @@ public class AddRoomView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 RoomListView roomListView = new RoomListView(user,cinema);
-                frame.add(roomListView, new GridBagConstraints());
+                frame.add(roomListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 roomListView.requestFocus();

@@ -4,6 +4,7 @@ import Back.Controllers.ReservationController;
 import Back.Controllers.RoomsController;
 import Back.Controllers.SeansController;
 import Back.Models.*;
+import GraphicUI.MenuPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,7 @@ public class ReservationSeansView extends JPanel implements KeyListener {
     Object previous;
     public ReservationSeansView(User user, Seans seans, Object previous) {
         panel = this;
+        MenuPanel.bottomPanel = this;
         this.user = user;
         this.seans = seans;
         this.previous = previous;
@@ -54,7 +56,7 @@ public class ReservationSeansView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 ReservationSeansListView reservationSeansListView = new ReservationSeansListView(user,cinema,previous);
-                frame.add(reservationSeansListView, new GridBagConstraints());
+                frame.add(reservationSeansListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 reservationSeansListView.requestFocus();
@@ -86,7 +88,7 @@ public class ReservationSeansView extends JPanel implements KeyListener {
                             JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                             frame.remove(panel);
                             ReservationSeansListView reservationSeansListView = new ReservationSeansListView(user,cinema,this);
-                            frame.add(reservationSeansListView, new GridBagConstraints());
+                            frame.add(reservationSeansListView, BorderLayout.CENTER);
                             frame.revalidate();
                             frame.repaint();
                             reservationSeansListView.requestFocus();
@@ -123,7 +125,7 @@ public class ReservationSeansView extends JPanel implements KeyListener {
                         JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                         frame.remove(panel);
                         ReservationSeansListView reservationSeansListView = new ReservationSeansListView(user,cinema,this);
-                        frame.add(reservationSeansListView, new GridBagConstraints());
+                        frame.add(reservationSeansListView, BorderLayout.CENTER);
                         frame.revalidate();
                         frame.repaint();
                         reservationSeansListView.requestFocus();
@@ -161,7 +163,7 @@ public class ReservationSeansView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 ReservationSeansListView reservationSeansListView = new ReservationSeansListView(user,cinema,previous);
-                frame.add(reservationSeansListView, new GridBagConstraints());
+                frame.add(reservationSeansListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 reservationSeansListView.requestFocus();

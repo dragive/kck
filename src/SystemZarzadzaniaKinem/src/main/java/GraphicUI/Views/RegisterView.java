@@ -2,6 +2,7 @@ package GraphicUI.Views;
 
 import Back.Controllers.UsersController;
 import Back.Models.User;
+import GraphicUI.MenuPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,7 +31,7 @@ public class RegisterView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 LoginView loginView = new LoginView();
-                frame.add(loginView, new GridBagConstraints());
+                frame.add(loginView, BorderLayout.PAGE_START);
                 frame.revalidate();
                 frame.repaint();
                 loginView.requestFocus();
@@ -49,11 +50,13 @@ public class RegisterView extends JPanel implements KeyListener {
                 usersController.createNew(newUser);
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
-                MenuView menuView = new MenuView(newUser);
-                frame.add(menuView, new GridBagConstraints());
+                MenuPanel menuPanel = new MenuPanel(newUser);
+                frame.add(menuPanel, BorderLayout.PAGE_START);
+                CinemaListView cinemaListView = new CinemaListView(newUser);
+                frame.add(cinemaListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
-                menuView.requestFocus();
+                menuPanel.requestFocus();
             }
         });
 
@@ -81,7 +84,7 @@ public class RegisterView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 LoginView loginView = new LoginView();
-                frame.add(loginView, new GridBagConstraints());
+                frame.add(loginView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 loginView.requestFocus();

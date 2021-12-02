@@ -3,6 +3,7 @@ package GraphicUI.Views;
 import Back.Controllers.CinemaController;
 import Back.Models.Cinema;
 import Back.Models.User;
+import GraphicUI.MenuPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,8 +16,8 @@ public class CinemaListView extends JPanel implements KeyListener {
     User user;
     public CinemaListView(User user) {
         panel = this;
+        MenuPanel.bottomPanel = this;
         this.user = user;
-
         this.setMinimumSize(new Dimension(400,300));
         this.setLayout(new GridLayout(0,1));
         this.addKeyListener(this);
@@ -30,7 +31,6 @@ public class CinemaListView extends JPanel implements KeyListener {
             }
         });
         JButton addCinema = new JButton("Dodaj kino");
-        JButton exit = new JButton("Wstecz");
 
         addCinema.addActionListener(new ActionListener() {
             @Override
@@ -38,22 +38,10 @@ public class CinemaListView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 AddCinemaView addCinemaView = new AddCinemaView(user);
-                frame.add(addCinemaView, new GridBagConstraints());
+                frame.add(addCinemaView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 addCinemaView.requestFocus();
-            }
-        });
-        exit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
-                frame.remove(panel);
-                MenuView menuView = new MenuView(user);
-                frame.add(menuView, new GridBagConstraints());
-                frame.revalidate();
-                frame.repaint();
-                menuView.requestFocus();
             }
         });
 
@@ -63,7 +51,6 @@ public class CinemaListView extends JPanel implements KeyListener {
 
         if (user.isPermission()) this.add(new JLabel("Wybierz kino lub utwórz nowe:"));
         else this.add(new JLabel("Wybierz kino:"));
-        this.add(new JLabel(""));
 
         for(Cinema cinema: cinemas) {
             JButton temp = new JButton(cinema.getName());
@@ -73,7 +60,7 @@ public class CinemaListView extends JPanel implements KeyListener {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                     frame.remove(panel);
                     CinemaView cinemaView = new CinemaView(user, cinema);
-                    frame.add(cinemaView, new GridBagConstraints());
+                    frame.add(cinemaView, BorderLayout.CENTER);
                     frame.revalidate();
                     frame.repaint();
                     cinemaView.requestFocus();
@@ -85,7 +72,6 @@ public class CinemaListView extends JPanel implements KeyListener {
         this.add(new JLabel(""));
 
         if (user.isPermission()) this.add(addCinema);
-        this.add(exit);
     }
 
 
@@ -98,15 +84,6 @@ public class CinemaListView extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case 27:
-                JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
-                frame.remove(panel);
-                MenuView menuView = new MenuView(user);
-                frame.add(menuView, new GridBagConstraints());
-                frame.revalidate();
-                frame.repaint();
-                menuView.requestFocus();
-                break;
             default:
                 break;
         }

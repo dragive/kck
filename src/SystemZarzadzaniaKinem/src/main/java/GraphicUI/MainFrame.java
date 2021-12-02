@@ -12,7 +12,7 @@ import java.awt.event.WindowEvent;
 public class MainFrame extends JFrame implements KeyListener {
     public User user;
     public MainFrame() {
-        this.setLayout(new GridBagLayout());
+        this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(720,445));
         this.setMinimumSize(new Dimension(720,445));
         this.setFocusable(true);
@@ -23,7 +23,7 @@ public class MainFrame extends JFrame implements KeyListener {
         this.setResizable(true);
         this.addKeyListener(this);
         LoginView loginView = new LoginView();
-        this.add(loginView, new GridBagConstraints());
+        this.add(loginView, BorderLayout.PAGE_START);
         loginView.requestFocus();
     }
 

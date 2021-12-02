@@ -2,6 +2,8 @@ package GraphicUI.Views;
 import Back.Controllers.CinemaController;
 import Back.Models.Cinema;
 import Back.Models.User;
+import GraphicUI.MenuPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -12,7 +14,7 @@ public class AddCinemaView extends JPanel implements KeyListener {
     public AddCinemaView(User user) {
         panel = this;
         this.user = user;
-
+        MenuPanel.bottomPanel = this;
         this.setMinimumSize(new Dimension(400,300));
         this.setLayout(new GridLayout(0,2));
         this.addKeyListener(this);
@@ -37,7 +39,7 @@ public class AddCinemaView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 CinemaListView cinemaListView = new CinemaListView(user);
-                frame.add(cinemaListView, new GridBagConstraints());
+                frame.add(cinemaListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 cinemaListView.requestFocus();
@@ -56,7 +58,7 @@ public class AddCinemaView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 CinemaListView cinemaListView = new CinemaListView(user);
-                frame.add(cinemaListView, new GridBagConstraints());
+                frame.add(cinemaListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 cinemaListView.requestFocus();
@@ -86,7 +88,7 @@ public class AddCinemaView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 CinemaListView cinemaListView = new CinemaListView(user);
-                frame.add(cinemaListView, new GridBagConstraints());
+                frame.add(cinemaListView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 cinemaListView.requestFocus();

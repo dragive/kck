@@ -1,6 +1,7 @@
 package GraphicUI.Views;
 import Back.Controllers.UsersController;
 import Back.Models.User;
+import GraphicUI.MenuPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +15,7 @@ public class EditUserView extends JPanel implements KeyListener {
     public EditUserView(User user,User panelUser,Object previousWindow) {
         previous = previousWindow;
         panel = this;
+        MenuPanel.bottomPanel = this;
         this.user = user;
         this.panelUser = panelUser;
         this.setMinimumSize(new Dimension(400,300));
@@ -49,7 +51,7 @@ public class EditUserView extends JPanel implements KeyListener {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                     frame.remove(panel);
                     UserListView userListView = new UserListView(user);
-                    frame.add(userListView, new GridBagConstraints());
+                    frame.add(userListView, BorderLayout.CENTER);
                     frame.revalidate();
                     frame.repaint();
                     userListView.requestFocus();
@@ -58,7 +60,7 @@ public class EditUserView extends JPanel implements KeyListener {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                     frame.remove(panel);
                     LoginView loginView = new LoginView();
-                    frame.add(loginView, new GridBagConstraints());
+                    frame.add(loginView, BorderLayout.PAGE_START);
                     frame.revalidate();
                     frame.repaint();
                     loginView.requestFocus();
@@ -76,7 +78,7 @@ public class EditUserView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 UserView userView = new UserView(user,panelUser,previous);
-                frame.add(userView, new GridBagConstraints());
+                frame.add(userView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 userView.requestFocus();
@@ -88,7 +90,7 @@ public class EditUserView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 UserView userView = new UserView(user,panelUser,previous);
-                frame.add(userView, new GridBagConstraints());
+                frame.add(userView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 userView.requestFocus();
@@ -114,8 +116,6 @@ public class EditUserView extends JPanel implements KeyListener {
 
         this.add(new JLabel(""));
         this.add(exit);
-
-        this.add(exit);
     }
 
     @Override
@@ -130,7 +130,7 @@ public class EditUserView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 UserView userView = new UserView(user,panelUser,previous);
-                frame.add(userView, new GridBagConstraints());
+                frame.add(userView, BorderLayout.CENTER);
                 frame.revalidate();
                 frame.repaint();
                 userView.requestFocus();
