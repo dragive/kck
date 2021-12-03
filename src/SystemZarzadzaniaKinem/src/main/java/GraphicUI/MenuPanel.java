@@ -14,6 +14,8 @@ public class MenuPanel extends JPanel implements KeyListener {
     JPanel panel;
     public static JPanel bottomPanel;
     public static User user;
+    public final Integer FONT_SIZE = 22;
+    public final Font FONT = new Font(this.getFont().getName(), this.getFont().getStyle() ,FONT_SIZE);
     public MenuPanel(User user) {
         bottomPanel = null;
         panel = this;
@@ -21,21 +23,23 @@ public class MenuPanel extends JPanel implements KeyListener {
         JLabel userWelcomeMessage = new JLabel("Witaj "+user.getName()+"!");
 
         this.setMinimumSize(new Dimension(600,300));
-        this.setLayout(new GridLayout(1,0));
+//        this.setLayout(new GridLayout(1,0));
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.requestFocus();
-
-        JButton filmcategories = new JButton("Kategorie filmów");
+        
+        JButton filmCategories = new JButton("Kategorie filmów");
+        filmCategories.setFont(FONT);
         JButton cinemas = new JButton("Kina");
-        JButton films = new JButton("Filmy");
-        JButton userButton = new JButton("Użytkownik");
-        JButton users = new JButton("Użytkownicy");
-        JButton credits = new JButton("Twórcy");
-        JButton reservation = new JButton("Zarezerwuj");
-        JButton logout = new JButton("Wyloguj");
+        cinemas.setFont(FONT);
+        JButton films = new JButton("Filmy");films.setFont(FONT);
+        JButton userButton = new JButton("Użytkownik");userButton.setFont(FONT);
+        JButton users = new JButton("Użytkownicy");users.setFont(FONT);
+        JButton credits = new JButton("Twórcy");credits.setFont(FONT);
+        JButton reservation = new JButton("Zarezerwuj");reservation.setFont(FONT);
+        JButton logout = new JButton("Wyloguj");logout.setFont(FONT);
 
         credits.addActionListener(new ActionListener() {
             @Override
@@ -120,7 +124,7 @@ public class MenuPanel extends JPanel implements KeyListener {
                 }
             }
         });
-        filmcategories.addActionListener(new ActionListener() {
+        filmCategories.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(!bottomPanel.getClass().toString().contains("FilmCategoryListView")) {
@@ -150,7 +154,7 @@ public class MenuPanel extends JPanel implements KeyListener {
         });
 
         this.add(cinemas);
-        this.add(filmcategories);
+        this.add(filmCategories);
         this.add(films);
         this.add(reservation);
         this.add(userButton);

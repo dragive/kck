@@ -16,7 +16,7 @@ public class UserListView extends JPanel implements KeyListener {
         MenuPanel.bottomPanel = this;
         this.user = user;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,1));
+        this.setLayout(new FlowLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -38,7 +38,7 @@ public class UserListView extends JPanel implements KeyListener {
                 JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                 frame.remove(panel);
                 AddUserView addUserView = new AddUserView(user);
-                frame.add(addUserView, BorderLayout.CENTER);
+                frame.add(addUserView);
                 frame.revalidate();
                 frame.repaint();
                 addUserView.requestFocus();
@@ -53,7 +53,7 @@ public class UserListView extends JPanel implements KeyListener {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                     frame.remove(panel);
                     UserView cinemaListView = new UserView(user,item,this);
-                    frame.add(cinemaListView, BorderLayout.CENTER);
+                    frame.add(cinemaListView);
                     frame.revalidate();
                     frame.repaint();
                     cinemaListView.requestFocus();

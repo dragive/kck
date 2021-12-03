@@ -44,7 +44,7 @@ public class LoginView extends JPanel implements KeyListener {
                         JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
                         frame.remove(panel);
                         MenuPanel menuPanel = new MenuPanel(user);
-                        frame.add(menuPanel, BorderLayout.PAGE_START);
+                        frame.add(menuPanel, BorderLayout.NORTH);
                         CinemaListView cinemaListView = new CinemaListView(user);
                         frame.add(cinemaListView, BorderLayout.CENTER);
                         frame.revalidate();

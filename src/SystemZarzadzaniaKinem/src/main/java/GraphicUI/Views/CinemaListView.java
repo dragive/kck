@@ -4,6 +4,7 @@ import Back.Controllers.CinemaController;
 import Back.Models.Cinema;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanels.SimpleGridPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,9 +20,10 @@ public class CinemaListView extends JPanel implements KeyListener {
         MenuPanel.bottomPanel = this;
         this.user = user;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,1));
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
+
         this.setFocusable(true);
         this.addMouseListener(new MouseAdapter() {
             @Override
@@ -50,28 +52,36 @@ public class CinemaListView extends JPanel implements KeyListener {
 
 
         if (user.isPermission()) this.add(new JLabel("Wybierz kino lub utwórz nowe:"));
-        else this.add(new JLabel("Wybierz kino:"));
+        else this.add(new JLabel("Wybierz kino:"),BorderLayout.NORTH);
+
+        SimpleGridPanel simpleGridPanel = new SimpleGridPanel();
+        JScrollPane jScrollPane = new JScrollPane(simpleGridPanel);
+        jScrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        this.add(jScrollPane,BorderLayout.CENTER);
 
         for(Cinema cinema: cinemas) {
-            JButton temp = new JButton(cinema.getName());
-            temp.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
-                    frame.remove(panel);
-                    CinemaView cinemaView = new CinemaView(user, cinema);
-                    frame.add(cinemaView, BorderLayout.CENTER);
-                    frame.revalidate();
-                    frame.repaint();
-                    cinemaView.requestFocus();
-                }
-            });
-            this.add(temp);
+            for(Integer i=0;i<100;i++){
+                JButton temp = new JButton(cinema.getName()+i.toString());
+                temp.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
+                        frame.remove(panel);
+                        CinemaView cinemaView = new CinemaView(user, cinema);
+                        frame.add(cinemaView/*, BorderLayout.CENTER*/);
+                        frame.revalidate();
+                        frame.repaint();
+                        cinemaView.requestFocus();
+                    }
+                });
+                simpleGridPanel.add(temp);
+            }
         }
 
-        this.add(new JLabel(""));
+//        this.add(new JLabel(""));
 
-        if (user.isPermission()) this.add(addCinema);
+        if (user.isPermission()) this.add(addCinema,BorderLayout.SOUTH);
+
     }
 
 
