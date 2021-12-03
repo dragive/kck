@@ -2,6 +2,7 @@ package GraphicUI;
 
 import Back.Models.User;
 import GraphicUI.Views.*;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,8 +15,7 @@ public class MenuPanel extends JPanel implements KeyListener {
     JPanel panel;
     public static JPanel bottomPanel;
     public static User user;
-    public final Integer FONT_SIZE = 22;
-    public final Font FONT = new Font(this.getFont().getName(), this.getFont().getStyle() ,FONT_SIZE);
+    public final Font FONT = SettingsService.GenerateFont();
     public MenuPanel(User user) {
         bottomPanel = null;
         panel = this;

@@ -4,7 +4,8 @@ import Back.Controllers.CinemaController;
 import Back.Models.Cinema;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
-import GraphicUI.Views.MinorPanels.SimpleGridPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
+import GraphicUI.Views.MinorPanelsAndUtils.SimpleGridPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,6 +63,7 @@ public class CinemaListView extends JPanel implements KeyListener {
         for(Cinema cinema: cinemas) {
             for(Integer i=0;i<100;i++){
                 JButton temp = new JButton(cinema.getName()+i.toString());
+                temp.setFont(SettingsService.GenerateFont());
                 temp.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -79,7 +81,7 @@ public class CinemaListView extends JPanel implements KeyListener {
         }
 
 //        this.add(new JLabel(""));
-
+        addCinema.setFont(SettingsService.GenerateFont());
         if (user.isPermission()) this.add(addCinema,BorderLayout.SOUTH);
 
     }

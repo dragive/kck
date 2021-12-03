@@ -1,4 +1,4 @@
-package GraphicUI.Views.MinorPanels;
+package GraphicUI.Views.MinorPanelsAndUtils;
 
 import javax.swing.*;
 import java.awt.*;

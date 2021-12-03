@@ -3,10 +3,12 @@ package GraphicUI.Views;
 import Back.Controllers.UsersController;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Set;
 
 public class LoginView extends JPanel implements KeyListener {
     private JTextField login;
@@ -29,8 +31,11 @@ public class LoginView extends JPanel implements KeyListener {
         login = new JTextField();
         password = new JTextField();
         JButton signIn = new JButton("Zaloguj");
+        signIn.setFont(SettingsService.GenerateFont());
         JButton signUp = new JButton("Zarejestruj");
+        signUp.setFont(SettingsService.GenerateFont());
         JButton exit = new JButton("Wyjdź");
+        exit.setFont(SettingsService.GenerateFont());
         panel = this;
         signIn.addActionListener(new ActionListener() {
             @Override
@@ -79,12 +84,21 @@ public class LoginView extends JPanel implements KeyListener {
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
         });
-
-        this.add(new JLabel("Czesio's Cinema Manager"));
-        this.add(new JLabel(""));
-        this.add(new JLabel("Login: "));
+        login.setFont(SettingsService.GenerateFont());
+        password.setFont(SettingsService.GenerateFont());
+        JLabel title = new JLabel("Czesio's Cinema Manager");
+        title.setFont(SettingsService.GenerateFont());
+        this.add(title);//.setFont(SettingsService.GenerateFont());
+        JLabel empty = new JLabel("");
+        empty.setFont(SettingsService.GenerateFont());
+        this.add(empty);
+        JLabel loginText = new JLabel("Login: ");
+        loginText.setFont(SettingsService.GenerateFont());
+        this.add(loginText);
         this.add(login);
-        this.add(new JLabel("Hasło: "));
+        JLabel pass = new JLabel("Hasło: ");
+        pass.setFont(SettingsService.GenerateFont());
+        this.add(pass);
         this.add(password);
         this.add(signUp);
         this.add(signIn);
