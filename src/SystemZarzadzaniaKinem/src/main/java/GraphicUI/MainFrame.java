@@ -12,7 +12,7 @@ import java.awt.event.WindowEvent;
 public class MainFrame extends JFrame implements KeyListener {
     public User user;
     public MainFrame() {
-        this.setLayout(new BorderLayout());
+        this.setLayout(new BorderLayout(20,0));
         this.setPreferredSize(new Dimension(720,445));
         this.setMinimumSize(new Dimension(720,445));
         this.setFocusable(true);

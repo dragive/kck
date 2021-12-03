@@ -8,9 +8,12 @@ import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
 import GraphicUI.Views.MinorPanelsAndUtils.SimpleGridPanel;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class CinemaListView extends JPanel implements KeyListener {
@@ -60,9 +63,12 @@ public class CinemaListView extends JPanel implements KeyListener {
         jScrollPane.getVerticalScrollBar().setUnitIncrement(16);
         this.add(jScrollPane,BorderLayout.CENTER);
 
+        cinemas = cinemas.stream().sorted(Comparator.comparing(Cinema::getName)).collect(Collectors.toList());
+
         for(Cinema cinema: cinemas) {
-            for(Integer i=0;i<100;i++){
-                JButton temp = new JButton(cinema.getName()+i.toString());
+            for(int i = 0; i<100; i++){
+                JButton temp = new JButton(cinema.getName()+ i);
+                temp.setBorder(new EmptyBorder(30, 30, 30, 30));
                 temp.setFont(SettingsService.GenerateFont());
                 temp.addActionListener(new ActionListener() {
                     @Override
@@ -82,7 +88,24 @@ public class CinemaListView extends JPanel implements KeyListener {
 
 //        this.add(new JLabel(""));
         addCinema.setFont(SettingsService.GenerateFont());
-        if (user.isPermission()) this.add(addCinema,BorderLayout.SOUTH);
+        addCinema.setBorder(new EmptyBorder(20, 20, 20, 20));
+        
+//        addCinema.setBorderPainted(true);
+        if (user.isPermission()) {
+            JPanel jPanel = new JPanel();
+            jPanel.setLayout(new BorderLayout());
+//            JPanel emptyPanel = new JPanel();
+            jPanel.setBorder( BorderFactory.createEmptyBorder(20,0,0,0) );
+//            jPanel.add(emptyPanel,BorderLayout.NORTH);
+            jPanel.add(addCinema,BorderLayout.SOUTH);
+            this.add(jPanel,BorderLayout.SOUTH);
+
+
+
+             /*jPanel.setLayout(new BorderLayout());
+            JPanel emptyPanel = new JPanel();
+//            emptyPanel.set(new Dimension(1,200));*/
+        }
 
     }
 
