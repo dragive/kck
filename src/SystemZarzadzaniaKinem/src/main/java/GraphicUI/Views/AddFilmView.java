@@ -5,13 +5,16 @@ import Back.Models.Film;
 import Back.Models.FilmCategory;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
 import lombok.SneakyThrows;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Set;
 
 public class AddFilmView extends JPanel implements KeyListener {
     JPanel panel;
@@ -23,7 +26,7 @@ public class AddFilmView extends JPanel implements KeyListener {
         this.user = user;
         this.filmCategory = filmCategory;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,2));
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -37,10 +40,15 @@ public class AddFilmView extends JPanel implements KeyListener {
 
         Film film = new Film();
         JButton exit = new JButton("Wstecz");
+        exit.setFont(SettingsService.GenerateFont());
         JButton accept = new JButton("Zatwierdź");
+        accept.setFont(SettingsService.GenerateFont());
         JTextField title = new JTextField();
+        title.setFont(SettingsService.GenerateFont());
         JTextField desc = new JTextField();
+        desc.setFont(SettingsService.GenerateFont());
         JTextField date = new JTextField();
+        date.setFont(SettingsService.GenerateFont());
 
         accept.addActionListener(new ActionListener() {
             @SneakyThrows
@@ -87,20 +95,49 @@ public class AddFilmView extends JPanel implements KeyListener {
             }
         });
 
-        this.add(new JLabel("Tytuł"));
-        this.add(title);
+        JPanel upper = new JPanel(new GridLayout(0,1));
+        this.add(upper,BorderLayout.NORTH);
 
-        this.add(new JLabel("Opis"));
-        this.add(desc);
+        JPanel lower = new JPanel(new BorderLayout());
+        this.add(lower,BorderLayout.SOUTH);
 
-        this.add(new JLabel("Data (DD-MM-RRRR)"));
-        this.add(date);
+        JPanel panel;
+        panel = new JPanel(new GridLayout(1,2));
+        JLabel titleLabel = new JLabel("Tytuł");
+        titleLabel.setFont(SettingsService.GenerateFont());
 
-        this.add(new JLabel(""));
-        this.add(accept);
+        panel.add(titleLabel);
+        panel.add(title);
 
-        this.add(new JLabel(""));
-        this.add(exit);
+        upper.add(panel);
+
+
+        panel = new JPanel(new GridLayout(1,2));
+        JLabel dateLabel = new JLabel("Data (DD-MM-RRRR)");
+        dateLabel.setFont(SettingsService.GenerateFont());
+        panel.add(dateLabel);
+        panel.add(date);
+        upper.add(panel);
+
+        panel = new JPanel(new GridLayout(1,2));
+        JLabel descLabel = new JLabel("Opis");
+        descLabel.setFont(SettingsService.GenerateFont());
+        panel.add(descLabel);
+        panel.add(desc);
+        upper.add(panel);
+
+
+
+        panel = new JPanel(new GridLayout(1,1));
+
+        panel.add(accept);
+        accept.setBorder(new EmptyBorder(30, 30, 30, 30));
+        lower.add(panel,BorderLayout.WEST);
+
+        panel = new JPanel(new GridLayout(1,1));
+        exit.setBorder(new EmptyBorder(30, 30, 30, 30));
+        panel.add(exit);
+        lower.add(panel,BorderLayout.EAST);
     }
 
     @Override

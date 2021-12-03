@@ -6,8 +6,10 @@ import Back.Models.Film;
 import Back.Models.FilmCategory;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
@@ -25,7 +27,7 @@ public class FilmView extends JPanel implements KeyListener {
         this.film = film;
         this.previousWindow = previousWindow;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,2));
+        this.setLayout(new GridLayout(1,1));
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -38,7 +40,9 @@ public class FilmView extends JPanel implements KeyListener {
         });
 
         JButton exit = new JButton("Wstecz");
+        exit.setFont(SettingsService.GenerateFont());
         JButton delete = new JButton("Usuń");
+        delete.setFont(SettingsService.GenerateFont());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
         delete.addActionListener(new ActionListener() {
@@ -97,21 +101,50 @@ public class FilmView extends JPanel implements KeyListener {
             }
         });
 
-        this.add(new JLabel("Tytuł"));
-        this.add(new JLabel(film.getTitle()));
+        JPanel main = new JPanel(new BorderLayout());
+        this.add(main);
 
-        this.add(new JLabel("Opis"));
-        this.add(new JLabel(film.getDescription()));
+        JPanel higher = new JPanel(new GridLayout(0,2));
+        main.add(higher,BorderLayout.NORTH);
+        JLabel titleLabel = new JLabel("Tytuł");
+        titleLabel.setFont(SettingsService.GenerateFont());
+        higher.add(titleLabel);
+        JLabel titleOfFilmLabel = new JLabel(film.getTitle());
+        titleOfFilmLabel.setFont(SettingsService.GenerateFont());
+        higher.add(titleOfFilmLabel);
 
-        this.add(new JLabel("Data (DD-MM-RRRR)"));
-        this.add(new JLabel(simpleDateFormat.format(film.getReleaseDate())));
+        JLabel datelabel =new JLabel("Data (DD-MM-RRRR)");
+        datelabel.setFont(SettingsService.GenerateFont());
+        higher.add(datelabel);
+        JLabel releasedateLabel = new JLabel(simpleDateFormat.format(film.getReleaseDate()));
+        releasedateLabel.setFont(SettingsService.GenerateFont());
+        higher.add(releasedateLabel);
 
+
+
+        JPanel centered = new JPanel(new GridLayout(0,2));
+        main.add(centered,BorderLayout.CENTER);
+
+        JLabel filmdesc = new JLabel("Opis");
+        filmdesc.setFont(SettingsService.GenerateFont());
+        centered.add(filmdesc);
+
+        ScrollPane scrollPane = new ScrollPane();
+        centered.add(scrollPane);
+        JLabel descofthefilm =new JLabel("<html>"+film.getDescription()+"</html>");
+        descofthefilm.setFont(SettingsService.GenerateFont());
+        scrollPane.add(descofthefilm);
+
+
+        JPanel lower = new JPanel(new BorderLayout());
+        main.add(lower,BorderLayout.SOUTH);
         if(user.isPermission())
         {
-            this.add(delete);
+            lower.add(delete,BorderLayout.WEST);
+            delete.setBorder(new EmptyBorder(30, 30, 30, 30));
         }
-
-        this.add(exit);
+        exit.setBorder(new EmptyBorder(30, 30, 30, 30));
+        lower.add(exit,BorderLayout.EAST);
     }
 
     @Override

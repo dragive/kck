@@ -34,7 +34,8 @@ public class MenuPanel extends JPanel implements KeyListener {
         filmCategories.setFont(FONT);
         JButton cinemas = new JButton("Kina");
         cinemas.setFont(FONT);
-        JButton films = new JButton("Filmy");films.setFont(FONT);
+        JButton films = new JButton("Filmy");
+        films.setFont(FONT);
         JButton userButton = new JButton("Użytkownik");userButton.setFont(FONT);
         JButton users = new JButton("Użytkownicy");users.setFont(FONT);
         JButton credits = new JButton("Twórcy");credits.setFont(FONT);

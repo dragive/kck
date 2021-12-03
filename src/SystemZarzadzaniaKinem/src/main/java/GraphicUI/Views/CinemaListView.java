@@ -86,17 +86,13 @@ public class CinemaListView extends JPanel implements KeyListener {
             }
         }
 
-//        this.add(new JLabel(""));
         addCinema.setFont(SettingsService.GenerateFont());
         addCinema.setBorder(new EmptyBorder(20, 20, 20, 20));
-        
-//        addCinema.setBorderPainted(true);
+
         if (user.isPermission()) {
             JPanel jPanel = new JPanel();
             jPanel.setLayout(new BorderLayout());
-//            JPanel emptyPanel = new JPanel();
             jPanel.setBorder( BorderFactory.createEmptyBorder(20,0,0,0) );
-//            jPanel.add(emptyPanel,BorderLayout.NORTH);
             jPanel.add(addCinema,BorderLayout.SOUTH);
             this.add(jPanel,BorderLayout.SOUTH);
 

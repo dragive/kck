@@ -3,13 +3,20 @@ package GraphicUI.Views;
 import Back.Controllers.FilmCategoryController;
 import Back.Models.Film;
 import Back.Models.FilmCategory;
+import Back.Models.Seans;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
+import GraphicUI.Views.MinorPanelsAndUtils.SimpleGridPanel;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class FilmCategoryView extends JPanel implements KeyListener {
     JPanel panel;
@@ -20,7 +27,7 @@ public class FilmCategoryView extends JPanel implements KeyListener {
         this.user = user;
 
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,1));
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -36,7 +43,9 @@ public class FilmCategoryView extends JPanel implements KeyListener {
         List<Film> filmList = filmCategoryController.getCategoryFilms(filmCategory.getId());
 
         JButton exit = new JButton("Wstecz");
+        exit.setFont(SettingsService.GenerateFont());
         JButton addFilm = new JButton("Dodaj film");
+        addFilm.setFont(SettingsService.GenerateFont());
 
         addFilm.addActionListener(new ActionListener() {
             @Override
@@ -62,11 +71,21 @@ public class FilmCategoryView extends JPanel implements KeyListener {
                 filmCategoryListView.requestFocus();
             }
         });
+        JLabel addFilmLabel = new JLabel("Wybierz film:");
+        addFilmLabel.setFont(SettingsService.GenerateFont());
+        this.add(addFilmLabel);
 
-        this.add(new JLabel("Wybierz kategorię filmu:"));
-        this.add(new JLabel(""));
+
+        SimpleGridPanel simpleGridPanel = new SimpleGridPanel();
+        JScrollPane jScrollPane = new JScrollPane(simpleGridPanel);
+        jScrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        this.add(jScrollPane,BorderLayout.CENTER);
+
+        filmList = filmList.stream().sorted(Comparator.comparing(Film::getTitle)).collect(Collectors.toList());
+
         for(Film film:filmList) {
             JButton temp = new JButton(film.getTitle());
+            temp.setFont(SettingsService.GenerateFont());
             temp.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -79,11 +98,14 @@ public class FilmCategoryView extends JPanel implements KeyListener {
                     filmView.requestFocus();
                 }
             });
-            this.add(temp);
+            simpleGridPanel.add(temp);
         }
-        this.add(new JLabel(""));
-        this.add(addFilm);
-        this.add(exit);
+        JPanel jPanelAddExit = new JPanel(new BorderLayout());
+        jPanelAddExit.add(addFilm,BorderLayout.LINE_START);
+        addFilm.setBorder(new EmptyBorder(30, 30, 30, 30));
+        exit.setBorder(new EmptyBorder(30, 30, 30, 30));
+        jPanelAddExit.add(exit,BorderLayout.LINE_END);
+        this.add(jPanelAddExit,BorderLayout.SOUTH);
     }
 
     @Override
