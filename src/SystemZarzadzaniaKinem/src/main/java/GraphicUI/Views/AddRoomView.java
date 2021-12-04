@@ -21,7 +21,7 @@ public class AddRoomView extends JPanel implements KeyListener {
         this.user = user;
         this.cinema = cinema;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,2));//TODO
+        this.setLayout(new BorderLayout());//TODO ing
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);

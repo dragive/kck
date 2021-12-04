@@ -27,7 +27,7 @@ public class FilmView extends JPanel implements KeyListener {
         this.film = film;
         this.previousWindow = previousWindow;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(1,1));//TODO
+        this.setLayout(new GridLayout(1,1));
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -132,7 +132,7 @@ public class FilmView extends JPanel implements KeyListener {
 
         ScrollPane scrollPane = new ScrollPane();
         centered.add(scrollPane);
-        JTextArea descOfTheFilm =new JTextArea("dupa \ndupa2 \n");
+        JTextArea descOfTheFilm =new JTextArea("dupa \ndupa2 \n");// FIXME
         descOfTheFilm.setEditable(false);
         descOfTheFilm.setFont(SettingsService.GenerateFont());
         scrollPane.add(descOfTheFilm);

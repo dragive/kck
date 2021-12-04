@@ -4,6 +4,7 @@ import Back.Controllers.FilmCategoryController;
 import Back.Models.FilmCategory;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +19,7 @@ public class AddFilmCategoryView extends JPanel implements KeyListener {
         this.user = user;
         MenuPanel.bottomPanel = this;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,2));//TODO
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -66,11 +67,30 @@ public class AddFilmCategoryView extends JPanel implements KeyListener {
             }
         });
 
-        this.add(new JLabel("Nazwa kategorii"));
-        this.add(name);
+        JPanel upper = new JPanel(new GridLayout(1,2));
+        upper.setBorder(SettingsService.Border());
+        JLabel categoryname =  new JLabel("Nazwa kategorii");
+        categoryname.setFont(SettingsService.GenerateFont());
+        name.setFont(SettingsService.GenerateFont());
+        upper.add(categoryname);
+        upper.add(name);
 
-        this.add(accept);
-        this.add(exit);
+        this.add(upper,BorderLayout.NORTH);
+
+
+        JPanel lower = new JPanel(new BorderLayout());
+
+        this.add(lower,BorderLayout.SOUTH);
+
+        lower.add(accept,BorderLayout.EAST);
+        lower.add(exit,BorderLayout.WEST);
+
+        accept.setFont(SettingsService.GenerateFont());
+        accept.setBorder(SettingsService.Border());
+
+        exit.setFont(SettingsService.GenerateFont());
+        exit.setBorder(SettingsService.Border());
+
     }
 
     @Override

@@ -3,6 +3,7 @@ import Back.Controllers.CinemaController;
 import Back.Models.Cinema;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +17,7 @@ public class AddCinemaView extends JPanel implements KeyListener {
         this.user = user;
         MenuPanel.bottomPanel = this;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,2));//TODO
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -29,7 +30,7 @@ public class AddCinemaView extends JPanel implements KeyListener {
         });
         Cinema cinema = new Cinema();
         JTextField name = new JTextField();
-        JTextField desc = new JTextField();
+        JTextArea desc = new JTextArea();
         JButton accept = new JButton("Zaakceptuj");
         JButton exit = new JButton("Wstecz");
 
@@ -65,14 +66,36 @@ public class AddCinemaView extends JPanel implements KeyListener {
             }
         });
 
-        this.add(new JLabel("Nazwa"));
-        this.add(name);
-        this.add(new JLabel("Opis"));
-        this.add(desc);
-        this.add(new JLabel(""));
-        this.add(accept);
-        this.add(new JLabel(""));
-        this.add(exit);
+        JPanel upper = new JPanel(new GridLayout(0,2));
+
+        JPanel center = new JPanel(new GridLayout(0,2));
+
+        JPanel footer = new JPanel(new BorderLayout());
+
+        this.add(upper,BorderLayout.NORTH);
+        this.add(center,BorderLayout.CENTER);
+        this.add(footer,BorderLayout.SOUTH);
+        JLabel nameLabel = new JLabel("Nazwa");
+        upper.add(nameLabel);
+        nameLabel.setFont(SettingsService.GenerateFont());
+        upper.add(name);
+        name.setFont(SettingsService.GenerateFont());
+
+        JLabel descLabel = new JLabel("Opis");
+        descLabel.setVerticalAlignment(JLabel.NORTH);
+        center.add(descLabel);
+        desc.setFont(SettingsService.GenerateFont());
+        center.add(desc);
+        descLabel.setFont(SettingsService.GenerateFont());
+
+
+        footer.add(accept,BorderLayout.WEST);
+        accept.setFont(SettingsService.GenerateFont());
+        accept.setBorder(SettingsService.Border());
+
+        footer.add(exit,BorderLayout.EAST);
+        exit.setFont(SettingsService.GenerateFont());
+        exit.setBorder(SettingsService.Border());
 
     }
 

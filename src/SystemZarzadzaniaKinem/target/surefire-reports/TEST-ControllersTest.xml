@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="33" failures="0" name="ControllersTest" time="0.89" errors="0" skipped="0">
+  <properties>
+    <property name="idea.version" value="2021.2.3"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="java.vm.version" value="17+35-2724"/>
+    <property name="sun.boot.library.path" value="C:\Users\fende\.jdks\openjdk-17\bin"/>
+    <property name="maven.multiModuleProjectDirectory" value="E:\!Studia\!SEMV\KCK\kck\src\SystemZarzadzaniaKinem"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="path.separator" value=";"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="PL"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="E:\!Studia\!SEMV\KCK\kck\src\SystemZarzadzaniaKinem"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="java.runtime.version" value="17+35-2724"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\fende\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="maven.ext.class.path" value="E:\Program Files (x86)\IntelliJ IDEA Community Edition 2021.2.3\plugins\maven\lib\maven-event-listener.jar"/>
+    <property name="classworlds.conf" value="E:\Program Files (x86)\IntelliJ IDEA Community Edition 2021.2.3\plugins\maven\lib\maven3\bin\m2.conf"/>
+    <property name="sun.jnu.encoding" value="Cp1250"/>
+    <property name="java.library.path" value="C:\Users\fende\.jdks\openjdk-17\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;E:\Program Files (x86)\Python 3.10.0 (64-bit)\Scripts\;E:\Program Files (x86)\Python 3.10.0 (64-bit)\;E:\Program Files (x86)\VMWare Workstation Player\bin\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;E:\Program Files\Scripts\;E:\Program Files\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\Program Files\Inkscape\bin;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\dotnet\;E:\Program Files (x86)\Gpg4win\..\GnuPG\bin;E:\Program Files\Git\cmd;C:\Users\fende\AppData\Local\Microsoft\WindowsApps;E:\Program Files (x86)\Microsoft VS Code\bin;E:\Program Files (x86)\IntelliJ IDEA Community Edition 2021.2.3\bin;;E:\Program Files\Julia-1.6.0\bin;C:\Users\fende\.dotnet\tools;E:\Program Files (x86)\PyCharm Community Edition 2021.2\bin;;."/>
+    <property name="maven.conf" value="E:\Program Files (x86)\IntelliJ IDEA Community Edition 2021.2.3\plugins\maven\lib\maven3/conf"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="java.class.version" value="61.0"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.0"/>
+    <property name="user.home" value="C:\Users\fende"/>
+    <property name="user.timezone" value="Europe/Warsaw"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="17"/>
+    <property name="user.name" value="fende"/>
+    <property name="java.class.path" value="E:\Program Files (x86)\IntelliJ IDEA Community Edition 2021.2.3\plugins\maven\lib\maven3\boot\plexus-classworlds-2.6.0.jar;E:\Program Files (x86)\IntelliJ IDEA Community Edition 2021.2.3\plugins\maven\lib\maven3\boot\plexus-classworlds.license"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version=2021.2.3 package"/>
+    <property name="java.home" value="C:\Users\fende\.jdks\openjdk-17"/>
+    <property name="user.language" value="pl"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.version" value="17"/>
+    <property name="native.encoding" value="Cp1250"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="E:\Program Files (x86)\IntelliJ IDEA Community Edition 2021.2.3\plugins\maven\lib\maven3"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.version.date" value="2021-09-14"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase classname="ControllersTest" name="UserBasicOperationsWriteDeleteReadTest" time="0.37"/>
+  <testcase classname="ControllersTest" name="SeansBasicOperationsWriteCreateReadTest" time="0.026"/>
+  <testcase classname="ControllersTest" name="RoomBasicOperationsWriteDeleteReadTest" time="0.025"/>
+  <testcase classname="ControllersTest" name="SeatBasicOperationsWriteDeleteReadTest" time="0.025"/>
+  <testcase classname="ControllersTest" name="CinemaBasicOperationsWriteUpdateReadTest" time="0.022"/>
+  <testcase classname="ControllersTest" name="CinemaBasicOperationsWriteCreateReadTest" time="0.019"/>
+  <testcase classname="ControllersTest" name="FilmBasicOperationsWriteAndReadTest" time="0.015"/>
+  <testcase classname="ControllersTest" name="ReservationBasicOperationsWriteDeleteReadTest" time="0.024"/>
+  <testcase classname="ControllersTest" name="FilmCategoryBasicOperationsWriteDeleteReadTest" time="0.024"/>
+  <testcase classname="ControllersTest" name="CinemaBasicOperationsWriteAndReadTest" time="0.008"/>
+  <testcase classname="ControllersTest" name="SeansBasicOperationsWriteDeleteReadTest" time="0.02"/>
+  <testcase classname="ControllersTest" name="FilmBasicOperationsWriteUpdateReadTest" time="0.021"/>
+  <testcase classname="ControllersTest" name="FilmBasicOperationsWriteCreateReadTest" time="0.017"/>
+  <testcase classname="ControllersTest" name="ReservationBasicOperationsWriteAndReadTest" time="0.011"/>
+  <testcase classname="ControllersTest" name="PaymentBasicOperationsWriteAndReadTest" time="0.021"/>
+  <testcase classname="ControllersTest" name="CinemaBasicOperationsWriteDeleteReadTest" time="0.013"/>
+  <testcase classname="ControllersTest" name="PaymentBasicOperationsWriteUpdateReadTest" time="0.022"/>
+  <testcase classname="ControllersTest" name="PaymentBasicOperationsWriteCreateReadTest" time="0.016"/>
+  <testcase classname="ControllersTest" name="SeansBasicOperationsWriteAndReadTest" time="0.01"/>
+  <testcase classname="ControllersTest" name="FilmCategoryBasicOperationsWriteAndReadTest" time="0.009"/>
+  <testcase classname="ControllersTest" name="UserBasicOperationsWriteUpdateReadTest" time="0.02"/>
+  <testcase classname="ControllersTest" name="UserBasicOperationsWriteCreateReadTest" time="0.019"/>
+  <testcase classname="ControllersTest" name="FilmBasicOperationsWriteDeleteReadTest" time="0.014"/>
+  <testcase classname="ControllersTest" name="RoomBasicOperationsWriteUpdateReadTest" time="0.016"/>
+  <testcase classname="ControllersTest" name="SeatBasicOperationsWriteAndReadTest" time="0.008"/>
+  <testcase classname="ControllersTest" name="RoomBasicOperationsWriteCreateReadTest" time="0.012"/>
+  <testcase classname="ControllersTest" name="UserBasicOperationsWriteAndReadTest" time="0.008"/>
+  <testcase classname="ControllersTest" name="SeatBasicOperationsWriteCreateReadTest" time="0.017"/>
+  <testcase classname="ControllersTest" name="PaymentBasicOperationsWriteDeleteReadTest" time="0.011"/>
+  <testcase classname="ControllersTest" name="FilmCategoryBasicOperationsWriteUpdateReadTest" time="0.015"/>
+  <testcase classname="ControllersTest" name="ReservationBasicOperationsWriteCreateReadTest" time="0.013"/>
+  <testcase classname="ControllersTest" name="RoomBasicOperationsWriteAndReadTest" time="0.008"/>
+  <testcase classname="ControllersTest" name="FilmCategoryBasicOperationsWriteCreateReadTest" time="0.011"/>
+</testsuite>
