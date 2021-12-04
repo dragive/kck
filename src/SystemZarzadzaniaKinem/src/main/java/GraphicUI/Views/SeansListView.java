@@ -19,6 +19,7 @@ public class SeansListView extends JPanel implements KeyListener {
     User user;
     Room room;
     public SeansListView(User user, Room room) {
+        System.out.println("SeansListView");
         panel = this;
         MenuPanel.bottomPanel = this;
         this.user = user;

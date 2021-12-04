@@ -5,6 +5,7 @@ import Back.Models.Room;
 import Back.Models.Seat;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +22,7 @@ public class RoomView extends JPanel implements KeyListener {
         this.user = user;
         this.room = room;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,2));//TODO
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -37,6 +38,12 @@ public class RoomView extends JPanel implements KeyListener {
         JLabel name = new JLabel(room.getName());
         JLabel rows = new JLabel(String.valueOf(seatList.get(seatList.size()-1).getRow()));
         JLabel howManySeats = new JLabel(String.valueOf(seatList.size()));
+
+        name.setFont(SettingsService.GenerateFont());
+        rows.setFont(SettingsService.GenerateFont());
+        howManySeats.setFont(SettingsService.GenerateFont());
+
+
 
         JButton exit = new JButton("Wstecz");
         JButton seanses = new JButton("Seanse");
@@ -83,25 +90,48 @@ public class RoomView extends JPanel implements KeyListener {
             }
         });
 
-        this.add(new JLabel("Nazwa"));
-        this.add(name);
+        exit.setFont(SettingsService.GenerateFont());
+        seanses.setFont(SettingsService.GenerateFont());
+        remove.setFont(SettingsService.GenerateFont());
 
-        this.add(new JLabel("Liczba rzędów"));
-        this.add(rows);
+        exit.setBorder(SettingsService.Border());
+        seanses.setBorder(SettingsService.Border());
+        remove.setBorder(SettingsService.Border());
 
-        this.add(new JLabel("Liczba siedzeń"));
-        this.add(howManySeats);
+        JPanel upper = new JPanel(new GridLayout(0,2));
+        this.add(upper,BorderLayout.NORTH);
+
+        JPanel lower = new JPanel(new BorderLayout());
+        this.add(lower,BorderLayout.SOUTH);
+
+        JLabel nameL = new JLabel("Nazwa");
+        nameL.setFont(SettingsService.GenerateFont());
+        upper.add(nameL);
+        upper.add(name);
+
+        JLabel rowsL = new JLabel("Liczba rzędów");
+        rowsL.setFont(SettingsService.GenerateFont());
+        upper.add(rowsL);
+        upper.add(rows);
+
+        JLabel howManySeatsL =new JLabel("Liczba siedzeń");
+        howManySeatsL.setFont(SettingsService.GenerateFont());
+        upper.add(howManySeatsL);
+        upper.add(howManySeats);
+
+
+        JPanel lowerleft = new JPanel(new BorderLayout());
+        JPanel lowerright = new JPanel(new BorderLayout());
+        lower.add(lowerleft,BorderLayout.WEST);
+        lower.add(lowerright,BorderLayout.EAST);
 
         if(user.isPermission()) {
-            this.add(new JLabel(""));
-            this.add(remove);
+            lowerleft.add(remove,BorderLayout.EAST);
         }
 
-        this.add(new JLabel(""));
-        this.add(seanses);
+        lowerleft.add(seanses,BorderLayout.WEST);
 
-        this.add(new JLabel(""));
-        this.add(exit);
+        lowerright.add(exit);
     }
 
     @Override
