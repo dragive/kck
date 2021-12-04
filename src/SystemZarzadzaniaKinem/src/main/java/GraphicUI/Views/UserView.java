@@ -1,6 +1,7 @@
 package GraphicUI.Views;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
 
 
 import javax.swing.*;
@@ -14,6 +15,7 @@ public class UserView extends JPanel implements KeyListener {
     Object previousWindow;
     User panelUser;
     public UserView(User user,User panelUser, Object previousWindow) {
+        System.out.println("UserView");
         panel = this;
         this.previousWindow = previousWindow;
         this.user = user;
@@ -29,7 +31,7 @@ public class UserView extends JPanel implements KeyListener {
         }
 
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,2));
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -91,30 +93,57 @@ public class UserView extends JPanel implements KeyListener {
             }
         });
 
-        this.add(new JLabel("Nazwa użytkownika"));
-        this.add(name);
+        JPanel upper = new JPanel(new GridLayout(0,2));
+        this.add(upper,BorderLayout.NORTH);
 
-        this.add(new JLabel("Adres e-mail"));
-        this.add(email);
+        JLabel nameOfUser = new JLabel("Nazwa użytkownika");
+        nameOfUser.setFont(SettingsService.GenerateFont());
+        upper.add(nameOfUser);
+        upper.add(name);
 
-        this.add(new JLabel("Data założenia"));
-        this.add(date);
+        JLabel userEmail = new JLabel("Adres e-mail");
+        userEmail.setFont(SettingsService.GenerateFont());
+        upper.add(userEmail);
+        upper.add(email);
+
+        JLabel dateOfCreation = new JLabel("Data założenia");
+        dateOfCreation.setFont(SettingsService.GenerateFont());
+        upper.add(dateOfCreation);
+        upper.add(date);
+
+        name.setFont(SettingsService.GenerateFont());
+        email.setFont(SettingsService.GenerateFont());
+        date.setFont(SettingsService.GenerateFont());
+
 
         if(panelUser.isPermission()) {
-            this.add(new JLabel(""));
-            this.add(new JLabel("Pracownik"));
+            upper.add(new JLabel(""));
+            JLabel pracownik = new JLabel("Pracownik");
+            pracownik.setFont(SettingsService.GenerateFont());
+            upper.add(pracownik);
         }
 
-        this.add(new JLabel(""));
-        this.add(reservations);
 
-        this.add(new JLabel(""));
-        this.add(edit);
 
-        if(previousWindow.getClass().toString().contains("UserListView")) {
-            this.add(new JLabel(""));
-            this.add(exit);
-        }
+        JPanel lower = new JPanel(new BorderLayout());
+        this.add(lower,BorderLayout.SOUTH);
+
+        JPanel lowerLeft = new JPanel(new GridLayout(0,2));
+        lower.add(lowerLeft,BorderLayout.WEST);
+
+        JPanel lowerRight = new JPanel(new BorderLayout() );
+        lower.add(lowerRight,BorderLayout.NORTH);
+
+        lowerLeft.add(reservations);
+        lowerLeft.add(edit);
+
+        reservations.setFont(SettingsService.GenerateFont());
+        reservations.setBorder(SettingsService.Border());
+
+        edit.setFont(SettingsService.GenerateFont());
+        edit.setBorder(SettingsService.Border());
+
+
     }
 
     @Override

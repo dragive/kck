@@ -2,6 +2,7 @@ package GraphicUI.Views;
 import Back.Controllers.UsersController;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +20,7 @@ public class EditUserView extends JPanel implements KeyListener {
         this.user = user;
         this.panelUser = panelUser;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,2));
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -32,8 +33,10 @@ public class EditUserView extends JPanel implements KeyListener {
         });
 
         JTextField name = new JTextField();
+        name.setFont(SettingsService.GenerateFont());
         name.setText(panelUser.getName());
         JTextField email = new JTextField();
+        email.setFont(SettingsService.GenerateFont());
         email.setText(panelUser.getEmail());
 
         JButton delete = new JButton("Usuń konto");
@@ -96,26 +99,51 @@ public class EditUserView extends JPanel implements KeyListener {
                 userView.requestFocus();
             }
         });
+        JPanel upper = new JPanel(new GridLayout(0,2));
+        this.add(upper,BorderLayout.NORTH);
 
-        this.add(new JLabel("Nazwa użytkownika"));
-        this.add(name);
+        JPanel lower = new JPanel(new BorderLayout());
+        this.add(lower,BorderLayout.SOUTH);
 
-        this.add(new JLabel("Adres e-mail"));
-        this.add(email);
+
+
+        JLabel nameLabel = new JLabel("Nazwa użytkownika");
+        nameLabel.setFont(SettingsService.GenerateFont());
+        upper.add(nameLabel);
+        name.setFont(SettingsService.GenerateFont());
+        upper.add(name);
+
+        JLabel emialLabel = new JLabel("Adres e-mail");
+        emialLabel.setFont(SettingsService.GenerateFont());
+        upper.add(emialLabel);
+        upper.add(email);
 
         if(user.isPermission()) {
-            this.add(new JLabel("Pracownik"));
-            this.add(checkBox);
+            JLabel pracownik = new JLabel("Pracownik");
+            pracownik.setFont(SettingsService.GenerateFont());
+            upper.add(pracownik);
+            upper.add(checkBox);
         }
 
-        this.add(new JLabel(""));
-        this.add(accept);
+        JPanel lowerLeft = new JPanel(new BorderLayout());
+        lower.add(lowerLeft,BorderLayout.WEST);
 
-        this.add(new JLabel(""));
-        this.add(delete);
+        JPanel lowerRight = new JPanel(new BorderLayout());
+        lower.add(lowerRight,BorderLayout.EAST);
 
-        this.add(new JLabel(""));
-        this.add(exit);
+
+
+        lowerRight.add(accept,BorderLayout.WEST);
+        accept.setBorder(SettingsService.Border());
+        accept.setFont(SettingsService.GenerateFont());
+
+        lowerLeft.add(delete, BorderLayout.CENTER);
+        delete.setBorder(SettingsService.Border());
+        delete.setFont(SettingsService.GenerateFont());
+
+        lowerRight.add(exit,BorderLayout.EAST);
+        exit.setBorder(SettingsService.Border());
+        exit.setFont(SettingsService.GenerateFont());
     }
 
     @Override

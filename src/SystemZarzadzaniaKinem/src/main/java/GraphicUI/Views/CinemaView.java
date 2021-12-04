@@ -4,8 +4,10 @@ import Back.Controllers.CinemaController;
 import Back.Models.Cinema;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -18,7 +20,7 @@ public class CinemaView extends JPanel implements KeyListener {
         this.user = user;
 
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,2));
+        this.setLayout(new GridLayout(0,1));
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -31,11 +33,18 @@ public class CinemaView extends JPanel implements KeyListener {
         });
 
         JButton exit = new JButton("Wstecz");
+        exit.setFont(SettingsService.GenerateFont());
         JButton room = new JButton("Sale kinowe");
+        room.setFont(SettingsService.GenerateFont());
         JButton delete = new JButton("Usuń kino");
+        delete.setFont(SettingsService.GenerateFont());
         JButton reservation = new JButton("Zarezerwuj");
+        reservation.setFont(SettingsService.GenerateFont());
         JLabel name = new JLabel(cinema.getName());
-        JLabel desc = new JLabel(cinema.getDescription());
+        name.setFont(SettingsService.GenerateFont());
+        JTextArea desc = new JTextArea(cinema.getDescription());
+        desc.setEditable(false);
+        desc.setFont(SettingsService.GenerateFont());
 
         delete.addActionListener(new ActionListener() {
             @Override
@@ -88,30 +97,56 @@ public class CinemaView extends JPanel implements KeyListener {
             }
         });
 
-        this.add(new JLabel("Wybierz salę lub rezerwazję w tym kinie:"));
-        this.add(new JLabel(""));
+        JPanel main = new JPanel(new BorderLayout());
 
-        this.add(new JLabel(""));this.add(new JLabel(""));
+        JPanel labels = new JPanel(new GridLayout(0,1));
+        main.add(labels,BorderLayout.NORTH);
 
-        this.add(new JLabel("Nazwa kina:"));
-        this.add(name);
+        JPanel buttons = new JPanel(new BorderLayout());
+        main.add(buttons);
 
-        this.add(new JLabel("Opis kina:"));
-        this.add(desc);
+        this.add(main);
 
-        this.add(new JLabel(""));
-        this.add(room);
-        this.add(new JLabel(""));
-        this.add(reservation);
 
+        JLabel selectEverything = new JLabel("Wybierz salę lub rezerwazję w tym kinie:");
+        selectEverything.setFont(SettingsService.GenerateFont());
+        labels.add(selectEverything);
+
+
+        JPanel nameP = new JPanel(new GridLayout(0,2));
+        JLabel nameOfCinemaL = new JLabel("Nazwa kina:");
+        nameOfCinemaL.setFont(SettingsService.GenerateFont());
+        nameP.add(nameOfCinemaL);
+        nameP.add(name);
+        labels.add(nameP);
+
+        JPanel descP = new JPanel(new GridLayout(0,2));
+        JLabel descOfCinema = new JLabel("Opis kina:");
+        descOfCinema.setFont(SettingsService.GenerateFont());
+        descP.add(descOfCinema);
+        descP.add(new JScrollPane(desc));
+        labels.add(descP);
+
+
+        JPanel buttonsGrid = new JPanel(new GridLayout(0,2));
         if(user.isPermission()) {
-            this.add(new JLabel(""));
-            this.add(delete);
+            delete.setBorder(SettingsService.Border());
+            buttonsGrid.add(delete);
         }
+        else {
+            buttonsGrid.add(new JPanel());
+        }
+        buttonsGrid.add(room);
+        room.setBorder(SettingsService.Border());
+        
+        buttonsGrid.add(exit);
+        exit.setBorder(SettingsService.Border());
+
+        buttonsGrid.add(reservation);
+        reservation.setBorder(SettingsService.Border());
 
 
-        this.add(new JLabel(""));
-        this.add(exit);
+        buttons.add(buttonsGrid,BorderLayout.SOUTH);
     }
 
     @Override
@@ -121,18 +156,14 @@ public class CinemaView extends JPanel implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case 27:
-                JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
-                frame.remove(panel);
-                CinemaListView cinemaListView = new CinemaListView(user);
-                frame.add(cinemaListView, BorderLayout.CENTER);
-                frame.revalidate();
-                frame.repaint();
-                cinemaListView.requestFocus();
-                break;
-            default:
-                break;
+        if (e.getKeyCode() == 27) {
+            JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
+            frame.remove(panel);
+            CinemaListView cinemaListView = new CinemaListView(user);
+            frame.add(cinemaListView, BorderLayout.CENTER);
+            frame.revalidate();
+            frame.repaint();
+            cinemaListView.requestFocus();
         }
     }
 

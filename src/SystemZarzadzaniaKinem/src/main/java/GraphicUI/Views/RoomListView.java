@@ -4,11 +4,15 @@ import Back.Models.Cinema;
 import Back.Models.Room;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
+import GraphicUI.Views.MinorPanelsAndUtils.SimpleGridPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RoomListView extends JPanel implements KeyListener {
     JPanel panel;
@@ -20,7 +24,7 @@ public class RoomListView extends JPanel implements KeyListener {
         this.user = user;
         this.cinema = cinema;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,1));
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -33,7 +37,10 @@ public class RoomListView extends JPanel implements KeyListener {
         });
 
         JButton addRoom = new JButton("Dodaj salę kinową");
+        addRoom.setFont(SettingsService.GenerateFont());
+
         JButton exit = new JButton("Wstecz");
+        exit.setFont(SettingsService.GenerateFont());
 
         addRoom.addActionListener(new ActionListener() {
             @Override
@@ -61,9 +68,22 @@ public class RoomListView extends JPanel implements KeyListener {
         });
         RoomsController roomsController = new RoomsController();
         List<Room> roomList = roomsController.getByCinemaId(cinema.getId());
+
+        roomList = roomList.stream().sorted(Comparator.comparing(Room::getName)).collect(Collectors.toList());
+
+//        SimpleGridPanel simpleGridPanel = new SimpleGridPanel();
+//        JScrollPane jScrollPane = new JScrollPane(simpleGridPanel);
+//        jScrollPane.getVerticalScrollBar().setUnitIncrement(16);
+//        this.add(jScrollPane,BorderLayout.CENTER);
+
+        JPanel tempp = new JPanel(new GridLayout(0,1));
+        this.add(tempp,BorderLayout.NORTH);
+
         for(Room room: roomList)
         {
             JButton temp = new JButton(room.getName());
+            temp.setFont(SettingsService.GenerateFont());
+            temp.setBorder(SettingsService.Border());
             temp.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -76,14 +96,19 @@ public class RoomListView extends JPanel implements KeyListener {
                     roomView.requestFocus();
                 }
             });
-            this.add(temp);
+
+            tempp.add(temp);
+
         }
 
-        this.add(new JLabel(""));
+        JPanel footer = new JPanel(new BorderLayout());
+        this.add(footer,BorderLayout.SOUTH);
         if(user.isPermission()) {
-            this.add(addRoom);
+            addRoom.setBorder(SettingsService.Border());
+            footer.add(addRoom,BorderLayout.EAST);
         }
-        this.add(exit);
+        footer.add(exit,BorderLayout.WEST);
+        exit.setBorder(SettingsService.Border());
     }
 
     @Override

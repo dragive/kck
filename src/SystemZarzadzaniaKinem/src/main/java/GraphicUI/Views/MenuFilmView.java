@@ -4,11 +4,16 @@ import Back.Controllers.FilmController;
 import Back.Models.Film;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
+import GraphicUI.Views.MinorPanelsAndUtils.SimpleGridPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class MenuFilmView extends JPanel implements KeyListener {
     JPanel panel;
@@ -19,7 +24,7 @@ public class MenuFilmView extends JPanel implements KeyListener {
         this.user = user;
 
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,1));
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -30,13 +35,25 @@ public class MenuFilmView extends JPanel implements KeyListener {
                 requestFocus();
             }
         });
-
-        this.add(new JLabel("Wybierz film z listy:"));
+        JLabel mainLabel = new JLabel("Wybierz film z listy:");
+        mainLabel.setFont(SettingsService.GenerateFont());
+        mainLabel.setBorder(SettingsService.Border());
+        this.add(mainLabel,BorderLayout.NORTH);
 
         FilmController filmController = new FilmController();
         List<Film> filmList = filmController.getAll();
+
+        filmList = filmList.stream().sorted(Comparator.comparing(Film::getTitle)).collect(Collectors.toList());
+
+        SimpleGridPanel simpleGridPanel = new SimpleGridPanel();
+        JScrollPane jScrollPane = new JScrollPane(simpleGridPanel);
+        jScrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        this.add(jScrollPane,BorderLayout.CENTER);
+
+
         for(Film film:filmList) {
             JButton temp = new JButton(film.getTitle());
+            temp.setFont(SettingsService.GenerateFont());
             temp.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -49,7 +66,7 @@ public class MenuFilmView extends JPanel implements KeyListener {
                     menuView.requestFocus();
                 }
             });
-            this.add(temp);
+            simpleGridPanel.add(temp);
         }
     }
 
