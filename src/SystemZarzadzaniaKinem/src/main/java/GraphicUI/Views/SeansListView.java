@@ -7,6 +7,8 @@ import Back.Models.Room;
 import Back.Models.Seans;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
+import GraphicUI.Views.MinorPanelsAndUtils.SimpleGridPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +27,7 @@ public class SeansListView extends JPanel implements KeyListener {
         this.user = user;
         this.room = room;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,1));//TODO
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -43,6 +45,12 @@ public class SeansListView extends JPanel implements KeyListener {
 
         JButton addSeans = new JButton("Dodaj seans");
         JButton exit = new JButton("Wstecz");
+
+        addSeans.setFont(SettingsService.GenerateFont());
+        exit.setFont(SettingsService.GenerateFont());
+
+        addSeans.setBorder(SettingsService.Border());
+        exit.setBorder(SettingsService.Border());
 
         addSeans.addActionListener(new ActionListener() {
             @Override
@@ -69,29 +77,43 @@ public class SeansListView extends JPanel implements KeyListener {
             }
         });
 
+
+        SimpleGridPanel simpleGridPanel = new SimpleGridPanel();
+        JScrollPane jScrollPane = new JScrollPane(simpleGridPanel);
+        jScrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        this.add(jScrollPane,BorderLayout.CENTER);
+
+
         for(Seans item: seansList) {
-            JButton temp = new JButton(filmController.getById(item.getFilmId()).getTitle() + " " +simpleDateFormat.format(item.getDate()));
-            temp.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
-                    frame.remove(panel);
-                    SeansView seansView = new SeansView(user, item);
-                    frame.add(seansView, BorderLayout.CENTER);
-                    frame.revalidate();
-                    frame.repaint();
-                    seansView.requestFocus();
-                }
-            });
-            this.add(temp);
+//            for(int i =5;i<100;i++)
+            {
+                JButton temp = new JButton(filmController.getById(item.getFilmId()).getTitle() + " " + simpleDateFormat.format(item.getDate()));
+                temp.setFont(SettingsService.GenerateFont());
+                temp.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
+                        frame.remove(panel);
+                        SeansView seansView = new SeansView(user, item);
+                        frame.add(seansView, BorderLayout.CENTER);
+                        frame.revalidate();
+                        frame.repaint();
+                        seansView.requestFocus();
+                    }
+                });
+                simpleGridPanel.add(temp);
+            }
         }
+
+        JPanel footer = new JPanel(new BorderLayout());
+        this.add(footer,BorderLayout.SOUTH);
 
         if(user.isPermission())
         {
-            this.add(addSeans);
+            footer.add(addSeans,BorderLayout.WEST);
         }
 
-        this.add(exit);
+        footer.add(exit,BorderLayout.EAST);
     }
 
     @Override
