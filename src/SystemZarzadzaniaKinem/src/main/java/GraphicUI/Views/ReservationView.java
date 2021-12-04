@@ -17,12 +17,13 @@ public class ReservationView extends JPanel implements KeyListener {
     User user;
     User panelUser;
     public ReservationView(User user, User panelUser, Reservation reservation) {
+        System.out.println("RezervationView");
         panel = this;
         MenuPanel.bottomPanel = this;
         this.user = user;
 
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,2));//TODO
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);

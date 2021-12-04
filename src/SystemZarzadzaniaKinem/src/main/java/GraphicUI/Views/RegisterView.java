@@ -3,6 +3,7 @@ package GraphicUI.Views;
 import Back.Controllers.UsersController;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +15,7 @@ public class RegisterView extends JPanel implements KeyListener {
     public RegisterView() {
         panel = this;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,2));//TODO
+        this.setLayout(new GridLayout(0,2));
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -60,16 +61,32 @@ public class RegisterView extends JPanel implements KeyListener {
             }
         });
 
-        this.add(new JLabel("Czesio's Cinema Manager"));
-        this.add(new JLabel(""));
-        this.add(new JLabel("Login: "));
+        JLabel title = new JLabel("Czesio's Cinema Manager");
+        JLabel empty = new JLabel("");
+        JLabel loginL = new JLabel("Login: ");
+        JLabel emailL = new JLabel("Email: ");
+        JLabel passwordL = new JLabel("Hasło: ");
+        this.add(title);
+        this.add(empty);
+        this.add(loginL);
         this.add(login);
-        this.add(new JLabel("Email: "));
+        this.add(emailL);
         this.add(email);
-        this.add(new JLabel("Hasło: "));
+        this.add(passwordL);
         this.add(password);
         this.add(exit);
         this.add(signUp);
+
+        title.setFont(SettingsService.GenerateFont());
+        empty.setFont(SettingsService.GenerateFont());
+        loginL.setFont(SettingsService.GenerateFont());
+        login.setFont(SettingsService.GenerateFont());
+        emailL.setFont(SettingsService.GenerateFont());
+        email.setFont(SettingsService.GenerateFont());
+        passwordL.setFont(SettingsService.GenerateFont());
+        password.setFont(SettingsService.GenerateFont());
+        exit.setFont(SettingsService.GenerateFont());
+        signUp.setFont(SettingsService.GenerateFont());
     }
 
     @Override

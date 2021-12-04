@@ -2,6 +2,7 @@ package GraphicUI.Views;
 
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +14,7 @@ public class CreditsView extends JPanel implements KeyListener {
         panel = this;
         MenuPanel.bottomPanel = this;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,1));//TODO
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -25,10 +26,28 @@ public class CreditsView extends JPanel implements KeyListener {
             }
         });
 
-        this.add(new JLabel("Autorzy Projektu:"));
-        this.add(new JLabel("Maciek Fender"));
-        this.add(new JLabel("Kacper Chrost"));
-        this.add(new JLabel("Krzysztof Funkowski"));
+        JPanel panel = new JPanel(new GridLayout(0,1));
+        this.add(panel,BorderLayout.NORTH);
+
+        JLabel title = new JLabel("Autorzy Projektu:");
+        JLabel empty = new JLabel("");
+        JLabel mf = new JLabel("Maciek Fender");
+        JLabel kc = new JLabel("Kacper Chrost");
+        JLabel kf = new JLabel("Krzysztof Funkowski");
+
+        title.setFont(SettingsService.GenerateFont());
+        empty.setFont(SettingsService.GenerateFont());
+        mf.setFont(SettingsService.GenerateFont());
+        kf.setFont(SettingsService.GenerateFont());
+        kc.setFont(SettingsService.GenerateFont());
+
+
+        panel.add(title);
+        panel.add(empty);
+        panel.add(mf);
+        panel.add(kf);
+        panel.add(kc);
+        panel.setBorder(SettingsService.Border());
     }
 
     @Override

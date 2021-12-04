@@ -20,7 +20,7 @@ public class CinemaView extends JPanel implements KeyListener {
         this.user = user;
 
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,1));//TODO
+        this.setLayout(new GridLayout(0,1));
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
