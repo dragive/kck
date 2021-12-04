@@ -66,8 +66,7 @@ public class CinemaListView extends JPanel implements KeyListener {
         cinemas = cinemas.stream().sorted(Comparator.comparing(Cinema::getName)).collect(Collectors.toList());
 
         for(Cinema cinema: cinemas) {
-            for(int i = 0; i<100; i++){
-                JButton temp = new JButton(cinema.getName()+ i);
+                JButton temp = new JButton(cinema.getName());
                 temp.setBorder(new EmptyBorder(30, 30, 30, 30));
                 temp.setFont(SettingsService.GenerateFont());
                 temp.addActionListener(new ActionListener() {
@@ -83,7 +82,6 @@ public class CinemaListView extends JPanel implements KeyListener {
                     }
                 });
                 simpleGridPanel.add(temp);
-            }
         }
 
         addCinema.setFont(SettingsService.GenerateFont());

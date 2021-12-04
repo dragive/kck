@@ -127,13 +127,15 @@ public class FilmView extends JPanel implements KeyListener {
 
         JLabel filmdesc = new JLabel("Opis");
         filmdesc.setFont(SettingsService.GenerateFont());
+        filmdesc.setVerticalAlignment(JLabel.NORTH);
         centered.add(filmdesc);
 
         ScrollPane scrollPane = new ScrollPane();
         centered.add(scrollPane);
-        JLabel descofthefilm =new JLabel("<html>"+film.getDescription()+"</html>");
-        descofthefilm.setFont(SettingsService.GenerateFont());
-        scrollPane.add(descofthefilm);
+        JTextArea descOfTheFilm =new JTextArea("dupa \ndupa2 \n");
+        descOfTheFilm.setEditable(false);
+        descOfTheFilm.setFont(SettingsService.GenerateFont());
+        scrollPane.add(descOfTheFilm);
 
 
         JPanel lower = new JPanel(new BorderLayout());
