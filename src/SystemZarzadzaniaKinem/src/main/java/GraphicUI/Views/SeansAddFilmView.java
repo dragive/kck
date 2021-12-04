@@ -5,6 +5,8 @@ import Back.Models.Film;
 import Back.Models.Seans;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
+import GraphicUI.Views.MinorPanelsAndUtils.SimpleGridPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +23,7 @@ public class SeansAddFilmView extends JPanel implements KeyListener {
         this.user = user;
         this.seans = seans;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,1));//TODO
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -36,6 +38,8 @@ public class SeansAddFilmView extends JPanel implements KeyListener {
         List<Film> filmList = filmController.getAll();
 
         JButton exit = new JButton("Wstecz");
+        exit.setBorder(SettingsService.Border());
+        exit.setFont(SettingsService.GenerateFont());
 
         exit.addActionListener(new ActionListener() {
             @Override
@@ -51,6 +55,12 @@ public class SeansAddFilmView extends JPanel implements KeyListener {
             }
         });
 
+        SimpleGridPanel simpleGridPanel = new SimpleGridPanel();
+        JScrollPane jScrollPane = new JScrollPane(simpleGridPanel);
+        jScrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        this.add(jScrollPane,BorderLayout.CENTER);
+
+
         for(Film film: filmList) {
             JButton temp = new JButton(film.getTitle());
             temp.addActionListener(new ActionListener() {
@@ -65,12 +75,12 @@ public class SeansAddFilmView extends JPanel implements KeyListener {
                     seansView.requestFocus();
                 }
             });
-            this.add(temp);
+            simpleGridPanel.add(temp);
         }
+        JPanel footer = new JPanel(new BorderLayout());
+        this.add(footer,BorderLayout.SOUTH);
 
-        this.add(new JLabel(""));
-
-        this.add(exit);
+        footer.add(exit,BorderLayout.EAST);
     }
 
     @Override

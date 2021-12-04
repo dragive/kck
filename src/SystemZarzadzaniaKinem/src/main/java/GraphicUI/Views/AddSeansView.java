@@ -6,6 +6,7 @@ import Back.Models.Room;
 import Back.Models.Seans;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
 import lombok.SneakyThrows;
 
 import javax.swing.*;
@@ -24,10 +25,11 @@ public class AddSeansView extends JPanel implements KeyListener {
         this.room = room;
         Seans seans = new Seans();
         JTextField date = new JTextField();
-        JButton button = new JButton("Wybierz film");
+        date.setFont(SettingsService.GenerateFont());
+        JButton button = new JButton("Przejdź dalej");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,2));//TODO potem
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -70,14 +72,27 @@ public class AddSeansView extends JPanel implements KeyListener {
             }
         });
 
-        this.add(new JLabel("Data seansu (dd-mm-rrrr hh:mm)"));
-        this.add(date);
+        button.setFont(SettingsService.GenerateFont());
+        button.setBorder(SettingsService.Border());
 
-        this.add(new JLabel(""));
-        this.add(button);
+        exit.setFont(SettingsService.GenerateFont());
+        exit.setBorder(SettingsService.Border());
 
-        this.add(new JLabel(""));
-        this.add(exit);
+        JPanel upper = new JPanel(new GridLayout(0,2));
+        this.add(upper,BorderLayout.NORTH);
+
+        JPanel lower = new JPanel(new BorderLayout());
+        this.add(lower,BorderLayout.SOUTH);
+
+
+        JLabel dateL = new JLabel("Data seansu (dd-mm-rrrr hh:mm)");
+        dateL.setFont(SettingsService.GenerateFont());
+        upper.add(dateL);
+        upper.add(date);
+
+        lower.add(button,BorderLayout.EAST);
+
+        lower.add(exit,BorderLayout.WEST);
     }
 
     public AddSeansView(User user, Seans seans, Film film) {
@@ -90,7 +105,7 @@ public class AddSeansView extends JPanel implements KeyListener {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         date.setText(String.valueOf(simpleDateFormat.format(seans.getDate())));
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,2));
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -104,6 +119,15 @@ public class AddSeansView extends JPanel implements KeyListener {
 
         JButton exit = new JButton("Wstecz");
         JButton accept = new JButton("Zatwierdź");
+
+        button.setFont(SettingsService.GenerateFont());
+        button.setBorder(SettingsService.Border());
+
+        exit.setFont(SettingsService.GenerateFont());
+        exit.setBorder(SettingsService.Border());
+
+        accept.setFont(SettingsService.GenerateFont());
+        accept.setBorder(SettingsService.Border());
 
         accept.addActionListener(new ActionListener() {
             @SneakyThrows
@@ -154,14 +178,42 @@ public class AddSeansView extends JPanel implements KeyListener {
             }
         });
 
-        this.add(new JLabel("Data seansu (dd-mm-rrrr hh:mm)"));
-        this.add(date);
+//        this.add(new JLabel("Data seansu (dd-mm-rrrr hh:mm)"));
+//        this.add(date);
+//
+//        this.add(accept);
+//        this.add(button);
+//
+//        this.add(new JLabel(""));
+//        this.add(exit);
 
-        this.add(accept);
-        this.add(button);
 
-        this.add(new JLabel(""));
-        this.add(exit);
+        button.setFont(SettingsService.GenerateFont());
+        button.setBorder(SettingsService.Border());
+
+        exit.setFont(SettingsService.GenerateFont());
+        exit.setBorder(SettingsService.Border());
+
+        JPanel upper = new JPanel(new GridLayout(0,2));
+        this.add(upper,BorderLayout.NORTH);
+
+        JPanel lower = new JPanel(new BorderLayout());
+        this.add(lower,BorderLayout.SOUTH);
+
+
+        JLabel dateL = new JLabel("Data seansu (dd-mm-rrrr hh:mm)");
+        dateL.setFont(SettingsService.GenerateFont());
+        upper.add(dateL);
+        upper.add(date);
+        date.setFont(SettingsService.GenerateFont());
+
+        JPanel lowerEast = new JPanel(new BorderLayout());
+        lowerEast.add(exit,BorderLayout.WEST);
+        lowerEast.add(accept,BorderLayout.EAST);
+
+        lower.add(lowerEast,BorderLayout.EAST);
+
+        lower.add(button,BorderLayout.WEST);
     }
 
     @Override

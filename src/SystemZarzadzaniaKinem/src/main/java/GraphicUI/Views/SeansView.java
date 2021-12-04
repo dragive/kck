@@ -5,6 +5,7 @@ import Back.Controllers.SeansController;
 import Back.Models.Seans;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +22,7 @@ public class SeansView extends JPanel implements KeyListener {
         this.user = user;
         this.seans = seans;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,2)); //TODO
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -36,9 +37,16 @@ public class SeansView extends JPanel implements KeyListener {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
         JButton exit = new JButton("Wstecz");
         JButton remove = new JButton("Usuń");
+
+        exit.setFont(SettingsService.GenerateFont());
+        remove.setFont(SettingsService.GenerateFont());
+
         JLabel date = new JLabel(simpleDateFormat.format(seans.getDate()));
         FilmController filmController = new FilmController();
         JLabel film = new JLabel(filmController.getById(seans.getFilmId()).getTitle());
+
+        date.setFont(SettingsService.GenerateFont());
+        film.setFont(SettingsService.GenerateFont());
 
         remove.addActionListener(new ActionListener() {
             @Override
@@ -70,19 +78,30 @@ public class SeansView extends JPanel implements KeyListener {
             }
         });
 
-        this.add(new JLabel("Data seansu (dd-mm-rrrr hh:mm)"));
-        this.add(date);
+        JPanel upper = new JPanel(new GridLayout(0,2));
+        this.add(upper,BorderLayout.NORTH);
 
-        this.add(new JLabel("Tytuł filmu"));
-        this.add(film);
+        JPanel lower = new JPanel(new BorderLayout());
+        this.add(lower,BorderLayout.SOUTH);
+
+
+        JLabel dateL = new JLabel("Data seansu (dd-mm-rrrr hh:mm)");
+        dateL.setFont(SettingsService.GenerateFont());
+        upper.add(dateL);
+        upper.add(date);
+
+        JLabel filmL = new JLabel("Tytuł filmu");
+        filmL.setFont(SettingsService.GenerateFont());
+        upper.add(filmL);
+        upper.add(film);
 
         if(user.isPermission()) {
-            this.add(new JLabel(""));
-            this.add(remove);
+            lower.add(remove,BorderLayout.WEST);
         }
 
-        this.add(new JLabel(""));
-        this.add(exit);
+remove.setBorder(SettingsService.Border());
+        exit.setBorder(SettingsService.Border());
+        lower.add(exit,BorderLayout.EAST);
     }
 
     @Override
