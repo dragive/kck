@@ -2,6 +2,8 @@ package GraphicUI.Views;
 import Back.Controllers.UsersController;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +19,7 @@ public class AddUserView extends JPanel implements KeyListener {
         this.user = user;
 
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,2));//TODO
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -29,6 +31,7 @@ public class AddUserView extends JPanel implements KeyListener {
             }
         });
 
+
         JButton accept = new JButton("Akceptuj");
         JButton exit = new JButton("Wstecz");
         JTextField name = new JTextField();
@@ -36,6 +39,24 @@ public class AddUserView extends JPanel implements KeyListener {
         JTextField email = new JTextField();
         JCheckBox checkBox = new JCheckBox();
         checkBox.setSelected(false);
+
+        accept.setFont(SettingsService.GenerateFont());
+        accept.setBorder(SettingsService.Border());
+
+        exit.setFont(SettingsService.GenerateFont());
+        exit.setBorder(SettingsService.Border());
+
+        name.setFont(SettingsService.GenerateFont());
+        name.setBorder(SettingsService.Border());
+
+        password.setFont(SettingsService.GenerateFont());
+        password.setBorder(SettingsService.Border());
+
+        email.setFont(SettingsService.GenerateFont());
+        email.setBorder(SettingsService.Border());
+
+        checkBox.setFont(SettingsService.GenerateFont());
+        checkBox.setBorder(SettingsService.Border());
 
         accept.addActionListener(new ActionListener() {
             @Override
@@ -71,23 +92,44 @@ public class AddUserView extends JPanel implements KeyListener {
             }
         });
 
-        this.add(new JLabel("Nazwa użytkownika"));
-        this.add(name);
 
-        this.add(new JLabel("E-mail"));
-        this.add(email);
+        JPanel upper = new JPanel(new GridLayout(0,2));
 
-        this.add(new JLabel("Hasło"));
-        this.add(password);
+        JPanel footer = new JPanel(new BorderLayout());
 
-        this.add(new JLabel("Pracownik"));
-        this.add(checkBox);
+        this.add(upper,BorderLayout.NORTH);
+        this.add(footer,BorderLayout.SOUTH);
 
-        this.add(new JLabel(""));
-        this.add(accept);
+        upper.setBorder(SettingsService.Border());
 
-        this.add(new JLabel(""));
-        this.add(exit);
+        JLabel nameofuser = new JLabel("Nazwa użytkownika");
+        nameofuser.setFont(SettingsService.GenerateFont());
+        name.setFont(SettingsService.GenerateFont());
+        upper.add(nameofuser);
+        upper.add(name);
+
+        JLabel emailL=  new JLabel("E-mail");
+        emailL.setFont(SettingsService.GenerateFont());
+        email.setFont(SettingsService.GenerateFont());
+        upper.add(emailL);
+        upper.add(email);
+
+        JLabel passwordL =new JLabel("Hasło");
+        upper.add(passwordL);
+        upper.add(password);
+        passwordL.setFont(SettingsService.GenerateFont());
+        password.setFont(SettingsService.GenerateFont());
+
+
+        JLabel pracownikL =new JLabel("Pracownik");
+        upper.add(pracownikL);
+        upper.add(checkBox);
+        pracownikL.setFont(SettingsService.GenerateFont());
+        checkBox.setFont(SettingsService.GenerateFont());
+
+
+        footer.add(accept,BorderLayout.EAST);
+        footer.add(exit,BorderLayout.WEST);
     }
 
     @Override

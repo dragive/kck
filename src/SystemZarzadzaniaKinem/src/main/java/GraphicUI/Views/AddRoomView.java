@@ -5,6 +5,7 @@ import Back.Models.Cinema;
 import Back.Models.Room;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
 import com.googlecode.lanterna.gui2.TextBox;
 
 import javax.swing.*;
@@ -21,7 +22,7 @@ public class AddRoomView extends JPanel implements KeyListener {
         this.user = user;
         this.cinema = cinema;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new BorderLayout());//TODO ing
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -68,20 +69,42 @@ public class AddRoomView extends JPanel implements KeyListener {
             }
         });
 
-        this.add(new JLabel("Nazwa"));
-        this.add(name);
+        JPanel upper = new JPanel(new GridLayout(0,2));
 
-        this.add(new JLabel("Liczba siedzeń w rzędzie"));
-        this.add(rows);
+        JPanel footer = new JPanel(new BorderLayout());
 
-        this.add(new JLabel("Liczba rzędów"));
-        this.add(cols);
+        this.add(upper,BorderLayout.NORTH);
+        this.add(footer,BorderLayout.SOUTH);
 
-        this.add(new JLabel(""));
-        this.add(button);
+        JLabel nameL = new JLabel("Nazwa");
+        nameL.setFont(SettingsService.GenerateFont());
+        name.setFont(SettingsService.GenerateFont());
+        upper.add(nameL);
 
-        this.add(new JLabel(""));
-        this.add(exit);
+        upper.add(name);
+
+
+        JLabel rowsL = new JLabel("Liczba siedzeń w rzędzie");
+        rowsL.setFont(SettingsService.GenerateFont());
+        upper.add(rowsL);
+        upper.add(rows);
+
+        rows.setFont(SettingsService.GenerateFont());
+
+        JLabel colsL = new JLabel("Liczba rzędów");
+        colsL.setFont(SettingsService.GenerateFont());
+        cols.setFont(SettingsService.GenerateFont());
+        upper.add(colsL);
+        upper.add(cols);
+
+        footer.add(button,BorderLayout.EAST);
+        footer.add(exit,BorderLayout.WEST);
+
+        button.setBorder(SettingsService.Border());
+        button.setFont(SettingsService.GenerateFont());
+
+        exit.setBorder(SettingsService.Border());
+        exit.setFont(SettingsService.GenerateFont());
     }
 
     @Override
