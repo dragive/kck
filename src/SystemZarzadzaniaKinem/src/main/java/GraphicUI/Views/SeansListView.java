@@ -24,7 +24,7 @@ public class SeansListView extends JPanel implements KeyListener {
         this.user = user;
         this.room = room;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,1));
+        this.setLayout(new GridLayout(0,1));//TODO
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);

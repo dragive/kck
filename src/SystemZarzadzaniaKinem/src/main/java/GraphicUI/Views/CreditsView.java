@@ -13,7 +13,7 @@ public class CreditsView extends JPanel implements KeyListener {
         panel = this;
         MenuPanel.bottomPanel = this;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,1));
+        this.setLayout(new GridLayout(0,1));//TODO
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);

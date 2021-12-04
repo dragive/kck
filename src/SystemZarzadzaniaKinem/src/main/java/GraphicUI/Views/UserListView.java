@@ -16,7 +16,7 @@ public class UserListView extends JPanel implements KeyListener {
         MenuPanel.bottomPanel = this;
         this.user = user;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new FlowLayout());
+        this.setLayout(new FlowLayout()); //TODO
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);

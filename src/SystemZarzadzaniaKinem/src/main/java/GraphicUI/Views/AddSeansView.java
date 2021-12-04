@@ -27,7 +27,7 @@ public class AddSeansView extends JPanel implements KeyListener {
         JButton button = new JButton("Wybierz film");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,2));
+        this.setLayout(new GridLayout(0,2));//TODO
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);

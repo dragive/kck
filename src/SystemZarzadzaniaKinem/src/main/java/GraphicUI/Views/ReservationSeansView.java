@@ -41,7 +41,7 @@ public class ReservationSeansView extends JPanel implements KeyListener {
         List<Seat> seatList = seans.getSeatList();
         Integer rows = seatList.get(seatList.size()-1).getRow();
         Reservation reservation = new Reservation();
-        this.setLayout(new GridLayout(0,rows));
+        this.setLayout(new GridLayout(0,rows));//TODO
         JCheckBox checkBox = new JCheckBox();
         checkBox.setSelected(false);
         JButton exit = new JButton("Wstecz");

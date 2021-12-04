@@ -14,7 +14,7 @@ public class RegisterView extends JPanel implements KeyListener {
     public RegisterView() {
         panel = this;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,2));
+        this.setLayout(new GridLayout(0,2));//TODO
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
