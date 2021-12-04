@@ -129,9 +129,9 @@ public class RoomView extends JPanel implements KeyListener {
             lowerleft.add(remove,BorderLayout.EAST);
         }
 
-        lowerleft.add(seanses,BorderLayout.WEST);
+        lowerright.add(seanses,BorderLayout.EAST);
 
-        lowerright.add(exit);
+        lowerright.add(exit,BorderLayout.WEST);
     }
 
     @Override
