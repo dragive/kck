@@ -35,6 +35,8 @@ public class UserListView extends JPanel implements KeyListener {
         List<User> userList = usersController.getAll();
 
         JButton addUser = new JButton("Dodaj użytkownika");
+        addUser.setFont(SettingsService.GenerateFont());
+        addUser.setBorder(BorderFactory.createEmptyBorder(0,0,10,0));
 
         addUser.addActionListener(new ActionListener() {
             @Override
@@ -59,6 +61,7 @@ public class UserListView extends JPanel implements KeyListener {
 
         for(User item : userList) {
             JButton temp = new JButton(item.getName());
+            temp.setFont(SettingsService.GenerateFont());
             temp.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

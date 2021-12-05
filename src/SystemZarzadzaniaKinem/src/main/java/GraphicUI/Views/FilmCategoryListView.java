@@ -55,6 +55,7 @@ public class FilmCategoryListView extends JPanel implements KeyListener {
             }
         });
         JLabel selectCategory =new JLabel("Wybierz kategorię filmu:");
+        selectCategory.setBorder(SettingsService.Border());
         selectCategory.setFont(SettingsService.GenerateFont());
         this.add(selectCategory,BorderLayout.NORTH);
 

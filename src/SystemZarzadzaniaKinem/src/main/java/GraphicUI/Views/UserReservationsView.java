@@ -6,6 +6,8 @@ import Back.Models.Reservation;
 import Back.Models.Seans;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
+import GraphicUI.Views.MinorPanelsAndUtils.SimpleGridPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,12 +20,13 @@ public class UserReservationsView extends JPanel implements KeyListener {
     User user;
     User panelUser;
     public UserReservationsView(User user,User panelUser) {
+        System.out.println("11UserReservationsViewUserReservationsView");
         panel = this;
         MenuPanel.bottomPanel = this;
         this.user = user;
         this.panelUser = panelUser;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new GridLayout(0,1)); //TODO
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -41,6 +44,12 @@ public class UserReservationsView extends JPanel implements KeyListener {
         FilmController filmController = new FilmController();
 
         JButton exit = new JButton("Wstecz");
+
+
+        SimpleGridPanel simpleGridPanel = new SimpleGridPanel();
+        JScrollPane jScrollPane = new JScrollPane(simpleGridPanel);
+        jScrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        this.add(jScrollPane,BorderLayout.CENTER);
 
         exit.addActionListener(new ActionListener() {
             @Override
@@ -74,7 +83,8 @@ public class UserReservationsView extends JPanel implements KeyListener {
                                 reservationView.requestFocus();
                             }
                         });
-                        this.add(temp);
+                        simpleGridPanel.add(temp);
+                        temp.setFont(SettingsService.GenerateFont());
                     }
                 }
                 else {
@@ -94,7 +104,8 @@ public class UserReservationsView extends JPanel implements KeyListener {
                                 reservationView.requestFocus();
                             }
                         });
-                        this.add(temp);
+                        simpleGridPanel.add(temp);
+                        temp.setFont(SettingsService.GenerateFont());
                     }
                 }
             }
@@ -115,11 +126,17 @@ public class UserReservationsView extends JPanel implements KeyListener {
                             reservationView.requestFocus();
                         }
                     });
-                    this.add(temp);
+                    simpleGridPanel.add(temp);
                 }
             }
         }
-        this.add(exit);
+        JPanel footer = new JPanel(new BorderLayout());
+        this.add(footer,BorderLayout.SOUTH);
+
+
+        footer.add(exit,BorderLayout.EAST);
+        exit.setBorder(SettingsService.Border());
+        exit.setFont(SettingsService.GenerateFont());
     }
 
     @Override
