@@ -73,7 +73,8 @@ public class FilmCategoryView extends JPanel implements KeyListener {
         });
         JLabel addFilmLabel = new JLabel("Wybierz film:");
         addFilmLabel.setFont(SettingsService.GenerateFont());
-        this.add(addFilmLabel);
+        addFilmLabel.setBorder(SettingsService.Border());
+        this.add(addFilmLabel,BorderLayout.NORTH);
 
 
         SimpleGridPanel simpleGridPanel = new SimpleGridPanel();
@@ -124,6 +125,18 @@ public class FilmCategoryView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 filmCategoryListView.requestFocus();
+                break;
+            case 122:
+                JFrame frame2 = (JFrame) SwingUtilities.windowForComponent(panel);
+                System.out.println(frame2.getExtendedState());
+                if(frame2.getExtendedState()==0) {
+                    frame2.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                    frame2.setVisible(true);
+                }
+                else {
+                    frame2.setExtendedState(JFrame.DO_NOTHING_ON_CLOSE);
+                    frame2.setVisible(true);
+                }
                 break;
             default:
                 break;

@@ -129,9 +129,9 @@ public class RoomView extends JPanel implements KeyListener {
             lowerleft.add(remove,BorderLayout.EAST);
         }
 
-        lowerright.add(seanses,BorderLayout.EAST);
+        lowerright.add(seanses,BorderLayout.WEST);
 
-        lowerright.add(exit,BorderLayout.WEST);
+        lowerright.add(exit,BorderLayout.EAST);
     }
 
     @Override
@@ -151,6 +151,18 @@ public class RoomView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 roomListView.requestFocus();
+                break;
+            case 122:
+                JFrame frame2 = (JFrame) SwingUtilities.windowForComponent(panel);
+                System.out.println(frame2.getExtendedState());
+                if(frame2.getExtendedState()==0) {
+                    frame2.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                    frame2.setVisible(true);
+                }
+                else {
+                    frame2.setExtendedState(JFrame.DO_NOTHING_ON_CLOSE);
+                    frame2.setVisible(true);
+                }
                 break;
             default:
                 break;

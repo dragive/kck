@@ -41,6 +41,8 @@ public class AddSeansView extends JPanel implements KeyListener {
             }
         });
 
+        JButton accept = new JButton("Zatwierdź");
+
         JButton exit = new JButton("Wstecz");
 
         button.addActionListener(new ActionListener() {
@@ -72,6 +74,10 @@ public class AddSeansView extends JPanel implements KeyListener {
             }
         });
 
+        accept.setFont(SettingsService.GenerateFont());
+        accept.setBorder(SettingsService.Border());
+        accept.setEnabled(false);
+
         button.setFont(SettingsService.GenerateFont());
         button.setBorder(SettingsService.Border());
 
@@ -91,7 +97,7 @@ public class AddSeansView extends JPanel implements KeyListener {
         upper.add(date);
 
         lower.add(button,BorderLayout.EAST);
-
+        //lower.add(accept, BorderLayout.WEST);
         lower.add(exit,BorderLayout.WEST);
     }
 
@@ -232,6 +238,18 @@ public class AddSeansView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 seansListView.requestFocus();
+                break;
+            case 122:
+                JFrame frame2 = (JFrame) SwingUtilities.windowForComponent(panel);
+                System.out.println(frame2.getExtendedState());
+                if(frame2.getExtendedState()==0) {
+                    frame2.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                    frame2.setVisible(true);
+                }
+                else {
+                    frame2.setExtendedState(JFrame.DO_NOTHING_ON_CLOSE);
+                    frame2.setVisible(true);
+                }
                 break;
             default:
                 break;

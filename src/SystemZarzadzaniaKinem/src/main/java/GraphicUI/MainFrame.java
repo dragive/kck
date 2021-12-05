@@ -13,14 +13,15 @@ public class MainFrame extends JFrame implements KeyListener {
     public User user;
     public MainFrame() {
         this.setLayout(new BorderLayout(20,0));
-        this.setPreferredSize(new Dimension(720,445));
-        this.setMinimumSize(new Dimension(720,445));
+        this.setPreferredSize(new Dimension(1140,445));
+        this.setMinimumSize(new Dimension(1140,445));
         this.setFocusable(true);
         this.getContentPane().setBackground(Color.lightGray);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setResizable(true);
+
         this.addKeyListener(this);
         LoginView loginView = new LoginView();
         this.add(loginView, BorderLayout.PAGE_START);

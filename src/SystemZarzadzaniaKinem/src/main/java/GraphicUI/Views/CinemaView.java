@@ -165,6 +165,18 @@ public class CinemaView extends JPanel implements KeyListener {
             frame.repaint();
             cinemaListView.requestFocus();
         }
+        else if (e.getKeyCode() == 122) {
+            JFrame frame2 = (JFrame) SwingUtilities.windowForComponent(panel);
+            System.out.println(frame2.getExtendedState());
+            if(frame2.getExtendedState()==0) {
+                frame2.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                frame2.setVisible(true);
+            }
+            else {
+                frame2.setExtendedState(JFrame.DO_NOTHING_ON_CLOSE);
+                frame2.setVisible(true);
+            }
+        }
     }
 
     @Override
