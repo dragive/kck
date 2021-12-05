@@ -5,6 +5,7 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.input.KeyStroke;
+import lombok.SneakyThrows;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -50,8 +51,16 @@ public class ErrorWindow {
         window.setFixedSize(new TerminalSize(20,5));
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel internalPanel = new Panel();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+            }
+        });
         internalPanel.setLayoutManager(new LinearLayout());
         internalPanel.addComponent(new Label(message));
+        internalPanel.addComponent(exit);
         window.setComponent(internalPanel);
         gui.addWindow(window);
     }

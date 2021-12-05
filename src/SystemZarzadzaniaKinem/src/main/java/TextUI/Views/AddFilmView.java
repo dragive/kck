@@ -73,6 +73,15 @@ public class AddFilmView {
         TextBox desc = new TextBox();
         TextBox date = new TextBox();
         Film film = new Film();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                FilmCategoryView filmCategoryView = FilmCategoryView.getInstance();
+                filmCategoryView.init(filmCategory);
+            }
+        });
         Button accept = new Button("Zatwierdź", new Runnable() {
             @SneakyThrows
             @Override
@@ -115,6 +124,9 @@ public class AddFilmView {
 
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(accept);
+
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(exit);
 
 
         window.setTitle("Dodaj film");

@@ -13,4 +13,5 @@ public class User {
     private String passwordHash;
     private String name;
     private Date registrationDate;
+    private boolean permission;
 }

@@ -74,6 +74,7 @@ public class EditUserView {
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(2));
         TextBox name = new TextBox(user.getName());
+        MenuView menuView = MenuView.getInstance();
         TextBox email = new TextBox(user.getEmail());
         Button delete = new Button("Usun konto", new Runnable() {
             @Override
@@ -93,6 +94,8 @@ public class EditUserView {
                 }
             }
         });
+        CheckBox checkBox = new CheckBox();
+        checkBox.setChecked(user.isPermission());
         Button accept = new Button("Zatwierdź", new Runnable() {
             @Override
             public void run() {
@@ -100,15 +103,25 @@ public class EditUserView {
                 UsersController usersController = new UsersController();
                 user.setName(name.getText());
                 user.setEmail(email.getText());
+                user.setPermission(checkBox.isChecked());
                 usersController.update(user);
                 if(previousWindow instanceof UserListView) {
                     UserListView userListView = UserListView.getInstance();
                     userListView.init();
                 }
-                else if(previousWindow instanceof EditUserView) {
+                else if(previousWindow instanceof UserView) {
                     UserView userView = UserView.getInstance();
                     userView.init(user,instance);
                 }
+            }
+        });
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                UserView userView = UserView.getInstance();
+                userView.init(user,instance);
             }
         });
 
@@ -118,8 +131,16 @@ public class EditUserView {
         panel.addComponent(new Label("Adres e-mail"));
         panel.addComponent(email);
 
+        if(menuView.getUser().isPermission())
+        {
+            panel.addComponent(new Label("Pracownik"));
+            panel.addComponent(checkBox);
+        }
+
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(accept);
         panel.addComponent(delete);
+        panel.addComponent(exit);
 
         window.setTitle(user.getName());
         window.setComponent(panel);

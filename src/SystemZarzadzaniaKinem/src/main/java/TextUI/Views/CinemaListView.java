@@ -58,6 +58,14 @@ public class CinemaListView {
         BasicWindow window = new BasicWindow();
         Panel panel = new Panel();
 
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+            }
+        });
+
         Button addCinema = new Button("Dodaj kino", new Runnable() {
             @Override
             public void run() {
@@ -70,7 +78,14 @@ public class CinemaListView {
         CinemaController cinemaController = new CinemaController();
         List<Cinema> cinemas = cinemaController.getAll();
 
+
+
         panel.setLayoutManager(new GridLayout(1));
+
+        if (MenuView.getInstance().getUser().isPermission())panel.addComponent(new Label("Wybierz kino lub utwórz nowe:"));
+        else panel.addComponent(new Label("Wybierz kino:"));
+        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
+
         for(Cinema cinema: cinemas) {
             panel.addComponent(new Button(cinema.getName(), new Runnable() {
                 @Override
@@ -81,7 +96,12 @@ public class CinemaListView {
                 }
             }));
         }
-        panel.addComponent(addCinema);
+        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
+        if(MenuView.getInstance().getUser().isPermission())
+        {
+            panel.addComponent(addCinema);
+        }
+        panel.addComponent(exit);
 
         KeyStrokeListener keyStrokeListener = new KeyStrokeListener();
         window.addWindowListener(keyStrokeListener);

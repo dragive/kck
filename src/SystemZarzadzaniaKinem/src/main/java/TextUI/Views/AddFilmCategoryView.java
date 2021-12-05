@@ -65,6 +65,15 @@ public class AddFilmCategoryView {
         panel.setLayoutManager(new GridLayout(2));
         FilmCategory filmCategory = new FilmCategory();
         TextBox name = new TextBox();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                FilmCategoryListView filmCategoryListView = FilmCategoryListView.getInstance();
+                filmCategoryListView.init();
+            }
+        });
 
         panel.addComponent(new Label("Nazwa kategorii"));
         panel.addComponent(name);
@@ -81,6 +90,8 @@ public class AddFilmCategoryView {
                 filmCategoryListView.init();
             }
         }));
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(exit);
 
         window.setTitle("");
         window.setComponent(panel);

@@ -1,5 +1,8 @@
 package TextUI.Views;
 
+import Back.Controllers.FilmCategoryController;
+import Back.Controllers.FilmController;
+import Back.Models.Film;
 import TextUI.MultiWindowTextExtendedGUI;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
@@ -8,16 +11,16 @@ import com.googlecode.lanterna.input.KeyStroke;
 import lombok.SneakyThrows;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class CityListView {
+public class MenuFilmView {
+    private static MenuFilmView instance = null;
 
-    private static CityListView instance = null;
+    private MenuFilmView(){}
 
-    private CityListView(){}
-
-    public static CityListView getInstance() {
-        if(instance==null) instance = new CityListView();
+    public static MenuFilmView getInstance() {
+        if(instance==null) instance = new MenuFilmView();
         return instance;
     }
 
@@ -58,9 +61,33 @@ public class CityListView {
         window.addWindowListener(keyStrokeListener);
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+            }
+        });
         panel.setLayoutManager(new GridLayout(1));
+        panel.addComponent(new Label("Wybierz film z listy:"));
+        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
+        FilmController filmController = new FilmController();
+        List<Film> filmList = filmController.getAll();
+        for(Film film:filmList)
+        {
+            panel.addComponent(new Button(film.getTitle(), new Runnable() {
+                @Override
+                public void run() {
+                    window.close();
+                    FilmView filmView = FilmView.getInstance();
+                    filmView.init(film, instance);
+                }
+            }));
+        }
+        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
+        panel.addComponent(exit);
 
-        window.setTitle("Miasta");
+        window.setTitle("Filmy");
         window.setComponent(panel);
         gui.addWindow(window);
     }

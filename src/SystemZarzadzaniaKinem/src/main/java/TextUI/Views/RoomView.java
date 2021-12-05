@@ -1,10 +1,10 @@
 package TextUI.Views;
 
 import Back.Controllers.CinemaController;
+import Back.Controllers.FilmCategoryController;
+import Back.Controllers.FilmController;
 import Back.Controllers.RoomsController;
-import Back.Models.Cinema;
-import Back.Models.Room;
-import Back.Models.Seat;
+import Back.Models.*;
 import TextUI.MultiWindowTextExtendedGUI;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
@@ -69,20 +69,34 @@ public class RoomView {
         Panel panel = new Panel();
         List<Seat> seatList = room.getSeatList();
         Label name = new Label(room.getName());
+        panel.setLayoutManager(new GridLayout(2));
         Label rows = new Label(String.valueOf(seatList.get(seatList.size()-1).getRow()));
         Label howManySeats = new Label(String.valueOf(seatList.size()));
-        Button seats = new Button("Siedzenia", new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        });
         Button seanses = new Button("Seanse", new Runnable() {
             @Override
             public void run() {
                 window.close();
                 SeansListView seansListView = SeansListView.getInstance();
                 seansListView.init(room);
+            }
+        });
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                CinemaController cinemaController = new CinemaController();
+                RoomListView roomListView = RoomListView.getInstance();
+                roomListView.init(cinemaController.getById(room.getCinemaId()));
+            }
+        });
+        Button remove = new Button("Usuń", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                RoomsController roomsController = new RoomsController();
+                roomsController.delete(room);
             }
         });
 
@@ -92,11 +106,20 @@ public class RoomView {
         panel.addComponent(new Label("Liczba rzędów"));
         panel.addComponent(rows);
 
-        panel.addComponent(new Label("Liczba siedzen"));
+        panel.addComponent(new Label("Liczba siedzeń"));
         panel.addComponent(howManySeats);
+
+        if (MenuView.getInstance().getUser().isPermission())
+        {
+            panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+            panel.addComponent(remove);
+        }
 
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(seanses);
+
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(exit);
 
         window.setTitle(room.getName());
         window.setComponent(panel);

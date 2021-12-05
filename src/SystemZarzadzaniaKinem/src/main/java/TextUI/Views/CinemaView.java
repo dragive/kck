@@ -7,6 +7,7 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.input.KeyStroke;
+import lombok.SneakyThrows;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -60,6 +61,15 @@ public class CinemaView {
         window.addWindowListener(keyStrokeListener);
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                CinemaListView cinemaListView = CinemaListView.getInstance();
+                cinemaListView.init();
+            }
+        });
         Button room = new Button("Sale kinowe", new Runnable() {
             @Override
             public void run() {
@@ -89,9 +99,16 @@ public class CinemaView {
 
         window.setTitle(cinema.getName());
         panel.setLayoutManager(new GridLayout(1));
+        panel.addComponent(new Label("Wybierz salę lub rezerwazję w tym kinie:"));
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(room);
         panel.addComponent(reservation);
-        panel.addComponent(delete);
+        if (MenuView.getInstance().getUser().isPermission())
+        {
+            panel.addComponent(delete);
+        }
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(exit);
 
         window.setTitle(cinema.getName());
         window.setComponent(panel);

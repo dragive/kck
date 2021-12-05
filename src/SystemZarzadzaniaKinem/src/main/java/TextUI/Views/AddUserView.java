@@ -68,6 +68,7 @@ public class AddUserView {
         TextBox name = new TextBox();
         TextBox password = new TextBox();
         TextBox email = new TextBox();
+        CheckBox checkBox = new CheckBox();
         Button accept = new Button("Akceptuj", new Runnable() {
             @Override
             public void run() {
@@ -78,7 +79,17 @@ public class AddUserView {
                 newUser.setEmail(email.getText());
                 newUser.setPasswordHash(password.getText());
                 newUser.setRegistrationDate(new Date());
+                newUser.setPermission(checkBox.isChecked());
                 usersController.createNew(newUser);
+                UserListView userListView = UserListView.getInstance();
+                userListView.init();
+            }
+        });
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
                 UserListView userListView = UserListView.getInstance();
                 userListView.init();
             }
@@ -93,8 +104,14 @@ public class AddUserView {
         panel.addComponent(new Label("Hasło"));
         panel.addComponent(password);
 
+        panel.addComponent(new Label("Pracownik"));
+        panel.addComponent(checkBox);
+
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(accept);
+
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(exit);
 
         window.setTitle("Dodaj użytkownika");
         window.setComponent(panel);

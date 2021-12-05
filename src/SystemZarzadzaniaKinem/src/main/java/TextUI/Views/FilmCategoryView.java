@@ -63,7 +63,18 @@ public class FilmCategoryView {
         window.addWindowListener(keyStrokeListener);
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                FilmCategoryListView filmCategoryListView = FilmCategoryListView.getInstance();
+                filmCategoryListView.init();
+            }
+        });
         panel.setLayoutManager(new GridLayout(1));
+        panel.addComponent(new Label("wybierz kategorię filmu:"));
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         FilmCategoryController filmCategoryController = new FilmCategoryController();
         List<Film> filmList = filmCategoryController.getCategoryFilms(filmCategory.getId());
         for(Film film:filmList)
@@ -73,18 +84,24 @@ public class FilmCategoryView {
                 public void run() {
                     window.close();
                     FilmView filmView = FilmView.getInstance();
-                    filmView.init(film);
+                    filmView.init(film, instance);
                 }
             }));
         }
-        panel.addComponent(new Button("Dodaj film", new Runnable() {
-            @Override
-            public void run() {
-                window.close();
-                AddFilmView addFilmView = AddFilmView.getInstance();
-                addFilmView.init(filmCategory);
-            }
-        }));
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        if(MenuView.getInstance().getUser().isPermission())
+        {
+            panel.addComponent(new Button("Dodaj film", new Runnable() {
+                @Override
+                public void run() {
+                    window.close();
+                    AddFilmView addFilmView = AddFilmView.getInstance();
+                    addFilmView.init(filmCategory);
+                }
+            }));
+        }
+
+        panel.addComponent(exit);
 
 
         window.setTitle(filmCategory.getName());

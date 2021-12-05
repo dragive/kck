@@ -63,12 +63,13 @@ public class LoginView {
     {
         MultiWindowTextExtendedGUI gui = MultiWindowTextExtendedGUI.getInstance();
         BasicWindow window = new BasicWindow();
-        login = new TextBox();
-        password = new TextBox();
+        login = new TextBox().setPreferredSize(new TerminalSize(22,1));
+        password = new TextBox().setPreferredSize(new TerminalSize(22,1));
         login.setSize(new TerminalSize(20,1));
         password.setSize(new TerminalSize(20,1));
 
         panel = new Panel();
+
         panel.setLayoutManager(new GridLayout(2));
 
         panel.addComponent(new Label("CZESIO'S CINEMA MANAGER"));
@@ -80,7 +81,6 @@ public class LoginView {
         panel.addComponent(new Label("Hasło"));
         panel.addComponent(password.setMask('*'));
 
-        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(new Button("Zaloguj się", new Runnable() {
             @Override
             public void run() {
@@ -105,12 +105,31 @@ public class LoginView {
                 }
             }
         }));
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(new Button("Zarejestruj się", new Runnable() {
+            @Override
+            public void run() {
+                window.close();
+                RegisterView registerView = RegisterView.getInstance();
+                registerView.init();
+            }
+        }));
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(new Button("Wyjdź", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                MultiWindowTextExtendedGUI gui = MultiWindowTextExtendedGUI.getInstance();
+                gui.getScreen().stopScreen();
+            }
+        }));
 
 
-        window.setFixedSize(new TerminalSize(60,20));
+        window.setFixedSize(new TerminalSize(50,6));
         KeyStrokeListener keyStrokeListener = new KeyStrokeListener();
         window.addWindowListener(keyStrokeListener);
-        window.setHints(Arrays.asList(Window.Hint.CENTERED));
+        window.setHints(Arrays.asList(Window.Hint.CENTERED,Window.Hint.FIXED_SIZE));
         window.setComponent(panel);
         gui.addWindow(window);
     }

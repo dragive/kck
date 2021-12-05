@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class Seans {
@@ -12,5 +13,6 @@ public class Seans {
     private Integer filmId;
     private Date date;
     private Integer roomId;
-
+    private Integer cinemaId;
+    private List<Seat> seatList;
 }

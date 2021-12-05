@@ -1,22 +1,24 @@
 import Back.Models.Film;
 import Back.Services.FileDataBaseService;
+import GraphicUI.MainFrame;
+import TextUI.MainLaterna;
+import lombok.SneakyThrows;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args){
-        FileDataBaseService fileDataBaseService = FileDataBaseService.getInstance();
-
-        List<Film> list = new ArrayList<>();
-//        list.add(Film.builder().id(1).filmCategoryId(null).description("123").releaseDate(Calendar.getInstance().getTime()).build());
-        list.add(new Film());
-        fileDataBaseService.saveAllFilm(list);
-
-
-        List<Film> out = fileDataBaseService.getAllFilm();
-        System.out.println(list);
-        System.out.println(out);
+    @SneakyThrows
+    public static void main(String[] args)
+    {
+        //MainLaterna.main(args);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new MainFrame();
+            }
+        });
     }
 }

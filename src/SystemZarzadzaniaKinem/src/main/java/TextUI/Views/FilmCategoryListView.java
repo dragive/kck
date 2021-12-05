@@ -60,9 +60,19 @@ public class FilmCategoryListView {
         window.addWindowListener(keyStrokeListener);
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+            }
+        });
         FilmCategoryController filmCategoryController = new FilmCategoryController();
         List<FilmCategory> filmCategories = filmCategoryController.getAll();
         panel.setLayoutManager(new GridLayout(1));
+        panel.addComponent(new Label("Wybierz kategorię filmu:"));
+
+        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
         for(FilmCategory item: filmCategories)
         {
             panel.addComponent(new Button(item.getName(), new Runnable() {
@@ -74,14 +84,20 @@ public class FilmCategoryListView {
                 }
             }));
         }
-        panel.addComponent(new Button("Dodaj kategorię", new Runnable() {
-            @Override
-            public void run() {
-                window.close();
-                AddFilmCategoryView addFilmCategoryView = AddFilmCategoryView.getInstance();
-                addFilmCategoryView.init();
-            }
-        }));
+        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
+        if(MenuView.getInstance().getUser().isPermission())
+        {
+            panel.addComponent(new Button("Dodaj kategorię", new Runnable() {
+                @Override
+                public void run() {
+                    window.close();
+                    AddFilmCategoryView addFilmCategoryView = AddFilmCategoryView.getInstance();
+                    addFilmCategoryView.init();
+                }
+            }));
+        }
+
+        panel.addComponent(exit);
         window.setTitle("Kategorie Filmów");
         window.setComponent(panel);
         gui.addWindow(window);

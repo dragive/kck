@@ -53,6 +53,11 @@ public class ReservationSeansListView {
                         ReservationCinemaListView reservationCinemaListView = ReservationCinemaListView.getInstance();
                         reservationCinemaListView.init();
                     }
+                    else if(previous instanceof ReservationSeansListView)
+                    {
+                        CinemaView cinemaView = CinemaView.getInstance();
+                        cinemaView.init(cinema);
+                    }
                     else if(previous instanceof CinemaView)
                     {
                         CinemaView cinemaView = CinemaView.getInstance();
@@ -73,12 +78,35 @@ public class ReservationSeansListView {
     public void init(Cinema cinema, Object previous){
         this.cinema = cinema;
         this.previous = previous;
+        System.out.println(previous.getClass().getSimpleName());
         MultiWindowTextExtendedGUI gui = MultiWindowTextExtendedGUI.getInstance();
         BasicWindow window = new BasicWindow();
         KeyStrokeListener keyStrokeListener = new KeyStrokeListener();
         window.addWindowListener(keyStrokeListener);
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                if(previous instanceof ReservationCinemaListView)
+                {
+                    ReservationCinemaListView reservationCinemaListView = ReservationCinemaListView.getInstance();
+                    reservationCinemaListView.init();
+                }
+                else if(previous instanceof ReservationSeansListView)
+                {
+                    CinemaView cinemaView = CinemaView.getInstance();
+                    cinemaView.init(cinema);
+                }
+                else if(previous instanceof CinemaView)
+                {
+                    CinemaView cinemaView = CinemaView.getInstance();
+                    cinemaView.init(cinema);
+                }
+            }
+        });
         panel.setLayoutManager(new GridLayout(1));
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
@@ -90,11 +118,13 @@ public class ReservationSeansListView {
             panel.addComponent(new Button(filmController.getById(seans.getFilmId()).getTitle() + " " + simpleDateFormat.format(seans.getDate()), new Runnable() {
                 @Override
                 public void run() {
+                    window.close();
                     ReservationSeansView reservationSeansView = ReservationSeansView.getInstance();
-                    reservationSeansView.init(seans);
+                    reservationSeansView.init(seans,instance);
                 }
             }));
         }
+        panel.addComponent(exit);
 
         window.setTitle("Wybierz seans");
         window.setComponent(panel);

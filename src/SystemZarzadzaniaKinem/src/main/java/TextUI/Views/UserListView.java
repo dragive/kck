@@ -1,5 +1,6 @@
 package TextUI.Views;
 
+import Back.Controllers.RoomsController;
 import Back.Controllers.UsersController;
 import Back.Models.User;
 import TextUI.MultiWindowTextExtendedGUI;
@@ -27,12 +28,12 @@ public class UserListView {
 
         @Override
         public void onResized(Window window, TerminalSize terminalSize, TerminalSize terminalSize1) {
-
+            System.out.println("onResized");
         }
 
         @Override
         public void onMoved(Window window, TerminalPosition terminalPosition, TerminalPosition terminalPosition1) {
-
+            System.out.println("onMoved");
         }
 
         @SneakyThrows
@@ -60,7 +61,16 @@ public class UserListView {
         window.addWindowListener(keyStrokeListener);
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+            }
+        });
         panel.setLayoutManager(new GridLayout(1));
+        panel.addComponent(new Label("Użytkownicy systemu: "));
+        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
         UsersController usersController = new UsersController();
         List<User> userList = usersController.getAll();
         for(User user : userList) {
@@ -73,6 +83,7 @@ public class UserListView {
                 }
             }));
         }
+        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
         panel.addComponent(new Button("Dodaj użytkownika", new Runnable() {
             @Override
             public void run() {
@@ -81,6 +92,8 @@ public class UserListView {
                 addUserView.init();
             }
         }));
+        panel.addComponent(new EmptySpace(new TerminalSize(1,1)));
+        panel.addComponent(exit);
 
         window.setTitle("Użytkownicy");
         window.setComponent(panel);

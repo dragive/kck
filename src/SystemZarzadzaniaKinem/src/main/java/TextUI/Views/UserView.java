@@ -54,6 +54,9 @@ public class UserView {
                     else if(previousWindow instanceof EditUserView) {
                         window.close();
                     }
+                    else if(previousWindow instanceof UserReservationsView) {
+                        window.close();
+                    }
                     break;
                 default:
                     break;
@@ -79,6 +82,8 @@ public class UserView {
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(2));
+        panel.addComponent(new Label("Dane użytkownika:"));
+        panel.addComponent(new EmptySpace(new TerminalSize(2,1)));
         Label name = new Label(user.getName());
         Label email = new Label(user.getEmail());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -91,6 +96,22 @@ public class UserView {
                 editUserView.init(user,previous);
             }
         });
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+            }
+        });
+        Button reservations = new Button("Rezerwacje", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                UserReservationsView reservationsView = UserReservationsView.getInstance();
+                reservationsView.init(user);
+            }
+        });
 
         panel.addComponent(new Label("Nazwa użytkownika"));
         panel.addComponent(name);
@@ -101,8 +122,20 @@ public class UserView {
         panel.addComponent(new Label("Data założenia"));
         panel.addComponent(date);
 
+        if(user.isPermission())
+        {
+            panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+            panel.addComponent(new Label("Pracownik"));
+        }
+
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(reservations);
+
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(edit);
+
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(exit);
 
         window.setTitle(user.getName());
         window.setComponent(panel);

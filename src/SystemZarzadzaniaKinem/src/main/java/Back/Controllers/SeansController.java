@@ -1,6 +1,7 @@
 package Back.Controllers;
 
 import Back.Models.Room;
+import Back.Models.Seat;
 import Back.Services.DataBaseService;
 import Back.Models.Seans;
 import Back.Services.FileDataBaseService;
@@ -37,8 +38,6 @@ public class SeansController {
                 seansList.add(seans);
             }
         }
-
-
         return seansList;
     }
     public void createNew(Seans object){List list = this.getAll();if(list.size()==0) object.setId(1);else {Seans last = (Seans)list.get(list.size()-1);object.setId(last.getId()+1);}list.add(object);this.saveAll(list);}

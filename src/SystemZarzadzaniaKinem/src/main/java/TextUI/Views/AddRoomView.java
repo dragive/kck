@@ -84,6 +84,15 @@ public class AddRoomView {
                 roomListView.init(cinema);
             }
         });
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                RoomListView roomListView = RoomListView.getInstance();
+                roomListView.init(cinema);
+            }
+        });
 
         panel.addComponent(new Label("Nazwa"));
         panel.addComponent(name);
@@ -96,6 +105,9 @@ public class AddRoomView {
 
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(button);
+
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(exit);
 
         window.setTitle("Dodaj salę kinową");
         window.setComponent(panel);

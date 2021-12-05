@@ -10,11 +10,13 @@ import com.googlecode.lanterna.input.KeyStroke;
 import lombok.SneakyThrows;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ReservationSeansView {
     private static ReservationSeansView instance = null;
+    private Object previous;
     private Seans seans;
     private ReservationSeansView(){}
 
@@ -40,12 +42,9 @@ public class ReservationSeansView {
         public void onInput(Window window, KeyStroke keyStroke, AtomicBoolean atomicBoolean) {
             switch (keyStroke.getKeyType()){
                 case Escape:
-                    window.close();
-
                     CinemaController cinemaController = new CinemaController();
-                    RoomsController roomsController = new RoomsController();
-                    Room room = roomsController.getById(seans.getRoomId());
-                    Cinema cinema = cinemaController.getById(room.getCinemaId());
+                    Cinema cinema = cinemaController.getById(seans.getCinemaId());
+                    window.close();
                     ReservationSeansListView reservationSeansListView = ReservationSeansListView.getInstance();
                     reservationSeansListView.init(cinema,instance);
                     break;
@@ -60,7 +59,9 @@ public class ReservationSeansView {
         }
     }
 
-    public void init(Seans seans){
+    public void init(Seans seans, Object previous){
+        this.previous = previous;
+        this.seans = seans;
         MultiWindowTextExtendedGUI gui = MultiWindowTextExtendedGUI.getInstance();
         BasicWindow window = new BasicWindow();
         KeyStrokeListener keyStrokeListener = new KeyStrokeListener();
@@ -69,29 +70,80 @@ public class ReservationSeansView {
         Panel panel = new Panel();
         RoomsController roomsController = new RoomsController();
         SeansController seansController = new SeansController();
-        Room room = roomsController.getById(seans.getRoomId());
-        List<Seat> seatList = roomsController.getSeatsByRoomId(seans.getRoomId());
+        List<Seat> seatList = seans.getSeatList();
         Integer rows = seatList.get(seatList.size()-1).getRow();
-        Integer cols = seatList.size()/rows;
         Reservation reservation = new Reservation();
-        panel.setLayoutManager(new GridLayout(cols));
+        panel.setLayoutManager(new GridLayout(rows));
+        CheckBox checkBox = new CheckBox();
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                CinemaController cinemaController = new CinemaController();
+                Room room = roomsController.getById(seans.getRoomId());
+                Cinema cinema = cinemaController.getById(room.getCinemaId());
+                ReservationSeansListView reservationSeansListView = ReservationSeansListView.getInstance();
+                reservationSeansListView.init(cinema,previous);
+            }
+        });
+        for(Seat seat: seatList)
+        {
+            if(seat.isReserved())
+            {
+                if(MenuView.getInstance().getUser().isPermission() && seat.isReserved())
+                {
+                    panel.addComponent(new Button("[*]", new Runnable() {
+                        @Override
+                        public void run() {
+                            seat.setReserved(false);
+                            seans.setSeatList(seatList);
+                            seansController.update(seans);
+                            ReservationController reservationController = new ReservationController();
+                            reservationController.delete(reservation);
+                            CinemaController cinemaController = new CinemaController();
+                            Cinema cinema = cinemaController.getById(seans.getCinemaId());
+                            window.close();
+                            ReservationSeansListView reservationSeansListView = ReservationSeansListView.getInstance();
+                            reservationSeansListView.init(cinema,instance);
+                        }
+                    }));
+                }
+                else panel.addComponent(new Button("[*]").setEnabled(false));
 
-        for(int i=0;i<rows;i++) {
-            for(int j=0;j<cols;j++) {
-                panel.addComponent(new Button("[*]", new Runnable() {
+            }
+            else {
+                panel.addComponent(new Button("[ ]", new Runnable() {
                     @Override
                     public void run() {
                         reservation.setSeansId(seans.getId());
                         MenuView menuView = MenuView.getInstance();
                         User user = menuView.getUser();
                         reservation.setUserId(user.getId());
+                        reservation.setSeatId(seat.getId());
+                        reservation.setPaid(checkBox.isChecked());
+                        reservation.setDateOfReservation(seans.getDate());
+                        reservation.setDateOfCreation(new Date());
+                        seat.setReserved(true);
+                        seans.setSeatList(seatList);
+                        seansController.update(seans);
                         ReservationController reservationController = new ReservationController();
                         reservationController.createNew(reservation);
+                        CinemaController cinemaController = new CinemaController();
+                        Cinema cinema = cinemaController.getById(seans.getCinemaId());
                         window.close();
+                        ReservationSeansListView reservationSeansListView = ReservationSeansListView.getInstance();
+                        reservationSeansListView.init(cinema,instance);
                     }
                 }));
             }
         }
+        if(MenuView.getInstance().getUser().isPermission())
+        {
+            panel.addComponent(new Label("Opłacona"));
+            panel.addComponent(checkBox);
+        }
+        panel.addComponent(exit);
 
         window.setTitle("Rezerwacja");
         window.setComponent(panel);

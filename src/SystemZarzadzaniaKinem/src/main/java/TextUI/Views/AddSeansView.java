@@ -76,10 +76,20 @@ public class AddSeansView {
             @Override
             public void run() {
                 window.close();
+                seans.setSeatList(room.getSeatList());
                 seans.setRoomId(room.getId());
                 seans.setDate(simpleDateFormat.parse(date.getText()));
                 SeansAddFilmView seansAddFilmView = SeansAddFilmView.getInstance();
                 seansAddFilmView.init(seans);
+            }
+        });
+        Button exit = new Button("Wstecz", new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                window.close();
+                RoomView roomView = RoomView.getInstance();
+                roomView.init(room);
             }
         });
 
@@ -88,6 +98,9 @@ public class AddSeansView {
 
         panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
         panel.addComponent(button);
+
+        panel.addComponent(new EmptySpace(new TerminalSize(0,0)));
+        panel.addComponent(exit);
 
         window.setTitle("Dodaj seans");
         window.setComponent(panel);
@@ -121,6 +134,7 @@ public class AddSeansView {
                 room = roomsController.getById(seans.getRoomId());
                 seans.setDate(simpleDateFormat.parse(date.getText()));
                 seans.setFilmId(film.getId());
+                seans.setCinemaId(room.getCinemaId());
                 seansController.createNew(seans);
                 window.close();
                 RoomView roomView = RoomView.getInstance();
