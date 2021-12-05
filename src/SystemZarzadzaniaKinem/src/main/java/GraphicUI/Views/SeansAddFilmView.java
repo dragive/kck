@@ -64,6 +64,8 @@ public class SeansAddFilmView extends JPanel implements KeyListener {
 
         for(Film film: filmList) {
             JButton temp = new JButton(film.getTitle());
+            temp.setFont(SettingsService.GenerateFont());
+            temp.setBorder(SettingsService.Border());
             temp.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

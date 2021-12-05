@@ -50,9 +50,11 @@ public class MenuFilmView extends JPanel implements KeyListener {
         jScrollPane.getVerticalScrollBar().setUnitIncrement(16);
         this.add(jScrollPane,BorderLayout.CENTER);
 
+        filmList = filmList.stream().sorted(Comparator.comparing(Film::getTitle)).collect(Collectors.toList());
 
         for(Film film:filmList) {
             JButton temp = new JButton(film.getTitle());
+            temp.setBorder(SettingsService.Border());
             temp.setFont(SettingsService.GenerateFont());
             temp.addActionListener(new ActionListener() {
                 @Override

@@ -6,11 +6,14 @@ import Back.Models.Reservation;
 import Back.Models.Seans;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
+import GraphicUI.Views.MinorPanelsAndUtils.SimpleGridPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
+import java.util.Set;
 
 public class ReservationView extends JPanel implements KeyListener {
     JPanel panel;
@@ -64,21 +67,59 @@ public class ReservationView extends JPanel implements KeyListener {
             }
         });
 
-        this.add(new JLabel("Idziesz na"));
-        this.add(new JLabel(filmController.getById(seans.getFilmId()).getTitle()));
+        JPanel simpleGridPanel = new JPanel(new GridLayout(0,2));
+        JScrollPane jScrollPane = new JScrollPane(simpleGridPanel);
+        jScrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        this.add(jScrollPane,BorderLayout.NORTH);
 
-        this.add(new JLabel("Data seansu"));
-        this.add(new JLabel(simpleDateFormat.format(reservation.getDateOfReservation())));
+        JLabel idzieszNa = new JLabel("Idziesz na");
+        simpleGridPanel.add(idzieszNa);
+        idzieszNa.setFont(SettingsService.GenerateFont());
 
-        this.add(new JLabel("Data rezerwacji"));
-        this.add(new JLabel(simpleDateFormat.format(reservation.getDateOfCreation())));
+        JLabel tytulidzieszna = new JLabel(filmController.getById(seans.getFilmId()).getTitle());
+        tytulidzieszna.setFont(SettingsService.GenerateFont());
+        simpleGridPanel.add(tytulidzieszna);
+
+        JLabel dataSeansu = new JLabel("Data seansu");
+        dataSeansu.setFont(SettingsService.GenerateFont());
+        simpleGridPanel.add(dataSeansu);
+
+        JLabel dataSeansuWartosc = new JLabel(simpleDateFormat.format(reservation.getDateOfReservation()));
+        dataSeansuWartosc.setFont(SettingsService.GenerateFont());
+        simpleGridPanel.add(dataSeansuWartosc);
+
+        JLabel datarezerwacji = new JLabel("Data rezerwacji");
+        datarezerwacji.setFont(SettingsService.GenerateFont());
+        simpleGridPanel.add(datarezerwacji);
+
+
+        JLabel dataRezerwacjiWartosc = new JLabel(simpleDateFormat.format(reservation.getDateOfCreation()));
+        dataRezerwacjiWartosc.setFont(SettingsService.GenerateFont());
+        simpleGridPanel.add(dataRezerwacjiWartosc);
 
         if(user.isPermission()) {
-            this.add(new JLabel("Opłacona"));
-            this.add(checkBox);
+            simpleGridPanel.add(new JPanel());
+            JPanel checkboxReservationpanel = new JPanel(new BorderLayout());
+            checkboxReservationpanel.add(checkBox,BorderLayout.WEST);
+            JLabel oplacona = new JLabel("Opłacona");
+            checkboxReservationpanel.add(oplacona,BorderLayout.CENTER);
+            oplacona.setFont(SettingsService.GenerateFont());
+            simpleGridPanel.add(checkboxReservationpanel);
+//            this.add(checkBox);
+//            this.add();
         }
 
-        this.add(exit);
+
+        JPanel footer = new JPanel(new BorderLayout());
+        JPanel footerRight = new JPanel(new BorderLayout());
+        footer.add(footerRight,BorderLayout.EAST);
+
+        this.add(footer,BorderLayout.SOUTH);
+
+        exit.setBorder(SettingsService.Border());
+        exit.setFont(SettingsService.GenerateFont());
+
+        footerRight.add(exit,BorderLayout.EAST);
     }
 
     @Override

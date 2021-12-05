@@ -105,12 +105,15 @@ public class RoomListView extends JPanel implements KeyListener {
         }
 
         JPanel footer = new JPanel(new BorderLayout());
+        JPanel footerRight = new JPanel(new BorderLayout());
         this.add(footer,BorderLayout.SOUTH);
+        footer.add(footerRight,BorderLayout.EAST);
+
         if(user.isPermission()) {
             addRoom.setBorder(SettingsService.Border());
-            footer.add(addRoom,BorderLayout.EAST);
+            footerRight.add(addRoom,BorderLayout.WEST);
         }
-        footer.add(exit,BorderLayout.WEST);
+        footerRight.add(exit,BorderLayout.EAST);
         exit.setBorder(SettingsService.Border());
     }
 

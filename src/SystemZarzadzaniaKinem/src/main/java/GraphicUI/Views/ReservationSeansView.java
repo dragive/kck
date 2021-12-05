@@ -19,7 +19,7 @@ public class ReservationSeansView extends JPanel implements KeyListener {
     Seans seans;
     Object previous;
     public ReservationSeansView(User user, Seans seans, Object previous) {
-//        System.out.println("ReservationSeansView  ReservationSeansView");
+        System.out.println("ReservationSeansView  ReservationSeansView");
         panel = this;
         MenuPanel.bottomPanel = this;
         this.user = user;
@@ -158,6 +158,7 @@ public class ReservationSeansView extends JPanel implements KeyListener {
             JLabel paid = new JLabel("Czy opłacona");
             paid.setFont(SettingsService.GenerateFont());
             JPanel checkboxPanel = new JPanel(new BorderLayout());
+            checkboxPanel.setBorder(SettingsService.Border());
             checkboxPanel.add(paid,BorderLayout.EAST);
             checkboxPanel.add(checkBox,BorderLayout.WEST);
             checkBox.setFont(SettingsService.GenerateFont());

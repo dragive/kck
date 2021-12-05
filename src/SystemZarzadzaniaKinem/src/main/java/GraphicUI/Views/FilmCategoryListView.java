@@ -70,6 +70,7 @@ public class FilmCategoryListView extends JPanel implements KeyListener {
 
         for(FilmCategory item: filmCategories) {
             JButton temp = new JButton(item.getName());
+            temp.setBorder(SettingsService.Border());
             temp.setFont(SettingsService.GenerateFont());
             temp.addActionListener(new ActionListener() {
                 @Override
@@ -86,15 +87,17 @@ public class FilmCategoryListView extends JPanel implements KeyListener {
             });
             simpleGridPanel.add(temp);
         }
-        addCategory.setBorder(new EmptyBorder(30, 30, 30, 30));
+        addCategory.setBorder(SettingsService.Border());
 
         if(user.isPermission()) {
-            JPanel jPanel = new JPanel();
-            jPanel.setLayout(new BorderLayout());
-            jPanel.setBorder(new EmptyBorder(20, 0,0,0));
-            jPanel.add(addCategory,BorderLayout.SOUTH);
+            JPanel footer = new JPanel(new BorderLayout());
+            JPanel footerRight = new JPanel(new BorderLayout());
+            footer.add(footerRight,BorderLayout.EAST);
 
-            this.add(jPanel,BorderLayout.SOUTH);
+//            .setBorder(SettingsService.Border());
+            footerRight.add(addCategory,BorderLayout.SOUTH);
+
+            this.add(footer,BorderLayout.SOUTH);
         }
     }
 

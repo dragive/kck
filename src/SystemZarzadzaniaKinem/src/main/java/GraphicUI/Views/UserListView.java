@@ -3,6 +3,7 @@ import Back.Controllers.UsersController;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
 import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
+import GraphicUI.Views.MinorPanelsAndUtils.SimpleGridPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,14 +55,23 @@ public class UserListView extends JPanel implements KeyListener {
 
         userList = userList.stream().sorted(Comparator.comparing(User::getName)).collect(Collectors.toList());
 
-        JPanel mainContaier = new JPanel(new GridLayout(0,1));
-        this.add(mainContaier,BorderLayout.NORTH);
+
+
+        SimpleGridPanel simpleGridPanel = new SimpleGridPanel();
+        JScrollPane jScrollPane = new JScrollPane(simpleGridPanel);
+        jScrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        this.add(jScrollPane,BorderLayout.CENTER);
+
 
         addUser.setBorder(SettingsService.Border());
-        mainContaier.add(addUser);
+
+        addUser.setFont(SettingsService.GenerateFont());
+
+        userList = userList.stream().sorted(Comparator.comparing(User::getName)).collect(Collectors.toList());
 
         for(User item : userList) {
             JButton temp = new JButton(item.getName());
+            temp.setBorder(SettingsService.Border());
             temp.setFont(SettingsService.GenerateFont());
             temp.addActionListener(new ActionListener() {
                 @Override
@@ -76,8 +86,14 @@ public class UserListView extends JPanel implements KeyListener {
                     frame.setTitle("Użytkownik");
                 }
             });
-            mainContaier.add(temp);
+            simpleGridPanel.add(temp);
+            temp.setFont(SettingsService.GenerateFont());
         }
+
+        JPanel footer = new JPanel(new BorderLayout());
+        this.add(footer,BorderLayout.SOUTH);
+
+        footer.add(addUser,BorderLayout.EAST);
 
     }
 

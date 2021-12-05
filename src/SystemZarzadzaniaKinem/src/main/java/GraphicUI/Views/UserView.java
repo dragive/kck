@@ -131,14 +131,17 @@ public class UserView extends JPanel implements KeyListener {
         JPanel lower = new JPanel(new BorderLayout());
         this.add(lower,BorderLayout.SOUTH);
 
-        JPanel lowerLeft = new JPanel(new GridLayout(0,2));
-        lower.add(lowerLeft,BorderLayout.WEST);
+        JPanel lowerLeft = new JPanel(new GridLayout(0,3));
+        lower.add(lowerLeft,BorderLayout.EAST);
 
-        JPanel lowerRight = new JPanel(new BorderLayout() );
-        lower.add(lowerRight,BorderLayout.NORTH);
+//        JPanel lowerRight = new JPanel(new BorderLayout() );
+//        lower.add(lowerRight,BorderLayout.NORTH);
 
-        lowerLeft.add(reservations);
         lowerLeft.add(edit);
+        lowerLeft.add(reservations);
+        lowerLeft.add(exit);
+        exit.setFont(SettingsService.GenerateFont());
+
 
         reservations.setFont(SettingsService.GenerateFont());
         reservations.setBorder(SettingsService.Border());

@@ -109,14 +109,17 @@ public class SeansListView extends JPanel implements KeyListener {
         }
 
         JPanel footer = new JPanel(new BorderLayout());
+        JPanel footerRight = new JPanel(new BorderLayout());
+
         this.add(footer,BorderLayout.SOUTH);
+        footer.add(footerRight,BorderLayout.EAST);
 
         if(user.isPermission())
         {
-            footer.add(addSeans,BorderLayout.WEST);
+            footerRight.add(addSeans,BorderLayout.WEST);
         }
 
-        footer.add(exit,BorderLayout.EAST);
+        footerRight.add(exit,BorderLayout.EAST);
     }
 
     @Override

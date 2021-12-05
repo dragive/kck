@@ -87,13 +87,13 @@ public class CinemaListView extends JPanel implements KeyListener {
         }
 
         addCinema.setFont(SettingsService.GenerateFont());
-        addCinema.setBorder(new EmptyBorder(20, 20, 20, 20));
+        addCinema.setBorder(SettingsService.Border());
 
         if (user.isPermission()) {
             JPanel jPanel = new JPanel();
             jPanel.setLayout(new BorderLayout());
             jPanel.setBorder( BorderFactory.createEmptyBorder(20,0,0,0) );
-            jPanel.add(addCinema,BorderLayout.SOUTH);
+            jPanel.add(addCinema,BorderLayout.EAST);
             this.add(jPanel,BorderLayout.SOUTH);
 
 

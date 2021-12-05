@@ -99,6 +99,9 @@ public class AddUserView extends JPanel implements KeyListener {
 
         JPanel footer = new JPanel(new BorderLayout());
 
+        JPanel footerRight = new JPanel(new BorderLayout());
+
+
         this.add(upper,BorderLayout.NORTH);
         this.add(footer,BorderLayout.SOUTH);
 
@@ -124,14 +127,23 @@ public class AddUserView extends JPanel implements KeyListener {
 
 
         JLabel pracownikL =new JLabel("Pracownik");
-        upper.add(pracownikL);
-        upper.add(checkBox);
+        JPanel pracownikPanel = new JPanel(new BorderLayout());
+
+        upper.add(new JPanel());
+        upper.add(pracownikPanel);
+
+        pracownikPanel.add(pracownikL);
+        pracownikPanel.add(checkBox);
+
         pracownikL.setFont(SettingsService.GenerateFont());
         checkBox.setFont(SettingsService.GenerateFont());
 
 
-        footer.add(accept,BorderLayout.EAST);
-        footer.add(exit,BorderLayout.WEST);
+        footer.add(footerRight,BorderLayout.EAST);
+
+        footerRight.add(exit,BorderLayout.EAST);
+        footerRight.add(exit,BorderLayout.WEST);
+
     }
 
     @Override

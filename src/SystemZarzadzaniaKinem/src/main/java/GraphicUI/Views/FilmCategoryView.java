@@ -104,12 +104,14 @@ public class FilmCategoryView extends JPanel implements KeyListener {
             });
             simpleGridPanel.add(temp);
         }
-        JPanel jPanelAddExit = new JPanel(new BorderLayout());
-        jPanelAddExit.add(addFilm,BorderLayout.LINE_START);
-        addFilm.setBorder(new EmptyBorder(30, 30, 30, 30));
-        exit.setBorder(new EmptyBorder(30, 30, 30, 30));
-        jPanelAddExit.add(exit,BorderLayout.LINE_END);
-        this.add(jPanelAddExit,BorderLayout.SOUTH);
+        JPanel footer = new JPanel(new BorderLayout());
+        JPanel footerRight = new JPanel(new BorderLayout());
+        footer.add(footerRight,BorderLayout.EAST);
+        footerRight.add(addFilm,BorderLayout.WEST);
+        addFilm.setBorder(SettingsService.Border());
+        exit.setBorder(SettingsService.Border());
+        footerRight.add(exit,BorderLayout.EAST);
+        this.add(footer,BorderLayout.SOUTH);
     }
 
     @Override

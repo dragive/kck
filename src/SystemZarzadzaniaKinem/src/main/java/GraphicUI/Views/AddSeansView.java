@@ -26,7 +26,7 @@ public class AddSeansView extends JPanel implements KeyListener {
         Seans seans = new Seans();
         JTextField date = new JTextField();
         date.setFont(SettingsService.GenerateFont());
-        JButton button = new JButton("Przejdź dalej");
+        JButton button = new JButton("Wybierz Film");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         this.setMinimumSize(new Dimension(400,300));
         this.setLayout(new BorderLayout());
@@ -98,9 +98,17 @@ public class AddSeansView extends JPanel implements KeyListener {
         upper.add(dateL);
         upper.add(date);
 
-        lower.add(button,BorderLayout.EAST);
-        //lower.add(accept, BorderLayout.WEST);
-        lower.add(exit,BorderLayout.WEST);
+        JPanel lowerEast = new JPanel(new BorderLayout());
+        JPanel lowerEastEast = new JPanel(new BorderLayout());
+
+//        lowerEast.add(exit,BorderLayout.WEST);
+        lowerEast.add(lowerEastEast,BorderLayout.EAST);
+        lowerEast.add(button,BorderLayout.WEST);
+        lowerEastEast.add(accept,BorderLayout.WEST);
+        lowerEastEast.add(exit,BorderLayout.EAST);
+
+        lower.add(lowerEast,BorderLayout.EAST);
+
     }
 
     public AddSeansView(User user, Seans seans, Film film) {
@@ -109,7 +117,7 @@ public class AddSeansView extends JPanel implements KeyListener {
         this.user = user;
         this.room = roomsController.getById(seans.getRoomId());
         JTextField date = new JTextField();
-        JButton button = new JButton("Wybierz film");
+        JButton button = new JButton("Zmień film");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         date.setText(String.valueOf(simpleDateFormat.format(seans.getDate())));
         this.setMinimumSize(new Dimension(400,300));
@@ -172,7 +180,7 @@ public class AddSeansView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 seansAddFilmView.requestFocus();
-                frame.setTitle("Wybierz film");
+                frame.setTitle("Zmień film");
             }
         });
         exit.addActionListener(new ActionListener() {
@@ -189,14 +197,6 @@ public class AddSeansView extends JPanel implements KeyListener {
             }
         });
 
-//        this.add(new JLabel("Data seansu (dd-mm-rrrr hh:mm)"));
-//        this.add(date);
-//
-//        this.add(accept);
-//        this.add(button);
-//
-//        this.add(new JLabel(""));
-//        this.add(exit);
 
 
         button.setFont(SettingsService.GenerateFont());
@@ -219,12 +219,17 @@ public class AddSeansView extends JPanel implements KeyListener {
         date.setFont(SettingsService.GenerateFont());
 
         JPanel lowerEast = new JPanel(new BorderLayout());
-        lowerEast.add(exit,BorderLayout.WEST);
-        lowerEast.add(accept,BorderLayout.EAST);
+        JPanel lowerEastEast = new JPanel(new BorderLayout());
+
+//        lowerEast.add(exit,BorderLayout.WEST);
+        lowerEast.add(lowerEastEast,BorderLayout.EAST);
+        lowerEast.add(button,BorderLayout.WEST);
+        lowerEastEast.add(accept,BorderLayout.WEST);
+        lowerEastEast.add(exit,BorderLayout.EAST);
 
         lower.add(lowerEast,BorderLayout.EAST);
 
-        lower.add(button,BorderLayout.WEST);
+
     }
 
     @Override
