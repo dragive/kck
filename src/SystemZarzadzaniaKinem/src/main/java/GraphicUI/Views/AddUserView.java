@@ -56,6 +56,7 @@ public class AddUserView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 userListView.requestFocus();
+                frame.setTitle("Lista użytkowników");
             }
         });
         exit.addActionListener(new ActionListener() {
@@ -68,6 +69,7 @@ public class AddUserView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 userListView.requestFocus();
+                frame.setTitle("Lista użytkowników");
             }
         });
 

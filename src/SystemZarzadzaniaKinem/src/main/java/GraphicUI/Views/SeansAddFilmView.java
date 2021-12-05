@@ -48,6 +48,7 @@ public class SeansAddFilmView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 seansView.requestFocus();
+                frame.setTitle("Dodaj seans");
             }
         });
 
@@ -63,6 +64,7 @@ public class SeansAddFilmView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     seansView.requestFocus();
+                    frame.setTitle("Podgląd");
                 }
             });
             this.add(temp);

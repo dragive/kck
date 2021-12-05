@@ -42,6 +42,7 @@ public class UserListView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 addUserView.requestFocus();
+                frame.setTitle("Dodaj użytkownika");
             }
         });
 
@@ -57,6 +58,7 @@ public class UserListView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     cinemaListView.requestFocus();
+                    frame.setTitle("Użytkownik");
                 }
             });
             this.add(temp);

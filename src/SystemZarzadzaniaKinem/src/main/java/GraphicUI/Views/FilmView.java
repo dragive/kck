@@ -60,6 +60,7 @@ public class FilmView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     filmCategoryView.requestFocus();
+                    frame.setTitle("Filmy");
                 }
                 else {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
@@ -69,6 +70,7 @@ public class FilmView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     menuView.requestFocus();
+                    frame.setTitle("Filmy");
                 }
             }
         });
@@ -84,6 +86,7 @@ public class FilmView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     filmCategoryView.requestFocus();
+                    frame.setTitle("Filmy");
                 }
                 else {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
@@ -93,6 +96,7 @@ public class FilmView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     menuView.requestFocus();
+                    frame.setTitle("Filmy");
                 }
             }
         });

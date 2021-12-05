@@ -48,6 +48,7 @@ public class FilmCategoryView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 addFilmView.requestFocus();
+                frame.setTitle("Dodaj film");
             }
         });
         exit.addActionListener(new ActionListener() {
@@ -60,10 +61,11 @@ public class FilmCategoryView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 filmCategoryListView.requestFocus();
+                frame.setTitle("Lista kategorii");
             }
         });
 
-        this.add(new JLabel("Wybierz kategorię filmu:"));
+        this.add(new JLabel("Wybierz film:"));
         this.add(new JLabel(""));
         for(Film film:filmList) {
             JButton temp = new JButton(film.getTitle());
@@ -77,6 +79,7 @@ public class FilmCategoryView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     filmView.requestFocus();
+                    frame.setTitle("Film");
                 }
             });
             this.add(temp);

@@ -72,6 +72,7 @@ public class AddFilmView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 filmCategoryView.requestFocus();
+                frame.setTitle("Filmy");
             }
         });
         exit.addActionListener(new ActionListener() {
@@ -84,6 +85,7 @@ public class AddFilmView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 filmCategoryView.requestFocus();
+                frame.setTitle("Filmy");
             }
         });
 

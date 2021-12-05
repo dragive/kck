@@ -45,6 +45,7 @@ public class FilmCategoryListView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 addFilmCategoryView.requestFocus();
+                frame.setTitle("Dodaj kategorię");
             }
         });
 
@@ -62,6 +63,7 @@ public class FilmCategoryListView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     filmCategoryView.requestFocus();
+                    frame.setTitle("Filmy");
                 }
             });
             this.add(temp);

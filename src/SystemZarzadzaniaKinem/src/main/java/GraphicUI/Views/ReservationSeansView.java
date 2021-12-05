@@ -60,6 +60,7 @@ public class ReservationSeansView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 reservationSeansListView.requestFocus();
+                frame.setTitle("Seanse");
             }
         });
 
@@ -92,6 +93,7 @@ public class ReservationSeansView extends JPanel implements KeyListener {
                             frame.revalidate();
                             frame.repaint();
                             reservationSeansListView.requestFocus();
+                            frame.setTitle("Seanse");
                         }
                     });
 
@@ -129,6 +131,7 @@ public class ReservationSeansView extends JPanel implements KeyListener {
                         frame.revalidate();
                         frame.repaint();
                         reservationSeansListView.requestFocus();
+                        frame.setTitle("Seanse");
                     }
                 });
 

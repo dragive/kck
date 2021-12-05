@@ -42,6 +42,7 @@ public class CinemaListView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 addCinemaView.requestFocus();
+                frame.setTitle("Dodaj kino");
             }
         });
 
@@ -64,6 +65,7 @@ public class CinemaListView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     cinemaView.requestFocus();
+                    frame.setTitle("Kino");
                 }
             });
             this.add(temp);

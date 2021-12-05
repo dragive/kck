@@ -60,6 +60,7 @@ public class UserView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 editUserView.requestFocus();
+                frame.setTitle("Edytuj dane");
             }
         });
 
@@ -73,6 +74,7 @@ public class UserView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 userReservationsView.requestFocus();
+                frame.setTitle("Twoje rezerwacje");
             }
         });
 
@@ -87,6 +89,7 @@ public class UserView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     userListView.requestFocus();
+                    frame.setTitle("Lista użytkowników");
                 }
             }
         });

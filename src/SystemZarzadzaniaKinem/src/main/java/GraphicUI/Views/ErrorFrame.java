@@ -35,7 +35,7 @@ public class ErrorFrame extends JFrame implements KeyListener {
         panel.add(button);
         wrapper.add(panel);
         this.add(wrapper, BorderLayout.CENTER);
-
+        this.setTitle("Wystąpił błąd");
     }
 
     @Override
