@@ -52,6 +52,7 @@ public class FilmCategoryListView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 addFilmCategoryView.requestFocus();
+                frame.setTitle("Dodaj kategorię");
             }
         });
         JLabel selectCategory =new JLabel("Wybierz kategorię filmu:");
@@ -80,6 +81,7 @@ public class FilmCategoryListView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     filmCategoryView.requestFocus();
+                    frame.setTitle("Filmy");
                 }
             });
             simpleGridPanel.add(temp);

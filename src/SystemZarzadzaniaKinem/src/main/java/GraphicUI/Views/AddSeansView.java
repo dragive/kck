@@ -59,6 +59,7 @@ public class AddSeansView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 seansAddFilmView.requestFocus();
+                frame.setTitle("Wybierz film");
             }
         });
         exit.addActionListener(new ActionListener() {
@@ -71,6 +72,7 @@ public class AddSeansView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 seansListView.requestFocus();
+                frame.setTitle("Seanse");
             }
         });
 
@@ -153,6 +155,7 @@ public class AddSeansView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 roomView.requestFocus();
+                frame.setTitle("Sala");
             }
         });
         button.addActionListener(new ActionListener() {
@@ -169,6 +172,7 @@ public class AddSeansView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 seansAddFilmView.requestFocus();
+                frame.setTitle("Wybierz film");
             }
         });
         exit.addActionListener(new ActionListener() {
@@ -181,6 +185,7 @@ public class AddSeansView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 seansListView.requestFocus();
+                frame.setTitle("Seanse");
             }
         });
 

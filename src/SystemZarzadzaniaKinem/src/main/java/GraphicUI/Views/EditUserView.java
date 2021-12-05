@@ -58,6 +58,7 @@ public class EditUserView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     userListView.requestFocus();
+                    frame.setTitle("Lista użytkowników");
                 }
                 else {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
@@ -67,6 +68,7 @@ public class EditUserView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     loginView.requestFocus();
+                    frame.setTitle("Menu");
                 }
             }
         });
@@ -85,6 +87,7 @@ public class EditUserView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 userView.requestFocus();
+                frame.setTitle("Twoje konto");
             }
         });
         exit.addActionListener(new ActionListener() {
@@ -97,6 +100,7 @@ public class EditUserView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 userView.requestFocus();
+                frame.setTitle("Twoje konto");
             }
         });
         JPanel upper = new JPanel(new GridLayout(0,2));

@@ -55,6 +55,7 @@ public class LoginView extends JPanel implements KeyListener {
                         frame.revalidate();
                         frame.repaint();
                         cinemaListView.requestFocus();
+                        frame.setTitle("Menu");
                     }
                     else {
                         new ErrorFrame("Zly login lub haslo");
@@ -75,6 +76,7 @@ public class LoginView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 registerView.requestFocus();
+                frame.setTitle("Rejestracja");
             }
         });
         exit.addActionListener(new ActionListener() {

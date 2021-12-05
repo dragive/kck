@@ -36,6 +36,7 @@ public class RegisterView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 loginView.requestFocus();
+                frame.setTitle("Logowanie");
             }
         });
         signUp.addActionListener(new ActionListener() {

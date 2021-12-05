@@ -64,6 +64,7 @@ public class MenuFilmView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     menuView.requestFocus();
+                    frame.setTitle("Film");
                 }
             });
             simpleGridPanel.add(temp);

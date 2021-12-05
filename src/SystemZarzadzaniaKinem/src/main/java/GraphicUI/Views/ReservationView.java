@@ -60,6 +60,7 @@ public class ReservationView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 reservationView.requestFocus();
+                frame.setTitle("Rezerwacje");
             }
         });
 

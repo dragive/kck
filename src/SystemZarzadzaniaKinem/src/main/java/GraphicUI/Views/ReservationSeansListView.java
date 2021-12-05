@@ -54,6 +54,7 @@ public class ReservationSeansListView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     reservationCinemaListView.requestFocus();
+                    frame.setTitle("Rezerwacja"); //sprawdzić
                 }
                 else {
                     JFrame frame = (JFrame) SwingUtilities.windowForComponent(panel);
@@ -63,6 +64,7 @@ public class ReservationSeansListView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     cinemaView.requestFocus();
+                    frame.setTitle("Kino");
                 }
             }
         });
@@ -93,6 +95,7 @@ public class ReservationSeansListView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     reservationSeansView.requestFocus();
+                    frame.setTitle("Podgląd sali");
                 }
             });
 

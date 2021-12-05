@@ -52,6 +52,7 @@ public class RoomListView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 addRoomView.requestFocus();
+                frame.setTitle("Dodaj salę");
             }
         });
         exit.addActionListener(new ActionListener() {
@@ -64,6 +65,7 @@ public class RoomListView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 cinemaView.requestFocus();
+                frame.setTitle("Kino");
             }
         });
         RoomsController roomsController = new RoomsController();
@@ -94,6 +96,7 @@ public class RoomListView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     roomView.requestFocus();
+                    frame.setTitle("Sala");
                 }
             });
 

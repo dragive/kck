@@ -61,6 +61,7 @@ public class SeansView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 seansListView.requestFocus();
+                frame.setTitle("Seanse");
 
             }
         });
@@ -75,6 +76,7 @@ public class SeansView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 seansListView.requestFocus();
+                frame.setTitle("Seanse");
             }
         });
 

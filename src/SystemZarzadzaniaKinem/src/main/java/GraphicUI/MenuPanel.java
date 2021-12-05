@@ -53,6 +53,7 @@ public class MenuPanel extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     creditsView.requestFocus();
+                    frame.setTitle("Twórcy");
                 }
             }
         });
@@ -67,6 +68,7 @@ public class MenuPanel extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 loginView.requestFocus();
+                frame.setTitle("Menu");
             }
         });
         cinemas.addActionListener(new ActionListener() {
@@ -80,6 +82,7 @@ public class MenuPanel extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     cinemaListView.requestFocus();
+                    frame.setTitle("Lista kin");
                 }
             }
         });
@@ -94,6 +97,7 @@ public class MenuPanel extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     userView.requestFocus();
+                    frame.setTitle("Twoje konto");
                 }
             }
         });
@@ -108,6 +112,7 @@ public class MenuPanel extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     userListView.requestFocus();
+                    frame.setTitle("Lista użytkowników");
                 }
             }
         });
@@ -122,6 +127,7 @@ public class MenuPanel extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     menuFilmView.requestFocus();
+                    frame.setTitle("Filmy");
                 }
             }
         });
@@ -136,6 +142,7 @@ public class MenuPanel extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     filmCategoryListView.requestFocus();
+                    frame.setTitle("Kategorie filmów");
                 }
             }
         });
@@ -150,6 +157,7 @@ public class MenuPanel extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     reservationCinemaListView.requestFocus();
+                    frame.setTitle("Rezerwacja");
                 }
             }
         });

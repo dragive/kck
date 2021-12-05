@@ -61,6 +61,7 @@ public class UserReservationsView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 userView.requestFocus();
+                frame.setTitle("Twoje konto");
             }
         });
 
@@ -81,6 +82,7 @@ public class UserReservationsView extends JPanel implements KeyListener {
                                 frame.revalidate();
                                 frame.repaint();
                                 reservationView.requestFocus();
+                                frame.setTitle("Twoja rezerwacja");
                             }
                         });
                         simpleGridPanel.add(temp);
@@ -102,6 +104,7 @@ public class UserReservationsView extends JPanel implements KeyListener {
                                 frame.revalidate();
                                 frame.repaint();
                                 reservationView.requestFocus();
+                                frame.setTitle("Twoja rezerwacja");
                             }
                         });
                         simpleGridPanel.add(temp);
@@ -124,6 +127,7 @@ public class UserReservationsView extends JPanel implements KeyListener {
                             frame.revalidate();
                             frame.repaint();
                             reservationView.requestFocus();
+                            frame.setTitle("Twoja rezerwacja");
                         }
                     });
                     simpleGridPanel.add(temp);

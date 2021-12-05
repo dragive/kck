@@ -62,6 +62,7 @@ public class SeansListView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 addSeansView.requestFocus();
+                frame.setTitle("Dodaj seans");
             }
         });
         exit.addActionListener(new ActionListener() {
@@ -74,6 +75,7 @@ public class SeansListView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 roomView.requestFocus();
+                frame.setTitle("Sala");
             }
         });
 
@@ -99,6 +101,7 @@ public class SeansListView extends JPanel implements KeyListener {
                         frame.revalidate();
                         frame.repaint();
                         seansView.requestFocus();
+                        frame.setTitle("Seans");
                     }
                 });
                 simpleGridPanel.add(temp);

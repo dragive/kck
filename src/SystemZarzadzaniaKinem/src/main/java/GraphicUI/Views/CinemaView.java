@@ -58,6 +58,7 @@ public class CinemaView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 cinemaListView.requestFocus();
+                frame.setTitle("Lista kin");
             }
         });
         reservation.addActionListener(new ActionListener() {
@@ -70,6 +71,7 @@ public class CinemaView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 reservationSeansListView.requestFocus();
+                frame.setTitle("Rezerwacja");
             }
         });
         room.addActionListener(new ActionListener() {
@@ -82,6 +84,7 @@ public class CinemaView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 roomListView.requestFocus();
+                frame.setTitle("Sale");
             }
         });
         exit.addActionListener(new ActionListener() {
@@ -94,6 +97,7 @@ public class CinemaView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 cinemaListView.requestFocus();
+                frame.setTitle("Lista kin");
             }
         });
 

@@ -26,6 +26,9 @@ public class MainFrame extends JFrame implements KeyListener {
         LoginView loginView = new LoginView();
         this.add(loginView, BorderLayout.PAGE_START);
         loginView.requestFocus();
+        ImageIcon image = new ImageIcon("xd.jpeg");
+        this.setIconImage(image.getImage());
+        this.setTitle("Menu");
     }
 
     @Override

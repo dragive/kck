@@ -57,6 +57,7 @@ public class FilmCategoryView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 addFilmView.requestFocus();
+                frame.setTitle("Dodaj film");
             }
         });
         exit.addActionListener(new ActionListener() {
@@ -69,6 +70,7 @@ public class FilmCategoryView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 filmCategoryListView.requestFocus();
+                frame.setTitle("Lista kategorii");
             }
         });
         JLabel addFilmLabel = new JLabel("Wybierz film:");
@@ -97,6 +99,7 @@ public class FilmCategoryView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     filmView.requestFocus();
+                    frame.setTitle("Film");
                 }
             });
             simpleGridPanel.add(temp);

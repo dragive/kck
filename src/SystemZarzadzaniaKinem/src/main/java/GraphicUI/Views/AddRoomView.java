@@ -54,6 +54,7 @@ public class AddRoomView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 cinemaView.requestFocus();
+                frame.setTitle("Kino");
             }
         });
         exit.addActionListener(new ActionListener() {
@@ -66,6 +67,7 @@ public class AddRoomView extends JPanel implements KeyListener {
                 frame.revalidate();
                 frame.repaint();
                 roomListView.requestFocus();
+                frame.setTitle("Sale");
             }
         });
 

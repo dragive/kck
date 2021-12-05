@@ -61,6 +61,7 @@ public class ReservationCinemaListView extends JPanel implements KeyListener {
                     frame.revalidate();
                     frame.repaint();
                     reservationSeansListView.requestFocus();
+                    frame.setTitle("Rezerwacja"); //sprawdzić
                 }
             });
 //            JPanel tempp = new JPanel(new GridLayout(0,1));
