@@ -132,7 +132,7 @@ public class FilmView extends JPanel implements KeyListener {
 
         ScrollPane scrollPane = new ScrollPane();
         centered.add(scrollPane);
-        JTextArea descOfTheFilm =new JTextArea("dupa \ndupa2 \n");// FIXME
+        JTextArea descOfTheFilm =new JTextArea(film.getDescription());
         descOfTheFilm.setEditable(false);
         descOfTheFilm.setFont(SettingsService.GenerateFont());
         scrollPane.add(descOfTheFilm);
