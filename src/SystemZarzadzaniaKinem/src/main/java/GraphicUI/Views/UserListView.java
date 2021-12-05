@@ -2,11 +2,14 @@ package GraphicUI.Views;
 import Back.Controllers.UsersController;
 import Back.Models.User;
 import GraphicUI.MenuPanel;
+import GraphicUI.Views.MinorPanelsAndUtils.SettingsService;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserListView extends JPanel implements KeyListener {
     JPanel panel;
@@ -16,7 +19,7 @@ public class UserListView extends JPanel implements KeyListener {
         MenuPanel.bottomPanel = this;
         this.user = user;
         this.setMinimumSize(new Dimension(400,300));
-        this.setLayout(new FlowLayout()); //TODO
+        this.setLayout(new BorderLayout());
         this.addKeyListener(this);
         this.setVisible(true);
         this.setFocusable(true);
@@ -27,6 +30,7 @@ public class UserListView extends JPanel implements KeyListener {
                 requestFocus();
             }
         });
+
         UsersController usersController = new UsersController();
         List<User> userList = usersController.getAll();
 
@@ -45,6 +49,14 @@ public class UserListView extends JPanel implements KeyListener {
             }
         });
 
+        userList = userList.stream().sorted(Comparator.comparing(User::getName)).collect(Collectors.toList());
+
+        JPanel mainContaier = new JPanel(new GridLayout(0,1));
+        this.add(mainContaier,BorderLayout.NORTH);
+
+        addUser.setBorder(SettingsService.Border());
+        mainContaier.add(addUser);
+
         for(User item : userList) {
             JButton temp = new JButton(item.getName());
             temp.addActionListener(new ActionListener() {
@@ -59,9 +71,9 @@ public class UserListView extends JPanel implements KeyListener {
                     cinemaListView.requestFocus();
                 }
             });
-            this.add(temp);
+            mainContaier.add(temp);
         }
-        this.add(addUser);
+
     }
 
     @Override
