@@ -125,24 +125,17 @@ public class AddUserView extends JPanel implements KeyListener {
         passwordL.setFont(SettingsService.GenerateFont());
         password.setFont(SettingsService.GenerateFont());
 
-
         JLabel pracownikL =new JLabel("Pracownik");
-        JPanel pracownikPanel = new JPanel(new BorderLayout());
 
-        upper.add(new JPanel());
-        upper.add(pracownikPanel);
-
-        pracownikPanel.add(pracownikL);
-        pracownikPanel.add(checkBox);
-
+        upper.add(pracownikL);
+        upper.add(checkBox);
         pracownikL.setFont(SettingsService.GenerateFont());
         checkBox.setFont(SettingsService.GenerateFont());
-
 
         footer.add(footerRight,BorderLayout.EAST);
 
         footerRight.add(exit,BorderLayout.EAST);
-        footerRight.add(exit,BorderLayout.WEST);
+        footerRight.add(accept,BorderLayout.WEST);
 
     }
 
