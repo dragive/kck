@@ -13,8 +13,8 @@ public class MainFrame extends JFrame implements KeyListener {
     public User user;
     public MainFrame() {
         this.setLayout(new BorderLayout(20,0));
-        this.setPreferredSize(new Dimension(1140,445));
-        this.setMinimumSize(new Dimension(1140,445));
+        this.setPreferredSize(new Dimension(1300,600));
+        this.setMinimumSize(new Dimension(1300,600));
         this.setFocusable(true);
         this.getContentPane().setBackground(Color.lightGray);
         this.setLocationRelativeTo(null);
